@@ -8,7 +8,7 @@ export default function GlobeSection() {
         <source src="/Globe.mp4" type="video/mp4" />
       </video>
       <div className={styles.content}>
-        <h2 className="heading-main anim-hidden blur-zoom-out observe-me">Global Scale, Local Impact</h2>
+        <h2 className="heading-main anim-hidden blur-zoom-out observe-me"><span className="text-gradient">Global Scale, Local Impact</span></h2>
         <p className="sub-heading anim-hidden fade-up observe-me" style={{ textAlign: 'left', margin: '0 0 40px 0' }}>
           We believe that the most powerful technologies should be accessible, scalable, and flawlessly engineered.
           From our team to your doorstep, we deliver the intelligence that moves the world.
