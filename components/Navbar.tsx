@@ -30,7 +30,7 @@ export default function Navbar() {
           <li className={styles.navItem}><a href="#">GCC</a></li>
           <li className={styles.navItem}><a href="#">StartIT</a></li>
         </ul>
-        <button className="cta-btn">Contact Us</button>
+        <button className="cta-btn" style={{padding: '10px 18px', fontSize: '13px'}}>Contact Us</button>
       </div>
 
       {/* Hamburger Button */}

@@ -51,7 +51,7 @@ export default function Features() {
   return (
     <section id="features" className={styles.featuresSection}>
       <div className={styles.sectionHeader}>
-        <h2 className="heading-main text-gradient anim-hidden blur-zoom-out observe-me">One partner. Every capability.</h2>
+        <h2 className="heading-main text-gradient anim-hidden blur-zoom-out observe-me">Automate. Elevate. Accelerate</h2>
         <p className="sub-heading anim-hidden fade-up observe-me">AI built into every layer so your enterprise doesn't just keep up, it pulls ahead.</p>
       </div>
       <div className={styles.scrollingWrapper}>

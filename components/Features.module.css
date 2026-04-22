@@ -30,7 +30,7 @@
 .scrollingTrack:hover { animation-play-state: paused; }
 
 .card {
-  width: 320px;
+  width: 280px;
   flex-shrink: 0;
   background: #020b18;
   border-radius: 14px;
@@ -158,9 +158,11 @@
   .cardTitle { font-size: 1rem; }
   .cardSub { font-size: 0.85rem; }
   .cardBullets li { font-size: 0.78rem; }
+  .sectionHeader h2 { font-size: 2rem; }
 }
 
 @media (max-width: 480px) {
   .card { width: 220px; }
   .cardImgWrapper { height: 220px; }
+  .sectionHeader h2 { font-size: 1.6rem; }
 }
