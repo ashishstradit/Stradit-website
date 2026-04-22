@@ -27,12 +27,9 @@ export default function Footer() {
         <div className={styles.footerCol}>
           <h4>Get in Touch</h4>
           <a href="mailto:reachout@stradit.com">reachout@stradit.com</a>
-          <a href="tel:+18005550199">+1 (800) 555-0199</a>
           <div className={styles.socialIcons}>
             <a href="#" title="LinkedIn">in</a>
             <a href="#" title="Twitter">𝕏</a>
-            <a href="#" title="GitHub">gh</a>
-            <a href="#" title="YouTube">yt</a>
           </div>
         </div>
       </div>
