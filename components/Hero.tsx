@@ -25,7 +25,7 @@ export default function Hero() {
         <source src="/Home Blue Section (2).mp4" type="video/mp4" />
       </video>
       <h1 className={`${styles.heroHeading} anim-hidden blur-zoom-out delay-2 observe-me`}>
-        <TypeWriter text="Applied AI" /> and Engineering That Delivers Measurable Change.
+        <TypeWriter text="Applied AI" /> and Engineering That Delivers Measurable Change
       </h1>
       <p className="sub-heading anim-hidden fade-up delay-3 observe-me">
         StradIT helps you turn technology into a lasting edge through applied AI and high-quality engineering delivery.
