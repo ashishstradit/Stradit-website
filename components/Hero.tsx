@@ -31,10 +31,10 @@ export default function Hero() {
         StradIT helps you turn technology into a lasting edge through applied AI and high-quality engineering delivery.
       </p>
       <div className={styles.heroButtons}>
-        <button className="cta-btn anim-hidden fade-right delay-4 observe-me">
+        <button className={`cta-btn ${styles.heroCta} anim-hidden fade-right delay-4 observe-me`}>
           Start Your Digital Transformation
         </button>
-        <button className="cta-btn anim-hidden fade-left delay-4 observe-me">
+        <button className={`cta-btn ${styles.heroCta} anim-hidden fade-left delay-4 observe-me`}>
           Explore Our Center of Excellence
         </button>
       </div>

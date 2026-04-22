@@ -28,7 +28,7 @@ export default function Navbar() {
             </ul>
           </li>
           <li className={styles.navItem}><a href="#">GCC</a></li>
-          <li className={styles.navItem}><a href="#">StradIT</a></li>
+          <li className={styles.navItem}><a href="#">StartIT</a></li>
         </ul>
         <button className="cta-btn">Contact Us</button>
       </div>
@@ -65,7 +65,7 @@ export default function Navbar() {
         </div>
 
         <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>GCC</a>
-        <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>StradIT</a>
+        <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>StartIT</a>
         <button className={`cta-btn ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>Contact Us</button>
       </div>
     </nav>

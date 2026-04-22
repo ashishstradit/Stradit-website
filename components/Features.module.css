@@ -5,6 +5,11 @@
   z-index: 2;
 }
 
+.sectionHeader h2 {
+  font-size: 4.5rem;
+  font-weight: 800;
+}
+
 .featuresSection {
   background-color: #020b18;
 }
