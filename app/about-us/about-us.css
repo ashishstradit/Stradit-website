@@ -1,0 +1,400 @@
+.about-us-page {
+  /* Keep consistent with landing page: hero handles navbar offset */
+  padding-top: 0;
+}
+
+.about-us-page {
+  --brand-color: var(--primary);
+  --text-muted-about: rgba(255, 255, 255, 0.65);
+  --transition-speed: 0.8s;
+}
+
+.about-us-page img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Paragraphs in About page should follow landing typography */
+.about-us-page #about p,
+.about-us-page #mission p,
+.about-us-page #vision p,
+.about-us-page #philosophy p,
+.about-us-page #delivery p,
+.about-us-page #pride p {
+  color: var(--text-muted-about);
+}
+
+.about-us-page .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--brand-color);
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(246, 135, 35, 0.3);
+}
+
+.about-us-page .btn:hover {
+  background-color: #d87116;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(246, 135, 35, 0.5);
+}
+
+.about-us-page .btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.about-us-page .btn:hover svg {
+  transform: translateX(4px);
+}
+
+.about-us-page .bullet-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.about-us-page .bullet-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  color: var(--text-muted-about);
+  font-size: 1.1rem;
+}
+
+.about-us-page .bullet-list li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  top: -2px;
+  color: var(--brand-color);
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.about-us-page section {
+  padding: 100px 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero */
+.about-us-page #hero {
+  padding: 0;
+  height: 70vh;
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  background: #0a0a0c;
+  padding-top: 80px; /* same idea as landing Hero */
+}
+
+.about-us-page .hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.about-us-page .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 60% at 50% 40%, rgba(10, 10, 12, 0.3) 0%, rgba(10, 10, 12, 0.9) 70%),
+    linear-gradient(to bottom, rgba(10, 10, 12, 0.15) 0%, rgba(10, 10, 12, 0.95) 100%);
+  z-index: 1;
+}
+
+.about-us-page .hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 5%;
+}
+
+/* First visible section: reduce top whitespace under navbar */
+.about-us-page #about {
+  padding-top: 40px;
+}
+
+.about-us-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-us-page .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-us-page .text-center {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-us-page .justify-text {
+  text-align: justify;
+}
+
+/* About paragraph readability */
+.about-us-page #about .justify-text {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  text-wrap: pretty;
+}
+
+.about-us-page .anim {
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
+  transition-delay: var(--delay, 0s);
+  will-change: opacity, transform;
+}
+
+.about-us-page .anim.anim-up {
+  transform: translateY(60px);
+}
+.about-us-page .anim.anim-down {
+  transform: translateY(-60px);
+}
+.about-us-page .anim.anim-left {
+  transform: translateX(60px);
+}
+.about-us-page .anim.anim-right {
+  transform: translateX(-60px);
+}
+.about-us-page .anim.anim-fade {
+  transform: scale(0.95);
+}
+
+.about-us-page .anim.is-visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+.about-us-page .slider-wrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  padding: 40px 0;
+  position: relative;
+}
+
+.about-us-page .slider-track {
+  display: flex;
+  width: max-content;
+  gap: 30px;
+}
+
+.about-us-page .slider-track:hover {
+  animation-play-state: paused;
+}
+
+.about-us-page .slider-wrapper::before,
+.about-us-page .slider-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.about-us-page .slider-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(17, 20, 30, 1), rgba(17, 20, 30, 0));
+}
+
+.about-us-page .slider-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(17, 20, 30, 1), rgba(17, 20, 30, 0));
+}
+
+.about-us-page .slider-track.left-to-right {
+  animation: slideRight 30s linear infinite;
+}
+.about-us-page .slider-track.right-to-left {
+  animation: slideLeft 30s linear infinite;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 15px));
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(calc(-50% - 15px));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.about-us-page .phil-card {
+  width: 400px;
+  background: #020b18;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.about-us-page .phil-card::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  right: -30%;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(30, 120, 255, 0.6);
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(30, 120, 255, 0.3);
+}
+
+.about-us-page .phil-card img {
+  border-radius: 0;
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+  box-shadow: none;
+}
+
+.about-us-page .phil-content {
+  padding: 20px;
+  position: relative;
+}
+
+.about-us-page .phil-line {
+  position: absolute;
+  left: 20px;
+  top: 25px;
+  bottom: 25px;
+  width: 3px;
+  background-color: var(--brand-color);
+}
+
+.about-us-page .phil-content h4,
+.about-us-page .phil-content p {
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
+.about-us-page .delivery-item {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.about-us-page .delivery-item .icon {
+  color: var(--brand-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 5px;
+}
+
+.about-us-page .pride-card {
+  width: 350px;
+  background: #020b18;
+  padding: 30px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-height: 210px;
+}
+
+.about-us-page .pride-icon-box {
+  width: 50px;
+  height: 50px;
+  background: rgba(17, 20, 30, 1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-color);
+}
+
+.about-us-page .about-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  max-width: 560px;
+}
+
+@media (max-width: 992px) {
+  .about-us-page .grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .about-us-page .grid-2 > div:nth-child(2) {
+    grid-row: 1;
+  }
+  .about-us-page #mission > div:nth-child(2),
+  .about-us-page #delivery > div:nth-child(2) {
+    grid-row: auto;
+  }
+
+  .about-us-page .about-img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-page section {
+    padding: 60px 5%;
+  }
+
+  .about-us-page #hero {
+    height: 60vh;
+    min-height: 360px;
+    padding-top: 100px; /* matches landing Hero mobile offset */
+  }
+
+  .about-us-page .slider-wrapper::before,
+  .about-us-page .slider-wrapper::after {
+    width: 70px;
+  }
+
+  .about-us-page .phil-card {
+    width: 320px;
+  }
+  .about-us-page .pride-card {
+    width: 280px;
+    padding: 22px;
+  }
+
+  .about-us-page #about .justify-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: left;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+}
+

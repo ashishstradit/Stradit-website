@@ -15,16 +15,16 @@ export default function Navbar() {
       {/* Desktop Links */}
       <div className={styles.desktopLinks}>
         <ul className={styles.navList}>
-          <li className={styles.navItem}><a href="#">About us</a></li>
+          <li className={styles.navItem}><a href="/about-us">About us</a></li>
           <li className={styles.navItem}>
             <a href="#">CoE</a>
             <ul className={styles.dropdownMenu}>
+              <li><a href="#">AI</a></li>
               <li><a href="#">Overview</a></li>
               <li><a href="#">Data Analytics</a></li>
               <li><a href="#">Applied AI</a></li>
               <li><a href="#">Testing CoE</a></li>
               <li><a href="#">GCC CoE</a></li>
-              <li><a href="#">AI</a></li>
             </ul>
           </li>
           <li className={styles.navItem}><a href="#">GCC</a></li>
@@ -46,7 +46,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
-        <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>About us</a>
+        <a href="/about-us" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>About us</a>
 
         <div className={styles.mobileAccordion}>
           <button className={styles.mobileAccordionBtn} onClick={() => setCoeOpen(!coeOpen)}>
