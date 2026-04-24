@@ -74,13 +74,10 @@ export default function AboutUsPage() {
               About StradIT
             </h2>
             <p className="justify-text anim anim-up observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              StradIT is a trusted technology partner for enterprises that want AI to drive measurable business outcomes,
-              not just make headlines. We deliver end-to-end transformation by aligning technology with strategic and
-              operational priorities. Our capabilities include Global Capability Center (GCC) setup and optimization, AI
-              automation, legacy modernization, analytics, and testing, helping organizations scale innovation with
-              control, speed, and confidenc, with AI as the engine behind every capability.At the core of StradIT is deep
-              domain expertise across applied AI, data analytics, cybersecurity, cloud and infrastructure, testing, and
-              quality engineering.
+              StradIT is a trusted technology partner for enterprises that want AI to drive measurable business outcomes, not just make headlines. We deliver end-to-end transformation by aligning technology with strategic and operational priorities. Our capabilities include Global Capability Center (GCC) setup and optimization, AI automation, legacy modernization, analytics, and testing, helping organizations scale innovation with control, speed, and confidence, with AI as the engine behind every capability.
+            </p>
+            <p className="justify-text about-paragraph-2 anim anim-up observe-me" style={{ ['--delay' as any]: '0.25s' }}>
+              At the core of StradIT is deep domain expertise across applied AI, data analytics, cybersecurity, cloud and infrastructure, testing, and quality engineering.
             </p>
             <div className="anim anim-up observe-me" style={{ ['--delay' as any]: '0.3s', marginTop: 30 }}>
               <a href="#" className="btn">
@@ -239,10 +236,12 @@ export default function AboutUsPage() {
               We Take Pride In
             </h2>
             <p className="sub-heading anim anim-up observe-me" style={{ ['--delay' as any]: '0.1s' }}>
-              Designing AI and Tech Solutions, Engineered for the Future.At StradIT, excellence isn’t a promise; it’s our
-              North Star, and we make this possible through:
+              Designing AI and Tech Solutions, Engineered for the Future.
             </p>
-            <div className="anim anim-up observe-me" style={{ ['--delay' as any]: '0.2s', marginBottom: 50 }}>
+            <p className="pride-subtext anim anim-up observe-me" style={{ ['--delay' as any]: '0.15s' }}>
+              At StradIT, excellence isn’t a promise; it’s our North Star, and we make this possible through:
+            </p>
+            <div className="anim anim-up observe-me" style={{ ['--delay' as any]: '0.2s', marginBottom: 16 }}>
               <a href="#" className="btn">
                 Experience Our Excellence <svg>
                   <use href="#icon-arrow" />

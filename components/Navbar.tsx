@@ -19,7 +19,7 @@ export default function Navbar() {
         <ul className={styles.navList}>
           <li className={styles.navItem}><a href="/about-us">About us</a></li>
           <li className={styles.navItem}>
-            <a href="#">CoE</a>
+            <a href="/coe">CoE</a>
             <ul className={styles.dropdownMenu}>
               <li><a href="#">AI</a></li>
               <li><a href="#">Overview</a></li>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Center of Excellence | Premium Digital</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --brand-color: #f68723;
+            --brand-gradient: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+            --text-main: #ffffff;
+            --text-muted: #ffffff;
+            --bg-dark-1: #0d0d0d;
+            --bg-dark-2: #141414;
+            --bg-dark-3: #1a1a1a;
+            --font-main: 'Montserrat', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.8s;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark-1);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            font-weight: 650;
+        }
+
+        .section-subheading {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        p {
+            color: var(--text-muted);
+        }
+
+        /* --- UI COMPONENTS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--brand-color);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #d87116;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.5);
+        }
+
+        .btn svg {
+            width: 16px; height: 16px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover svg {
+            transform: translateX(4px);
+        }
+
+        .btn-link {
+            color: var(--brand-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .btn-link:hover {
+            color: #d87116;
+        }
+
+        .btn-link svg {
+            width: 14px; height: 14px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* --- LAYOUTS --- */
+        section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-bottom: 60px;
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .anim {
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
+            will-change: opacity, transform;
+        }
+
+        /* Translates element from right side to its original position (leftwards) */
+        .anim.anim-from-right { transform: translateX(80px); }
+        .anim.anim-fade { transform: scale(0.95); }
+        .anim.anim-up { transform: translateY(50px); }
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* --- LOOP ANIMATIONS (MARQUEE) --- */
+        .slider-wrapper {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            width: max-content;
+            gap: 40px;
+        }
+
+        /* Pause on hover for better UX */
+        .slider-track:hover {
+            animation-play-state: paused !important;
+        }
+
+        .slider-track.right-to-left {
+            animation: slideLeft 35s linear infinite;
+        }
+
+        .slider-track.left-to-right {
+            animation: slideRight 35s linear infinite;
+        }
+
+        @keyframes slideLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 20px)); }
+        }
+
+        @keyframes slideRight {
+            0% { transform: translateX(calc(-50% - 20px)); }
+            100% { transform: translateX(0); }
+        }
+
+        /* --- SPECIFIC SECTIONS --- */
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.4) 100%), 
+                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+        }
+        .hero-content {
+            max-width: 650px;
+        }
+
+        /* Section 2: Portrait Loop */
+        #portrait-section {
+            background-color: var(--bg-dark-1);
+            overflow: hidden;
+        }
+        .portrait-card {
+            width: 320px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .portrait-img-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            height: 450px;
+        }
+        .portrait-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .portrait-card:hover .portrait-img-wrapper img {
+            transform: scale(1.08);
+        }
+        .portrait-content h4 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        .portrait-content p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* Section 3: Rectangle Loop */
+        #rectangle-section {
+            background-color: var(--bg-dark-2);
+        }
+        .rect-card {
+            width: 380px;
+            background: var(--bg-dark-3);
+            padding: 35px 30px;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            /*box-shadow: 0 10px 25px rgba(0,0,0,0.2);*/
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .rect-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(246, 135, 35, 0.3);
+        }
+        .rect-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(246, 135, 35, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-color);
+            margin-bottom: 10px;
+        }
+        .rect-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .rect-content p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+        .cta-wrapper {
+            text-align: center;
+            margin-top: 70px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <svg style="display: none;">
+        <symbol id="icon-arrow" viewBox="0 0 16 16">
+            <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </symbol>
+        <symbol id="icon-layer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 12 12 17 22 12"></polyline>
+            <polyline points="2 17 12 22 22 17"></polyline>
+        </symbol>
+    </svg>
+
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="section-heading gradient-text anim anim-from-right" style="--delay: 0.1s; font-size: 3.5rem;">Center of Excellence</h1>
+                <p class="section-subheading anim anim-from-right" style="--delay: 0.3s; color: #fff; font-size: 1.3rem;">
+                    From Insight to Innovation With AI and Tech Engineering. StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help Fortune 500 companies navigate the future with confidence. 
+
+                </p>
+                <div class="anim anim-from-right" style="--delay: 0.5s;">
+                    <a href="#" class="btn">
+                        Build With Our CoE
+                        <svg><use href="#icon-arrow"></use></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portrait-section">
+        <div class="slider-wrapper">
+            <div class="slider-track right-to-left">
+                <div class="portrait-card anim anim-fade" style="--delay: 0.1s;">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600" alt="Cloud Architecture">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Data Analytics</h4>
+                        <p>Transform raw data into actionable understandings through our AI-enabled data analytics.</p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card anim anim-fade" style="--delay: 0.2s;">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" alt="Data Analytics">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Cyber Security </h4>
+                        <p>Guard digital assets across applications, data, and identities while downsizing risks with AI-driven threat intelligence.</p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card anim anim-fade" style="--delay: 0.3s;">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=600" alt="AI & ML">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Cloud & Infrastructure </h4>
+                        <p>End-to-end consulting and service delivery to support cloud migration and modernization.</p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card anim anim-fade" style="--delay: 0.4s;">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=600" alt="DevOps">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Testing & Quality Engineering </h4>
+                        <p>Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards. </p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card anim anim-fade" style="--delay: 0.5s;">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600" alt="Cybersecurity">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>AI Solutions </h4>
+                        <p>Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve. </p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card anim anim-fade" style="--delay: 0.6s;">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1512758117984-97217dbbff0b?auto=format&fit=crop&q=80&w=600" alt="UI/UX Design">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Data Analytics</h4>
+                        <p>Transform raw data into actionable understandings through our AI-enabled data analytics.</p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+
+                <div class="portrait-card">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600" alt="Cloud Architecture">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Cyber Security </h4>
+                        <p>Guard digital assets across applications, data, and identities while downsizing risks with AI-driven threat intelligence.</p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" alt="Data Analytics">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Cloud & Infrastructure </h4>
+                        <p>End-to-end consulting and service delivery to support cloud migration and modernization.</p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=600" alt="AI & ML">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Testing & Quality Engineering </h4>
+                        <p>Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards. </p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=600" alt="DevOps">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Cloud & Infrastructure </h4>
+                        <p>End-to-end consulting and service delivery to support cloud migration and modernization.</p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600" alt="Cybersecurity">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>Testing & Quality Engineering</h4>
+                        <p>Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards. </p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+                <div class="portrait-card">
+                    <div class="portrait-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1512758117984-97217dbbff0b?auto=format&fit=crop&q=80&w=600" alt="UI/UX Design">
+                    </div>
+                    <div class="portrait-content">
+                        <h4>AI Solutions </h4>
+                        <p>Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve. </p>
+                        <a href="#" class="btn-link">Know more <svg><use href="#icon-arrow"></use></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rectangle-section">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim anim-up" style="--delay: 0.1s;">What You Gain with StradIT</h2>
+            <h3 class="section-subheading anim anim-up" style="--delay: 0.2s;"> Don’t Just Adopt Technology; Lead With it. When you choose StradIT, you gain more than a vendor; you gain a velocity partner. We position you at the forefront of AI-led innovation, ensuring you aren't just running the race, but leading it.
+</h3>
+        </div>
+
+        <div class="slider-wrapper">
+            <div class="slider-track left-to-right">
+                <div class="rect-card anim anim-fade" style="--delay: 0.2s;">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>100% Tailored Solutions</h4>
+                        <!-- <p>Refactoring legacy systems into agile, microservices-based architectures.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card anim anim-fade" style="--delay: 0.3s;">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Start-to-Finish Confidence</h4>
+                        <!-- <p>Connecting hardware and software for real-time edge computing.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card anim anim-fade" style="--delay: 0.4s;">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Built-in Trust & Authority/h4>
+                        <!-- <p>Implementing decentralized ledgers for absolute data integrity.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card anim anim-fade" style="--delay: 0.5s;">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Scale Without Limits</h4>
+                        <!-- <p>Building boundary-pushing virtual and augmented reality experiences.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card anim anim-fade" style="--delay: 0.6s;">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Smarter Teams, Bigger Wins</h4>
+                        <!-- <p>Engineering hyper-secure, high-frequency transaction gateways.</p> -->
+                    </div>
+                </div>
+
+                <div class="rect-card">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>100% Tailored Solutions</h4>
+                        <!-- <p>Refactoring legacy systems into agile, microservices-based architectures.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Start-to-Finish Confidence</h4>
+                        <!-- <p>Connecting hardware and software for real-time edge computing.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Built-in Trust & Authority</h4>
+                        <!-- <p>Implementing decentralized ledgers for absolute data integrity.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Scale Without Limits</h4>
+                        <!-- <p>Building boundary-pushing virtual and augmented reality experiences.</p> -->
+                    </div>
+                </div>
+                <div class="rect-card">
+                    <div class="rect-icon"><svg width="28" height="28"><use href="#icon-layer"></use></svg></div>
+                    <div class="rect-content">
+                        <h4>Smarter Teams, Bigger Wins</h4>
+                        <!-- <p>Engineering hyper-secure, high-frequency transaction gateways.</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-wrapper anim anim-up" style="--delay: 0.3s;">
+            <a href="#" class="btn">
+                Transform With StradIT
+                <svg><use href="#icon-arrow"></use></svg>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apply delay styling based on inline variables
+            const animElements = document.querySelectorAll('.anim');
+            
+            animElements.forEach(el => {
+                const delay = el.style.getPropertyValue('--delay');
+                if (delay) {
+                    el.style.transitionDelay = delay;
+                }
+            });
+
+            // Intersection Observer configuration
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Triggers when 15% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
