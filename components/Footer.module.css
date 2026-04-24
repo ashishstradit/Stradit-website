@@ -51,7 +51,18 @@
 }
 
 @media (max-width: 1024px) {
-  .footerGrid { grid-template-columns: 1fr 1fr; }
+  .footer { padding: 70px 5% 34px; }
+  .footerGrid {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .footerCol h4 { margin-bottom: 16px; }
+  .footerCol p,
+  .footerCol a { margin-bottom: 12px; }
+
+  .socialIcons { margin-top: 14px; }
 }
 
 @media (max-width: 600px) {

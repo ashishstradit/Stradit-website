@@ -9,7 +9,9 @@ export default function Navbar() {
   return (
     <nav className={styles.nav}>
       <div className={styles.logo}>
-        <img src="/Artboard 1.png" alt="Brand Logo" />
+        <a href="/" aria-label="Go to home">
+          <img src="/Artboard 1.png" alt="Brand Logo" />
+        </a>
       </div>
 
       {/* Desktop Links */}
@@ -54,12 +56,12 @@ export default function Navbar() {
           </button>
           {coeOpen && (
             <div className={styles.mobileSubMenu}>
+              <a href="#" onClick={() => setMenuOpen(false)}>AI</a>
               <a href="#" onClick={() => setMenuOpen(false)}>Overview</a>
               <a href="#" onClick={() => setMenuOpen(false)}>Data Analytics</a>
               <a href="#" onClick={() => setMenuOpen(false)}>Applied AI</a>
               <a href="#" onClick={() => setMenuOpen(false)}>Testing CoE</a>
               <a href="#" onClick={() => setMenuOpen(false)}>GCC CoE</a>
-              <a href="#" onClick={() => setMenuOpen(false)}>AI</a>
             </div>
           )}
         </div>
