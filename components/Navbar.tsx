@@ -49,6 +49,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
         <a href="/about-us" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>About us</a>
+        <a href="/coe" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>CoE</a>
 
         <div className={styles.mobileAccordion}>
           <button className={styles.mobileAccordionBtn} onClick={() => setCoeOpen(!coeOpen)}>
