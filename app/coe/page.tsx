@@ -21,14 +21,14 @@ export default function CoePage() {
       title: 'Cyber Security',
       desc: 'Guard digital assets across applications, data, and identities while downsizing risks with AI-driven threat intelligence.',
       img: '/CoE.svg',
-      video: '/Cybersecurity.mp4',
+      video: '/Cyber%20Security.mp4',
       href: '/coe/cyber-security',
     },
     {
       title: 'Cloud & Infrastructure',
       desc: 'End-to-end consulting and service delivery to support cloud migration and modernization.',
       img: '/Limit.svg',
-      video: '/Cloud%20infrastructure.mp4',
+      video: '/Cloud%20cards.mp4',
       href: '/coe/cloud',
     },
     {
@@ -66,17 +66,19 @@ export default function CoePage() {
       <main className="coe-page">
         <section id="hero" aria-label="Center of Excellence hero">
           <video className="hero-video" autoPlay loop muted playsInline preload="auto">
-            <source src="/Main%20COE%20hero.mov" />
-            <source src="/Hero%20Section%20Blue.mp4" type="video/mp4" />
+            <source src="/Main%20COE%20hero.mp4" type="video/mp4" />
+            <source src="/Main%20COE%20hero.mov" type="video/quicktime" />
           </video>
           <div className="hero-overlay" />
+        </section>
 
+        <section id="hero-copy" aria-label="Center of Excellence intro" style={{ backgroundColor: '#0a0a0c' }}>
           <div className="container">
-            <div className="hero-content">
-              <h1 className="heading-main text-gradient anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.1s', fontSize: '3.5rem' }}>
+            <div className="hero-content hero-copy">
+              <h1 className="heading-main text-gradient anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.1s' }}>
                 Center of Excellence
               </h1>
-              <p className="sub-heading anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.3s', color: '#fff', fontSize: '1.3rem', textAlign: 'center', margin: '0 0 28px 0' }}>
+              <p className="sub-heading anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.3s', color: '#fff', margin: '0 0 28px 0' }}>
                 From Insight to Innovation With AI and Tech Engineering. StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help Fortune 500 companies navigate the future with confidence.
               </p>
               <div className="anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.5s' }}>

@@ -88,29 +88,37 @@
 
 /* Hero (video background) */
 .coe-page #hero {
-  height: 100vh;
+  --nav-offset: 80px;
+  height: 70vh;
+  min-height: 420px;
   display: flex;
   align-items: center;
-  padding: 0;
+  justify-content: center;
+  padding: var(--nav-offset) 0 0 0; /* keep video below fixed navbar */
   background: #0a0a0c;
 }
 
 .coe-page .hero-video {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: var(--nav-offset);
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--nav-offset));
+  /* Fit to screen (full-bleed) */
   object-fit: cover;
+  object-position: center;
   z-index: 0;
 }
 
 .coe-page .hero-overlay {
   position: absolute;
-  inset: 0;
-  /* Dark top for navbar readability + side gradient like landing */
-  background:
-    linear-gradient(to bottom, rgba(10, 10, 12, 0.78) 0%, rgba(10, 10, 12, 0) 38%),
-    linear-gradient(to right, rgba(13, 13, 13, 0.9) 0%, rgba(13, 13, 13, 0.45) 100%);
+  left: 0;
+  right: 0;
+  top: var(--nav-offset);
+  bottom: 0;
+  background: transparent;
   z-index: 1;
 }
 
@@ -118,7 +126,7 @@
   position: relative;
   z-index: 2;
   max-width: 900px;
-  padding-top: 80px; /* navbar space, same as landing hero */
+  padding-top: 80px; /* navbar safe space */
   text-align: center;
   margin: 0 auto;
   display: flex;
@@ -126,12 +134,20 @@
   align-items: center;
 }
 
-.coe-page .hero-content .sub-heading {
-  /* Justified paragraph while keeping the block centered */
-  text-align: justify;
-  text-align-last: center;
-  text-justify: inter-word;
+.coe-page .hero-copy {
+  padding-top: 40px;
+  padding-bottom: 10px;
 }
+
+.coe-page .hero-copy .sub-heading {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  text-align-last: left;
+}
+
+/* Keep other hero paragraphs default (do not override hero-copy alignment) */
 
 /* Scroll animations (same mechanism as useObserver + observe-me) */
 .coe-page .anim {
@@ -352,6 +368,9 @@
   }
   .coe-page .hero-content {
     padding-top: 100px;
+  }
+  .coe-page #hero {
+    --nav-offset: 100px;
   }
   .coe-page .portrait-img-wrapper {
     height: 320px;
