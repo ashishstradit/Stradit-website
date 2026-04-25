@@ -36,10 +36,14 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
+  line-height: 1.15;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(246, 135, 35, 0.3);
+  text-align: center;
+  justify-content: center;
+  white-space: normal;
 }
 
 .about-us-page .btn:hover {
@@ -231,6 +235,10 @@
   gap: 30px;
 }
 
+.about-us-page .slider-track.no-motion {
+  animation: none !important;
+}
+
 .about-us-page .slider-track:hover {
   animation-play-state: paused;
 }
@@ -261,11 +269,20 @@
   padding: 16px 0;
 }
 
-.about-us-page .slider-track.left-to-right {
-  animation: slideRight 30s linear infinite;
+/* Disable auto-motion (user scroll only) */
+.about-us-page .slider-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge legacy */
 }
-.about-us-page .slider-track.right-to-left {
-  animation: slideLeft 30s linear infinite;
+.about-us-page .slider-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+.about-us-page .phil-card,
+.about-us-page .pride-card {
+  scroll-snap-align: start;
 }
 
 @keyframes slideLeft {
@@ -450,6 +467,15 @@
   .about-us-page .pride-subtext {
     font-size: 0.95rem;
     margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-us-page .btn {
+    width: 100%;
+    max-width: 360px;
+    padding: 12px 18px;
+    font-size: 0.95rem;
   }
 }
 

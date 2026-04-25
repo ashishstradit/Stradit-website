@@ -8,33 +8,37 @@ export default function CoePage() {
       desc: 'Transform raw data into actionable understandings through our AI-enabled data analytics.',
       img: '/Graph.svg',
       video: '/Data%20Analytics.mp4',
+      href: '/coe/data-analytics',
     },
     {
       title: 'Cyber Security',
       desc: 'Guard digital assets across applications, data, and identities while downsizing risks with AI-driven threat intelligence.',
       img: '/CoE.svg',
       video: '/Cybersecurity.mp4',
+      href: '/coe/cyber-security',
     },
     {
       title: 'Cloud & Infrastructure',
       desc: 'End-to-end consulting and service delivery to support cloud migration and modernization.',
       img: '/Limit.svg',
       video: '/Cloud%20infrastructure.mp4',
+      href: '/coe/cloud',
     },
     {
       title: 'Testing & Quality Engineering',
       desc: 'Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards.',
       img: '/Qulaity.svg',
       video: '/Testing%20and%20Quality.mp4',
+      href: '/coe',
     },
     {
       title: 'AI Solutions',
       desc: 'Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve.',
       img: '/AI%20readiness.svg',
       video: '/AI%20solution.mp4',
+      href: '/coe',
     },
   ]
-  const portraitLoop = [...portraitCards, ...portraitCards]
 
   const gains = [
     { title: '100% Tailored Solutions', icon: '/100%25%20Solution.svg', iconKey: 'tailored' },
@@ -73,7 +77,7 @@ export default function CoePage() {
               <h1 className="heading-main text-gradient anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.1s', fontSize: '3.5rem' }}>
                 Center of Excellence
               </h1>
-              <p className="sub-heading anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.3s', color: '#fff', fontSize: '1.3rem', textAlign: 'left', margin: '0 0 28px 0' }}>
+              <p className="sub-heading anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.3s', color: '#fff', fontSize: '1.3rem', textAlign: 'center', margin: '0 0 28px 0' }}>
                 From Insight to Innovation With AI and Tech Engineering. StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help Fortune 500 companies navigate the future with confidence.
               </p>
               <div className="anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.5s' }}>
@@ -87,9 +91,13 @@ export default function CoePage() {
 
         <section id="portrait-section">
           <div className="slider-wrapper">
-            <div className="slider-track right-to-left">
-              {portraitLoop.map((c, idx) => (
-                <div className="portrait-card anim anim-fade observe-me" style={{ ['--delay' as any]: `${0.1 + (idx % 6) * 0.1}s` }} key={`${c.title}-${idx}`}>
+            <div className="slider-track no-motion">
+              {portraitCards.map((c, idx) => (
+                <div
+                  className="portrait-card anim anim-fade observe-me"
+                  style={{ ['--delay' as any]: `${0.1 + idx * 0.08}s` }}
+                  key={c.title}
+                >
                   <div className="portrait-img-wrapper">
                     {c.video ? (
                       <video className="card-video" autoPlay loop muted playsInline preload="metadata">
@@ -102,7 +110,7 @@ export default function CoePage() {
                   <div className="portrait-content">
                     <h4>{c.title}</h4>
                     <p>{c.desc}</p>
-                    <a href="#" className="btn-link">
+                    <a href={c.href ?? '#'} className="btn-link">
                       Know more <svg><use href="#icon-arrow" /></svg>
                     </a>
                   </div>
@@ -123,7 +131,7 @@ export default function CoePage() {
           </div>
 
           <div className="slider-wrapper">
-            <div className="slider-track left-to-right">
+            <div className="slider-track no-motion">
               {gainsLoop.map((t, idx) => (
                 <div
                   className="rect-card anim anim-fade observe-me"

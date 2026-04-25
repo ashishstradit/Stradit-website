@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Transformation Excellence</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --brand-color: #f68723;
+            --brand-gradient: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+            --text-main: #ffffff;
+            --text-muted: #FFF;
+            --bg-dark-1: #11141e;
+            --bg-dark-2: #161a26;
+            --bg-dark-3: #11141e;
+            --font-main: 'Montserrat', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.8s;
+            --hover-speed: 0.3s;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark-1);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-heading {
+            font-size: 2.2rem;
+            font-weight: 650;
+        }
+
+        .section-subheading {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- UI COMPONENTS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--brand-color);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 50px; /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--hover-speed) ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #d87116;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.5);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            color: var(--brand-color);
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        /* --- LAYOUTS --- */
+        section {
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-center {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Media Holders */
+        .video-holder {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            /*box-shadow: 0 20px 50px rgba(0,0,0,0.5);*/
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+        }
+
+        .video-holder video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .anim {
+            opacity: 0;
+            transition: opacity var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: opacity, transform;
+        }
+
+        .anim.slide-rtl { transform: translateX(80px); } /* Right to Left */
+        .anim.slide-btt { transform: translateY(60px); } /* Bottom to Top */
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* --- SPECIFIC SECTION STYLES --- */
+        
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(8,8,8,1) 0%, rgba(8,8,8,0.2) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-content .section-heading { font-size: 3rem; }
+
+        /* Stats Loop Section (Marquee) */
+        #stats-loop {
+            background-color: var(--brand-color); /* Initial bg, overridden to dark */
+            background: linear-gradient(90deg, var(--bg-dark-2) 0%, var(--bg-dark-3) 100%);
+            padding: 60px 0;
+        }
+
+        .slider-wrapper {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            width: max-content;
+            gap: 80px;
+            animation: slideLeft 25s linear infinite;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-number-wrapper {
+            font-size: 4.5rem;
+            font-weight: 650;
+            color: var(--brand-color);
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .stat-text {
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 500;
+            line-height: 1.3;
+            max-width: 200px;
+        }
+
+        @keyframes slideLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 40px)); }
+        }
+
+        /* Final CTA Section */
+        #final-cta {
+            background-image: linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,0.6) 100%), 
+                              /*url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1920');*/
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 5%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            /* Keep alternating layout logical on mobile (Text first, then Video) */
+            .grid-2 .video-holder.left-side { grid-row: 2; }
+            .hero-content .section-heading { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <video class="bg-video" autoplay loop muted playsinline>
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">Data Analytics Center of Excellence</h1>
+            <p class="section-subheading anim slide-rtl" style="--delay: 0.2s;" style="color: #fff; font-size: 1.3rem;">
+                Decode, Decide, and Dominate with Data. StradIT helps enterprises turn messy, fragmented information into clear insights and confident action through its AI-powered data analytics CoE. We unify data across systems, build analytics that teams actually use, and embed AI-driven intelligence into workflows so decisions get faster, smarter, and easier to defend.
+
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-top: 30px;">
+                <a href="#" class="btn">Begin Your Data Transformation</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats-loop" class="anim slide-rtl" style="--delay: 0.2s; padding: 60px 0;">
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="45">0</span>%
+                    </div>
+                    <div class="stat-text">Better Forecasts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="5">0</span>x
+                    </div>
+                    <div class="stat-text">Faster Reporting</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="50">0</span>%
+                    </div>
+                    <div class="stat-text">Fewer Metric Disputes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="45">0</span>%
+                    </div>
+                    <div class="stat-text">Better Forecasts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="5">0</span>x
+                    </div>
+                    <div class="stat-text">Faster Reporting</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="50">0</span>%
+                    </div>
+                    <div class="stat-text">Fewer Metric Disputes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-3" style="background-color: var(--bg-dark-1);">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">Turn Data into a Power Move</h2>
+            <h3 class="section-subheading anim slide-rtl" style="--delay: 0.2s;">
+                Data is everywhere. Value isn’t. Our end-to-end analytics services help you connect the dots across high-volume, multi-source data and convert it into strategy, performance, and measurable outcomes.
+            </h3>
+        </div>
+    </section>
+
+    <section id="section-4" style="background-color: var(--bg-dark-2);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="section-heading gradient-text anim slide-btt" style="--delay: 0s;">Data Integration</h2>
+                <h3 class="section-subheading anim slide-btt" style="--delay: 0.1s;">We help organizations embed data at the core of their operations so that every move is backed by intelligence, not instinct.</h3>
+                <ul class="bullet-list anim slide-btt" style="--delay: 0.2s;">
+                    <li>Integrate structured and unstructured data across your ecosystem</li>
+                    <li>Build a unified analytics foundation from ingestion to consumption</li>
+                    <li>Design scalable architectures that grow with your business</li>
+                </ul>
+            </div>
+            <div class="video-holder anim slide-btt" style="--delay: 0.3s;">
+                <video autoplay loop muted playsinline>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-5" style="background-color: var(--bg-dark-1);">
+        <div class="container grid-2">
+            <div class="video-holder left-side anim slide-btt" style="--delay: 0.3s;">
+                <video autoplay loop muted playsinline>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div>
+                <h2 class="section-heading gradient-text anim slide-btt" style="--delay: 0s;">Predictive Intelligence</h2>
+                <h3 class="section-subheading anim slide-btt" style="--delay: 0.1s;">We go beyond simple transformation to re-engineer your core business processes, turning historical data into a strategic roadmap.</h3>
+                <ul class="bullet-list anim slide-btt" style="--delay: 0.2s;">
+                    <li>Smarter resource allocation with ML-driven forecasts</li>
+                    <li>Lower downtime costs through predictive maintenance signals</li>
+                    <li>Stronger retention and revenue with churn risk prediction</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-6" style="background-color: var(--bg-dark-2);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="section-heading gradient-text anim slide-btt" style="--delay: 0s;">Decision Intelligence Platforms</h2>
+                <h3 class="section-subheading anim slide-btt" style="--delay: 0.1s;">StradIT moves beyond theoretical insights to deliver high-performance systems that generate measurable ROI and operational clarity from the moment they go live.</h3>
+                <ul class="bullet-list anim slide-btt" style="--delay: 0.2s;">
+                    <li>100% tailored dashboards and KPI trackers </li>
+                    <li>Enable real-time decisions with embedded analytics in workflows</li>
+                    <li>Drive next-best actions with alerts and recommendations</li>
+                </ul>
+            </div>
+            <div class="video-holder anim slide-btt" style="--delay: 0.3s;">
+                <video autoplay loop muted playsinline>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-7" style="background-color: var(--bg-dark-1);">
+        <div class="container grid-2">
+            <div class="video-holder left-side anim slide-btt" style="--delay: 0.3s;">
+                <video autoplay loop muted playsinline>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div>
+                <h2 class="section-heading gradient-text anim slide-btt" style="--delay: 0s;">Data Governance & Security</h2>
+                <h3 class="section-subheading anim slide-btt" style="--delay: 0.1s;">Delivering and deploying data is just one part of our comprehensive offerings. At StradIT, we also guarantee that data at the core of the key workflows is responsible, compliant, and prepared for enterprise use through data quality & governance services.</h3>
+                <ul class="bullet-list anim slide-btt" style="--delay: 0.2s;">
+                    <li>Increase accuracy through cleansing, deduplication, and enrichment</li>
+                    <li>Improve audit readiness with metadata and lineage visibility</li>
+                    <li>Protect sensitive data with role-based access and encryption</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="final-cta">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s; font-size: 2.5rem;">Data Stories From the Field</h2>
+            <h3 class="section-subheading anim slide-rtl" style="--delay: 0.2s;" style="color: #fff;">
+                For our clients, data isn’t noise. It’s leverage. The stories below show how teams used StradIT's AI-powered analytics to turn data into momentum, and momentum into sustained results.
+            </h3>
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-top: 30px;">
+                <a href="#" class="btn">Write Your Data Success Story With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apply delay styling based on inline variables
+            const animElements = document.querySelectorAll('.anim');
+            
+            animElements.forEach(el => {
+                const delay = el.style.getPropertyValue('--delay');
+                if (delay) {
+                    el.style.transitionDelay = delay;
+                }
+            });
+
+            // Set up the Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            // Counter Animation Logic
+            let counted = false;
+            const runCounters = () => {
+                if (counted) return;
+                counted = true;
+                const counters = document.querySelectorAll('.counter');
+                const speed = 100; // Lower is faster
+
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        // Calculate increment
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // If the stats loop section is visible, trigger counters
+                        if (entry.target.id === 'stats-loop') {
+                            runCounters();
+                        }
+
+                        // Optional: Unobserve to play animation only once
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

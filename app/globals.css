@@ -38,10 +38,13 @@ ul { list-style: none; }
   border-radius: 50px;
   font-weight: 600;
   font-size: 1rem;
+  line-height: 1.15;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(246, 135, 35, 0.3);
+  text-align: center;
+  white-space: normal;
 }
 
 .cta-btn:hover {
@@ -129,7 +132,12 @@ section {
 
 @media (max-width: 480px) {
   .heading-main { font-size: 1.3rem; }
-  .cta-btn { width: auto; justify-content: center; }
+  .cta-btn {
+    width: 100%;
+    max-width: 360px;
+    padding: 12px 18px;
+    justify-content: center;
+  }
 }
 
 @keyframes blink {
