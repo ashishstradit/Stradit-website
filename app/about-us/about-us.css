@@ -227,10 +227,10 @@
 }
 
 .about-us-page .slider-wrapper {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  overflow: hidden;
-  padding: 40px 0;
+  width: 100%;
+  margin-left: 0;
+  /* extra side padding so first/last card fully visible */
+  padding: 40px 5%;
   position: relative;
 }
 
@@ -276,9 +276,11 @@
 
 /* Disable auto-motion (user scroll only) */
 .about-us-page .slider-wrapper {
+  overflow-y: visible;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x proximity;
+  scroll-padding-inline: 5%;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge legacy */
 }
@@ -288,6 +290,69 @@
 .about-us-page .phil-card,
 .about-us-page .pride-card {
   scroll-snap-align: start;
+}
+
+/* Desktop: show all cards (no horizontal scroll) */
+@media (min-width: 769px) {
+  .about-us-page #philosophy .slider-wrapper,
+  .about-us-page #pride .slider-wrapper {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .about-us-page #philosophy .slider-wrapper::before,
+  .about-us-page #philosophy .slider-wrapper::after,
+  .about-us-page #pride .slider-wrapper::before,
+  .about-us-page #pride .slider-wrapper::after {
+    display: none;
+  }
+
+  /* Philosophy: 3 cards in a row */
+  .about-us-page #philosophy .slider-track {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  /* Force exactly 5 cards in one row */
+  .about-us-page #philosophy .phil-card,
+  .about-us-page #pride .pride-card {
+    width: auto;
+    min-width: 0;
+  }
+
+  /* Pride: horizontal row on desktop (scroll if needed) */
+  .about-us-page #pride .slider-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .about-us-page #pride .slider-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .about-us-page #pride .slider-track {
+    width: max-content;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    padding-bottom: 2px;
+  }
+  .about-us-page #pride .pride-card {
+    width: 320px;
+    flex: 0 0 auto;
+  }
+
+  .about-us-page #philosophy .phil-card img {
+    height: 160px;
+  }
+
+  .about-us-page #pride .pride-card {
+    padding: 20px;
+    min-height: 190px;
+  }
 }
 
 @keyframes slideLeft {

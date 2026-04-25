@@ -4,39 +4,47 @@ import './about-us.css'
 export default function AboutUsPage() {
   const philosophyCards = [
     {
+      id: 'phil-1',
       title: 'Technology with Accountability',
       img: '/Technology%20with%20Accountability.png',
       alt: 'Technology with Accountability',
       desc: 'We ensure tech is explainable, supervised, and aligned. Our solutions include built-in guardrails for data, security, and compliance.',
     },
     {
+      id: 'phil-2',
       title: 'Engineering with Purpose',
       img: '/Engineering%20with%20Purpose.png',
       alt: 'Engineering with Purpose',
       desc: 'We are purpose-driven. Every solution, integration, and AI automation is meticulously designed to decode complexity, solve tangible business problems.',
     },
     {
+      id: 'phil-3',
       title: 'Domain‑First Thinking',
       img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600',
       alt: 'Team collaboration',
       desc: 'Our teams speak your language. Deep domain expertise across LLMs, governance, and guardrails shapes every design, strategy, and AI model we build.',
     },
   ]
-  const philosophyLoopCards = [...philosophyCards, ...philosophyCards]
 
   const prideCards = [
     {
+      id: 'pride-1',
       title: 'Integrated Center of Excellence',
       desc: 'Drives innovation across AI, Cybersecurity, Cloud, and Quality Engineering.',
     },
     {
+      id: 'pride-2',
       title: 'AI Readiness Training',
       desc: 'Prepares teams with the mindset, mastery, and mechanisms to harness AI with precision.',
     },
-    { title: 'Continuous Assessment & Improvement', desc: 'Confirm sustained excellence.' },
-    { title: 'Quality Assurance', desc: 'Built into every layer of solutions we deliver.' },
+    { id: 'pride-3', title: 'Continuous Assessment & Improvement', desc: 'Confirm sustained excellence.' },
+    { id: 'pride-4', title: 'Quality Assurance', desc: 'Built into every layer of solutions we deliver.' },
+    {
+      id: 'pride-5',
+      title: 'Operational Excellence',
+      desc: 'Execution-first delivery that stays reliable at scale.',
+    },
   ]
-  const prideLoopCards = [...prideCards, ...prideCards]
 
   return (
     <>
@@ -168,7 +176,7 @@ export default function AboutUsPage() {
           <div className="slider-wrapper anim anim-fade observe-me" style={{ ['--delay' as any]: '0.3s' }}>
             <div className="slider-track no-motion">
               {philosophyCards.map((card, idx) => (
-                <div className="phil-card" key={`${card.title}-${idx}`}>
+                <div className="phil-card" key={card.id}>
                   <img src={card.img} alt={card.alt} loading="lazy" />
                   <div className="phil-content">
                     <div className="phil-line" />
@@ -253,7 +261,7 @@ export default function AboutUsPage() {
           <div className="slider-wrapper anim anim-fade observe-me" style={{ ['--delay' as any]: '0.3s' }}>
             <div className="slider-track no-motion">
               {prideCards.map((card, idx) => (
-                <div className="pride-card" key={`${card.title}-${idx}`}>
+                <div className="pride-card" key={card.id}>
                   <div className="pride-icon-box">
                     <svg width="24" height="24">
                       <use href="#icon-star" />

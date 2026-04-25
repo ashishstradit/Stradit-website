@@ -47,7 +47,8 @@ const portraits = [
 ]
 
 export default function Features() {
-  const cards = [...portraits, ...portraits]
+  // No duplicates: on mobile we stack vertically
+  const cards = portraits
   return (
     <section id="features" className={styles.featuresSection}>
       <div className={styles.sectionHeader}>
