@@ -4,6 +4,13 @@ import './coe.css'
 export default function CoePage() {
   const portraitCards = [
     {
+      title: 'AI Solutions',
+      desc: 'Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve.',
+      img: '/AI%20readiness.svg',
+      video: '/AI%20solution.mp4',
+      href: '/coe',
+    },
+    {
       title: 'Data Analytics',
       desc: 'Transform raw data into actionable understandings through our AI-enabled data analytics.',
       img: '/Graph.svg',
@@ -29,13 +36,6 @@ export default function CoePage() {
       desc: 'Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards.',
       img: '/Qulaity.svg',
       video: '/Testing%20and%20Quality.mp4',
-      href: '/coe',
-    },
-    {
-      title: 'AI Solutions',
-      desc: 'Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve.',
-      img: '/AI%20readiness.svg',
-      video: '/AI%20solution.mp4',
       href: '/coe',
     },
   ]
