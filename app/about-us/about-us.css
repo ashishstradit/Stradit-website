@@ -473,6 +473,28 @@
     font-size: 0.95rem;
     margin-top: 8px;
   }
+
+  /* Mobile: stack slider cards vertically (no horizontal scroll) */
+  .about-us-page .slider-wrapper {
+    width: 100%;
+    margin-left: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 0;
+  }
+
+  .about-us-page .slider-track {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .about-us-page .phil-card,
+  .about-us-page .pride-card {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 480px) {

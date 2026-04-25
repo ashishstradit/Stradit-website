@@ -349,6 +349,29 @@
   .coe-page .rect-card {
     width: 300px;
   }
+
+  /* Mobile: stack cards vertically (no horizontal scroll) */
+  .coe-page #portrait-section .slider-wrapper,
+  .coe-page #rectangle-section .slider-wrapper {
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 0;
+  }
+
+  .coe-page #portrait-section .slider-track,
+  .coe-page #rectangle-section .slider-track {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .coe-page .portrait-card,
+  .coe-page .rect-card {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 480px) {

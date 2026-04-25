@@ -47,7 +47,6 @@ export default function CoePage() {
     { title: 'Scale Without Limits', icon: '/Limit.svg' },
     { title: 'Smarter Teams, Bigger Wins', icon: '/Team.svg' },
   ]
-  const gainsLoop = [...gains, ...gains]
 
   return (
     <>
@@ -132,7 +131,7 @@ export default function CoePage() {
 
           <div className="slider-wrapper">
             <div className="slider-track no-motion">
-              {gainsLoop.map((t, idx) => (
+              {gains.map((t, idx) => (
                 <div
                   className="rect-card anim anim-fade observe-me"
                   style={{ ['--delay' as any]: `${0.2 + (idx % 6) * 0.1}s` }}

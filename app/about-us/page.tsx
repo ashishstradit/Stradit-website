@@ -167,7 +167,7 @@ export default function AboutUsPage() {
 
           <div className="slider-wrapper anim anim-fade observe-me" style={{ ['--delay' as any]: '0.3s' }}>
             <div className="slider-track no-motion">
-              {philosophyLoopCards.map((card, idx) => (
+              {philosophyCards.map((card, idx) => (
                 <div className="phil-card" key={`${card.title}-${idx}`}>
                   <img src={card.img} alt={card.alt} loading="lazy" />
                   <div className="phil-content">
@@ -252,7 +252,7 @@ export default function AboutUsPage() {
 
           <div className="slider-wrapper anim anim-fade observe-me" style={{ ['--delay' as any]: '0.3s' }}>
             <div className="slider-track no-motion">
-              {prideLoopCards.map((card, idx) => (
+              {prideCards.map((card, idx) => (
                 <div className="pride-card" key={`${card.title}-${idx}`}>
                   <div className="pride-icon-box">
                     <svg width="24" height="24">
