@@ -14,7 +14,7 @@ export default function CyberSecurityCoePage() {
           <div className="hero-overlay" />
         </section>
 
-        <section id="hero-copy" aria-label="Cyber Security CoE intro" style={{ backgroundColor: '#0a0a0c' }}>
+        <section id="hero-copy" aria-label="Cyber Security CoE intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Cyber Security Center of Excellence
@@ -32,7 +32,7 @@ export default function CyberSecurityCoePage() {
 
         {/* Removed: percentage/stats marquee section */}
 
-        <section style={{ backgroundColor: '#161a26' }}>
+        <section>
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Core Capabilities
@@ -79,7 +79,7 @@ export default function CyberSecurityCoePage() {
           </div>
         </section>
 
-        <section id="final-cta" style={{ backgroundColor: '#11141e' }}>
+        <section id="final-cta">
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Don&apos;t Wait for a Breach.

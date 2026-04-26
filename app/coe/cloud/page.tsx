@@ -14,7 +14,7 @@ export default function CloudCoePage() {
           <div className="hero-overlay" />
         </section>
 
-        <section id="hero-copy" aria-label="Cloud & Infrastructure CoE intro" style={{ backgroundColor: '#0a0a0c' }}>
+        <section id="hero-copy" aria-label="Cloud & Infrastructure CoE intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Cloud &amp; Infrastructure Centre of Excellence
@@ -32,7 +32,7 @@ export default function CloudCoePage() {
 
         {/* Removed: percentage/stats marquee section */}
 
-        <section style={{ backgroundColor: '#161a26' }}>
+        <section>
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Shaping Cloud You Need With Conviction
@@ -43,7 +43,7 @@ export default function CloudCoePage() {
           </div>
         </section>
 
-        <section style={{ backgroundColor: '#11141e' }}>
+        <section>
           <div className="container grid-2">
             <div className="media-box anim slide-btt observe-me" style={{ ['--delay' as any]: '0s' }}>
               <video autoPlay loop muted playsInline preload="metadata">
@@ -71,7 +71,7 @@ export default function CloudCoePage() {
           </div>
         </section>
 
-        <section style={{ backgroundColor: '#161a26' }}>
+        <section>
           <div className="container grid-2">
             <div>
               <h2 className="heading-main text-gradient anim slide-btt observe-me" style={{ ['--delay' as any]: '0s' }}>
@@ -99,7 +99,7 @@ export default function CloudCoePage() {
           </div>
         </section>
 
-        <section id="final-cta" style={{ backgroundColor: '#11141e' }}>
+        <section id="final-cta">
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Cloud Outcomes That Actually Hold Up In Production

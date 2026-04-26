@@ -72,7 +72,7 @@ export default function CoePage() {
           <div className="hero-overlay" />
         </section>
 
-        <section id="hero-copy" aria-label="Center of Excellence intro" style={{ backgroundColor: '#0a0a0c' }}>
+        <section id="hero-copy" aria-label="Center of Excellence intro">
           <div className="container">
             <div className="hero-content hero-copy">
               <h1 className="heading-main text-gradient anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.1s' }}>

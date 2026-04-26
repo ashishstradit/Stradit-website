@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics</title>
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & THEME CONFIGURATION
+           ========================================================================== */
+        :root {
+            --brand-primary: #f68723;
+            --brand-hover: #e07518;
+            --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
+            
+            --bg-dark-base: #161a26;
+            --bg-dark-surface: #11141e;
+            
+            --text-primary: #ffffff;
+            --text-secondary: #fff;
+            
+            --font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+            --transition-speed: 0.8s;
+            --radius-md: 12px;
+            --radius-pill: 50px;
+        }
+
+        /* ==========================================================================
+           RESET & GLOBAL STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           TYPOGRAPHY
+           ========================================================================== */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .heading-xl { font-size: clamp(3rem, 6vw, 3rem); }
+        .heading-lg { font-size: clamp(2.2rem, 4vw, 3rem); }
+        .heading-md { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+
+        .subheading {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .text-justify {
+            text-align: justify;
+            /* For better justification spacing in modern browsers */
+            text-justify: inter-word; 
+        }
+
+        /* ==========================================================================
+           COMPONENTS
+           ========================================================================== */
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-primary);
+            color: #ffffff;
+            padding: 10px 40px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(246, 135, 35, 0.25);
+        }
+
+        .btn:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(246, 135, 35, 0.4);
+        }
+
+        /* Bullet Points */
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -4px;
+            color: var(--brand-primary);
+            font-weight: 800;
+            font-size: 1.6rem;
+        }
+
+        /* Video Wrapper */
+        .video-wrapper {
+            /*border-radius: var(--radius-md);*/
+            overflow: hidden;
+            /*box-shadow: 0 20px 50px rgba(0,0,0,0.5);*/
+            position: relative;
+            background: #000;
+            aspect-ratio: 16/9;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ==========================================================================
+           LAYOUT UTILITIES
+           ========================================================================== */
+        section {
+            padding: 120px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Backgrounds */
+        .bg-media {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(8,11,35,1) 0%, rgba(8,8,8,0.4) 100%);
+            z-index: 1;
+        }
+
+        .bg-overlay-center {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /*background: rgba(8,8,8,0.7);*/
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           SCROLL ANIMATION ENGINE
+           ========================================================================== */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Slide Right to Left */
+        .anim.slide-rtl { transform: translateX(80px); }
+        
+        /* Slide Top to Bottom */
+        .anim.slide-ttd { transform: translateY(-60px); }
+
+        /* Simple Fade In (for Videos) */
+        .anim.fade-in { transform: scale(0.98); }
+
+        /* Active State */
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE ADJUSTMENTS
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .heading-xl { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero" style="height: 100vh; min-height: 600px; display: flex; align-items: center; padding: 0 5%;">
+        <video class="bg-media" autoplay loop muted playsinline style="opacity: 0.6;">
+            <source src="Data Analytics.mp4" type="video/mp4">
+        </video>
+        <div class="bg-overlay"></div>
+        
+        <div class="container" style="max-width: 800px; margin-left: 0;">
+            <h1 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                Data Analytics Center of Excellence
+            </h1>
+            <p class="subheading text-justify anim slide-rtl" style="--delay: 0.2s;">
+                  Decode, Decide, and Dominate with Data.StradIT helps enterprises turn messy, fragmented information into clear insights and confident action through its AI-powered data analytics CoE. We unify data across systems, build analytics that teams actually use, and embed AI-driven intelligence into workflows so decisions get faster, smarter, and easier to defend.
+
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.4s;">
+                <a href="#section-two" class="btn">Begin Your Data Transformation</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-two" style="background-color: var(--bg-dark-surface);">
+        <div class="container text-center">
+            <h2 class="heading-lg gradient-text anim slide-rtl" style="--delay: 0s;">
+                Turn Data into a Power Move
+            </h2>
+            <p class="subheading text-justify anim slide-rtl" style="--delay: 0.2s;" style="max-width: 850px; margin: 0 auto 2.5rem auto;">
+                Data is everywhere. Value isn’t. Our end-to-end analytics services help you connect the dots across high-volume, multi-source data and convert it into strategy, performance, and measurable outcomes.
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.4s;">
+                <a href="#" class="btn">Discover Our Methodology</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-three" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="heading-md gradient-text anim slide-ttd" style="--delay: 0s;">Data Integration</h2>
+                <h3 class="subheading anim slide-ttd" style="--delay: 0.1s; text-align: left;">
+                    We help organizations embed data at the core of their operations so that every move is backed by intelligence, not instinct.
+                </h3>
+                <ul class="bullet-list">
+                    <li class="anim slide-ttd" style="--delay: 0.2s;">Integrate structured and unstructured data across your ecosystem</li>
+                    <li class="anim slide-ttd" style="--delay: 0.3s;">Build a unified analytics foundation from ingestion to consumption</li>
+                    <li class="anim slide-ttd" style="--delay: 0.4s;">Design scalable architectures that grow with your business</li>
+                </ul>
+            </div>
+            
+            <div class="anim fade-in" style="--delay: 0.2s;">
+                <div class="video-wrapper">
+                    <video autoplay loop muted playsinline>
+                        <source src="Data integration.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-four" style="background-color: var(--bg-dark-surface);">
+        <div class="container grid-2">
+            <div class="anim fade-in" style="--delay: 0.2s;">
+                <div class="video-wrapper">
+                    <video autoplay loop muted playsinline>
+                        <source src="Predictive Intelligence.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="heading-md gradient-text anim slide-ttd" style="--delay: 0s;">Predictive Intelligence</h2>
+                <h3 class="subheading anim slide-ttd" style="--delay: 0.1s; text-align: left;">
+                    We go beyond simple transformation to re-engineer your core business processes, turning historical data into a strategic roadmap.
+                </h3>
+                <ul class="bullet-list">
+                    <li class="anim slide-ttd" style="--delay: 0.2s;">Smarter resource allocation with ML-driven forecasts</li>
+                    <li class="anim slide-ttd" style="--delay: 0.3s;">Lower downtime costs through predictive maintenance signals</li>
+                    <li class="anim slide-ttd" style="--delay: 0.4s;">Stronger retention and revenue with churn risk prediction</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-five" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="heading-md gradient-text anim slide-ttd" style="--delay: 0s;">Decision Intelligence Platforms</h2>
+                <h3 class="subheading anim slide-ttd" style="--delay: 0.1s; text-align: left;">
+                    StradIT moves beyond theoretical insights to deliver high-performance systems that generate measurable ROI and operational clarity from the moment they go live.
+                </h3>
+                <ul class="bullet-list">
+                    <li class="anim slide-ttd" style="--delay: 0.2s;">100% tailored dashboards and KPI trackers</li>
+                    <li class="anim slide-ttd" style="--delay: 0.3s;">Enable real-time decisions with embedded analytics in workflows</li>
+                    <li class="anim slide-ttd" style="--delay: 0.4s;">Drive next-best actions with alerts and recommendations</li>
+                </ul>
+            </div>
+            
+            <div class="anim fade-in" style="--delay: 0.2s;">
+                <div class="video-wrapper">
+                    <video autoplay loop muted playsinline>
+                        <source src="Decision Intelligence Platforms.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-six" style="background-color: var(--bg-dark-surface);">
+        <div class="container grid-2">
+            <div class="anim fade-in" style="--delay: 0.2s;">
+                <div class="video-wrapper">
+                    <video autoplay loop muted playsinline>
+                        <source src="Data Governance & Security.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="heading-md gradient-text anim slide-ttd" style="--delay: 0s;">Data Quality & Governance</h2>
+                <h3 class="subheading anim slide-ttd" style="--delay: 0.1s; text-align: left;">
+                    Delivering and deploying data is just one part of our comprehensive offerings. At StradIT, we also guarantee that data at the core of the key workflows is responsible, compliant, and prepared for enterprise use through data quality & governance services. 
+                </h3>
+                <ul class="bullet-list">
+                    <li class="anim slide-ttd" style="--delay: 0.2s;">Increase accuracy through cleansing, deduplication, and enrichment</li>
+                    <li class="anim slide-ttd" style="--delay: 0.3s;">Improve audit readiness with metadata and lineage visibility</li>
+                    <li class="anim slide-ttd" style="--delay: 0.4s;">Protect sensitive data with role-based access and encryption</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-seven" style="min-height: 80vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-media" alt="Technology Background">
+        <div class="bg-overlay-center"></div>
+
+        <div class="container text-center">
+            <h2 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                Data Stories From the Field
+            </h2>
+            <p class="subheading text-justify anim slide-rtl" style="--delay: 0.2s;" style="max-width: 800px; margin: 0 auto 2.5rem auto; color: #fff;">
+                For our clients, data isn’t noise. It’s leverage. The stories below show how teams used StradIT's AI-powered analytics to turn data into momentum, and momentum into sustained results.            </p>
+            <div class="anim slide-rtl" style="--delay: 0.4s;">
+                <a href="#" class="btn">Write Your Data Success Story With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Identify all elements to animate
+            const animatedElements = document.querySelectorAll('.anim');
+            
+            // 2. Apply inline delays to CSS transition-delay
+            animatedElements.forEach(el => {
+                const delayValue = el.style.getPropertyValue('--delay');
+                if (delayValue) {
+                    el.style.transitionDelay = delayValue;
+                }
+            });
+
+            // 3. Set up the Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px', // Trigger slightly before element enters
+                threshold: 0.1 
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Trigger animation
+                        entry.target.classList.add('is-visible');
+                        // Stop observing once animated
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            // 4. Attach observer to elements
+            animatedElements.forEach(el => {
+                scrollObserver.observe(el);
+            });
+
+        });
+    </script>
+</body>
+</html>

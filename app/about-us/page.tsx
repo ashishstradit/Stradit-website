@@ -76,7 +76,7 @@ export default function AboutUsPage() {
           <div className="hero-overlay" />
         </section>
 
-        <section id="about" style={{ backgroundColor: '#161a26' }}>
+        <section id="about">
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim anim-up observe-me" style={{ ['--delay' as any]: '0s' }}>
               About StradIT
@@ -95,7 +95,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <section id="mission" style={{ backgroundColor: '#11141e' }}>
+        <section id="mission">
           <div className="container grid-2">
             <div>
               <h2 className="heading-main text-gradient anim anim-right observe-me" style={{ ['--delay' as any]: '0s' }}>
@@ -125,7 +125,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <section id="vision" style={{ backgroundColor: '#161a26' }}>
+        <section id="vision">
           <div className="container grid-2">
             <div className="anim anim-down observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               <img className="about-img" src="/Vision.png" alt="Vision Technology" />
@@ -155,7 +155,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <section id="philosophy" style={{ backgroundColor: '#11141e' }}>
+        <section id="philosophy">
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim anim-fade observe-me" style={{ ['--delay' as any]: '0s' }}>
               Our Philosophy
@@ -189,7 +189,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <section id="delivery" style={{ backgroundColor: '#161a26' }}>
+        <section id="delivery">
           <div className="container grid-2">
             <div>
               <h2 className="heading-main text-gradient anim anim-left observe-me" style={{ ['--delay' as any]: '0s' }}>
@@ -238,7 +238,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        <section id="pride" style={{ backgroundColor: '#11141e' }}>
+        <section id="pride">
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim anim-up observe-me" style={{ ['--delay' as any]: '0s' }}>
               We Take Pride In
