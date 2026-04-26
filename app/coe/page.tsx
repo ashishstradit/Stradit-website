@@ -8,7 +8,7 @@ export default function CoePage() {
       desc: 'Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve.',
       img: '/AI%20readiness.svg',
       video: '/AI%20solution.mp4',
-      href: '/coe',
+      href: '/coe/ai',
     },
     {
       title: 'Data Analytics',
@@ -36,7 +36,7 @@ export default function CoePage() {
       desc: 'Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards.',
       img: '/Qulaity.svg',
       video: '/Testing%20and%20Quality.mp4',
-      href: '/coe',
+      href: '/coe/testing',
     },
   ]
 

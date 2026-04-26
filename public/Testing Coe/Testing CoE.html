@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing and Quality</title>
+    <style>
+        /* --- CSS VARIABLES FOR THEME MANAGEMENT --- */
+        :root {
+            --brand-color: #f68723;
+            --brand-color-hover: #d87116;
+            --brand-gradient: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+            --bg-dark-1: #161a26;
+            --bg-dark-2: #11141e;
+            --bg-dark-3: #161a26;
+            --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.8s;
+            --hover-speed: 0.3s;
+            --border-radius: 12px;
+        }
+
+        /* --- GLOBAL RESET & BASE TYPOGRAPHY --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark-1);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-heading {
+            font-size: clamp(2.5rem, 5vw, 3rem);
+            font-weight: 600;
+        }
+
+        .section-subheading {
+            font-size: clamp(1.1rem, 2vw, 1rem);
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 800px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- UI COMPONENTS --- */
+        
+        /* CTA Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-color);
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: 50px; /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--hover-speed) ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--brand-color-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        /* Bullet Lists */
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            color: var(--brand-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        section {
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* --- SCROLL ANIMATION CLASSES --- */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+        }
+
+        /* Right to Left Slide */
+        .anim.slide-rtl {
+            transform: translateX(80px);
+            transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
+        }
+
+        /* Zoom Out Ease-In Reveal */
+        .anim.zoom-out-reveal {
+            transform: scale(1.15);
+            transition: opacity var(--transition-speed) ease-in, transform var(--transition-speed) ease-in;
+        }
+
+        /* Active State */
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* =========================================
+           SECTION 1: HERO
+           ========================================= */
+        #hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(8,11,35,1) 0%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            text-align: left;
+            margin-left: 0; 
+        }
+
+        /* =========================================
+           SECTION 2: CAPABILITY GRID (3 Columns)
+           ========================================= */
+        #capabilities {
+            background-color: var(--bg-dark-2);
+            padding: 120px 5%;
+        }
+
+        .capability-card {
+            background-color: var(--bg-dark-3);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            /*box-shadow: 0 15px 35px rgba(0,0,0,0.4);*/
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 16:9 Aspect Ratio Image Holder */
+        .image-holder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .capability-card:hover .image-holder img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .card-content h4 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .card-content h5 {
+            font-size: 1rem;
+            color: var(--brand-color);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           SECTION 3: FINAL CTA (Labeled 4 in prompt)
+           ========================================= */
+        #final-cta {
+            background-image:url('Background 01.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 5%;
+        }
+
+        #final-cta .section-subheading {
+            color: #ffffff;
+            margin: 0 auto 3rem auto;
+            max-width: 800px;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <div class="container hero-content">
+            <h1 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">
+                Testing & Quality Engineering Center of Excellence
+            </h1>
+            <p class="section-subheading anim slide-rtl" style="--delay: 0.2s;">
+                DEngineering Trust in Every Line of Code. StradIT provides bespoke and AI-powered Testing & Quality Engineering that enable faster time-to-market without compromising on quality, reduce defect leakage, and lower TCO while enhancing customer satisfaction. 
+
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-top: 10px;">
+                <a href="#capabilities" class="btn">Strengthen Your Quality Engineering</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="capabilities">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">Precision-Driven Testing for Confident Delivery</h2>
+            <h3 class="section-subheading anim slide-rtl" style="--delay: 0.2s;">
+                We bring quality into the full product lifecycle, from early validation to release readiness. Our approach combines proven QA practices with AI-assisted test optimization and business-aligned strategies, so teams can move fast without adding risk.
+            </h3>
+        </div>
+
+        <div class="container grid-3">
+            <div class="capability-card anim zoom-out-reveal" style="--delay: 0s;">
+                <div class="image-holder">
+                    <img src="End To End.jpg" alt="Cloud Infrastructure">
+                </div>
+                <div class="card-content">
+                    <h4>End-to-End QA Lifecycle Support</h4>
+                    <h5>StradIT is committed to equipping enterprises with state-of-the-art quality engineering through fully-managed QA programs. From targeted testing engagements to fully managed QA programs, we help teams release more often with fewer surprises.</h5>
+                    <ul class="bullet-list">
+                        <li>Framing and deploying of tailored test strategies</li>
+                        <li>End-to-end automation scripting and maintenance</li>
+                        <li>Structured defect tracking and resolution</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="capability-card anim zoom-out-reveal" style="--delay: 0.2s;">
+                <div class="image-holder">
+                    <img src="Testing Framework.jpg" alt="Data Lakes">
+                </div>
+                <div class="card-content">
+                    <h4>Testing & Quality Engineering Frameworks</h4>
+                    <h5>StradIT is a strategic partner that understands both tech and business. We deliver inventive testing & quality engineering frameworks designed to lower QA overheads and reduce operational risks. </h5>
+                    <ul class="bullet-list">
+                        <li>Tailored frameworks </li>
+                        <li>Streamlined automated practices</li>
+                        <li>Reusable components </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="capability-card anim zoom-out-reveal" style="--delay: 0.4s;">
+                <div class="image-holder">
+                    <img src="Ai Domain.jpg" alt="Security Operations">
+                </div>
+                <div class="card-content">
+                    <h4>Domain-Specific Testing Expertise</h4>
+                    <h5>StradIT combines domain expertise with advanced QA frameworks and empowers enterprises to release technology that is secure, compliant, and trusted by end-users.</h5>
+                    <ul class="bullet-list">
+                        <li>Context-aware testing</li>
+                        <li>Rigorous validation </li>
+                        <li>Business-centric outcomes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="final-cta">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">
+               Releases That Feel Calm, From <br>Development to the Launch Day
+            </h2>
+            <h3 class="section-subheading anim slide-rtl" style="--delay: 0.2s;">
+                Fortune 500 enterprises trust StradIT to embed AI-enhanced quality into every stage of design, development, and deployment. The outcome? Fewer noisy faults, cleaner launches, and quality that holds strong as you scale.
+            </h3>
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-top: 20px;">
+                <a href="#" class="btn">Validate Your Product With Precision</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // Apply delay styling based on inline variables
+            const animatedElements = document.querySelectorAll('.anim');
+            
+            animatedElements.forEach(el => {
+                const delayValue = el.style.getPropertyValue('--delay');
+                if (delayValue) {
+                    el.style.transitionDelay = delayValue;
+                }
+            });
+
+            // Intersection Observer configuration
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Unobserve so the animation only plays once
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(el => {
+                scrollObserver.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -225,6 +225,185 @@
   align-items: center;
 }
 
+.coe-detail .ai-final {
+  background-image: url('/Ai%20Coe/Background%2001.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 520px;
+  display: grid;
+  align-items: center;
+}
+
+.coe-detail .testing-final {
+  background-image: url('/Testing%20Coe/Background%2001.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 520px;
+  display: grid;
+  align-items: center;
+}
+
+/* Testing CoE grid cards (ported from public/Testing Coe/Testing CoE.html) */
+.coe-detail .testing-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.coe-detail .testing-card {
+  background: rgba(2, 11, 24, 0.65);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.coe-detail .testing-card .image-holder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.coe-detail .testing-card .image-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s ease;
+}
+
+.coe-detail .testing-card:hover .image-holder img {
+  transform: scale(1.05);
+}
+
+/* AI CoE carousel (ported from public/Ai Coe/AI Solution (1).html) */
+.coe-detail .ai-carousel {
+  padding: 90px 0;
+}
+
+.coe-detail .ai-carousel .carousel-header {
+  padding: 0 5%;
+  margin-bottom: 40px;
+}
+
+.coe-detail .ai-carousel .carousel-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.coe-detail .ai-carousel .carousel-track-wrapper {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 5%;
+}
+
+.coe-detail .ai-carousel .carousel-track {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.coe-detail .ai-carousel .carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.coe-detail .ai-carousel .carousel-card {
+  background: rgba(2, 11, 24, 0.65);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  flex: 0 0 calc(33.333% - 20px);
+  scroll-snap-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.coe-detail .ai-carousel .image-holder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.coe-detail .ai-carousel .image-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s ease;
+}
+
+.coe-detail .ai-carousel .carousel-card:hover .image-holder img {
+  transform: scale(1.05);
+}
+
+.coe-detail .ai-carousel .card-content {
+  padding: 26px;
+}
+
+.coe-detail .ai-carousel .card-content h4 {
+  font-size: 1.4rem;
+  color: #fff;
+  margin: 0 0 10px 0;
+}
+
+.coe-detail .ai-carousel .card-content h5 {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 16px 0;
+  font-weight: 500;
+}
+
+.coe-detail .ai-carousel .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  background-color: rgba(26, 26, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.coe-detail .ai-carousel .nav-btn:hover {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+}
+
+.coe-detail .ai-carousel .nav-btn.prev {
+  left: 2%;
+}
+
+.coe-detail .ai-carousel .nav-btn.next {
+  right: 2%;
+}
+
 .coe-detail .cyber-cards {
   margin-top: 60px;
   display: grid;
@@ -352,6 +531,14 @@
   .coe-detail .flip-card {
     height: 520px;
   }
+
+  .coe-detail .ai-carousel .carousel-card {
+    flex: 0 0 calc(50% - 15px);
+  }
+
+  .coe-detail .testing-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
@@ -365,6 +552,27 @@
     --nav-offset: 100px;
     height: 80vh;
     min-height: 420px;
+  }
+
+  .coe-detail .hero-copy {
+    padding-top: 28px;
+    padding-bottom: 10px;
+  }
+
+  .coe-detail .ai-carousel .carousel-card {
+    flex: 0 0 85vw;
+  }
+
+  .coe-detail .ai-carousel .nav-btn {
+    display: none;
+  }
+
+  .coe-detail .ai-carousel .carousel-track-wrapper {
+    padding: 20px 0;
+  }
+
+  .coe-detail .testing-grid-3 {
+    grid-template-columns: 1fr;
   }
 }
 

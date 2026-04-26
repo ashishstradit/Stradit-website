@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Solution</title>
+    <style>
+        /* --- CSS VARIABLES FOR THEME MANAGEMENT --- */
+        :root {
+            --brand-color: #f68723;
+            --brand-color-hover: #d87116;
+            --brand-gradient: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+            --text-main: #ffffff;
+            --text-muted: #fff;
+            --bg-dark-1: #161a26;
+            --bg-dark-2: #11141e;
+            --bg-dark-3: #11141e;
+            --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.8s;
+            --hover-speed: 0.3s;
+            --border-radius: 12px;
+        }
+
+        /* --- GLOBAL RESET & BASE TYPOGRAPHY --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark-1);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-heading {
+            font-size: clamp(2.5rem, 5vw, 3rem);
+            font-weight: 600;
+        }
+
+        .section-subheading {
+            font-size: clamp(1.1rem, 2vw, 1rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            max-width: 800px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- UI COMPONENTS --- */
+        
+        /* CTA Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-color);
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: 50px; /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--hover-speed) ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--brand-color-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        /* Bullet Lists */
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            color: var(--brand-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        section {
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        /* --- SCROLL ANIMATION CLASSES --- */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+        }
+
+        /* Right to Left Slide */
+        .anim.slide-rtl {
+            transform: translateX(80px);
+            transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
+        }
+
+        /* Zoom Out Ease-In Reveal */
+        .anim.zoom-out-reveal {
+            transform: scale(1.15);
+            transition: opacity var(--transition-speed) ease-in, transform var(--transition-speed) ease-in;
+        }
+
+        /* Active State */
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* =========================================
+           SECTION 1: HERO
+           ========================================= */
+        #hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(10,10,10,1) 0%, rgba(10,10,10,0.4) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            text-align: left;
+            margin-left: 0; 
+        }
+
+        /* =========================================
+           SECTION 2: CAROUSEL SLIDER
+           ========================================= */
+        #carousel-section {
+            background-color: var(--bg-dark-2);
+            padding: 100px 0; /* Remove horizontal padding for full bleed */
+        }
+
+        .carousel-header {
+            padding: 0 5%;
+            margin-bottom: 50px;
+        }
+
+        /* Carousel Layout */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track-wrapper {
+            width: 100%;
+            overflow: hidden; /* Hide scrollbars visually */
+            padding: 20px 5%; /* Padding for drop shadows */
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .carousel-card {
+            background-color: var(--bg-dark-3);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            flex: 0 0 calc(33.333% - 20px); /* Show ~3 cards on desktop */
+            scroll-snap-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 16:9 Aspect Ratio Image Holder */
+        .image-holder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .carousel-card:hover .image-holder img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .card-content h4 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .card-content h5 {
+            font-size: 1rem;
+            color: var(--brand-color);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* Slider Arrow Buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all var(--hover-speed) ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background-color: var(--brand-color);
+            border-color: var(--brand-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-btn.prev { left: 2%; }
+        .nav-btn.next { right: 2%; }
+
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* =========================================
+           SECTION 4 (Third Section visually): FINAL CTA
+           ========================================= */
+        #final-cta {
+            background-image: url('Background 01.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 5%;
+        }
+
+        #final-cta .section-subheading {
+            color: #ffffff;
+            margin: 0 auto 3rem auto;
+            max-width: 600px;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1024px) {
+            .carousel-card { flex: 0 0 calc(50% - 15px); /* 2 cards on tablet */ }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-card { flex: 0 0 85vw; /* 1 card mostly centered on mobile */ }
+            .nav-btn { display: none; /* Hide arrows on mobile, rely on swipe/scroll */ }
+            .carousel-track-wrapper { padding: 20px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <svg style="display: none;">
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </symbol>
+    </svg>
+
+    <section id="hero">
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <div class="container hero-content">
+            <h1 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">
+                AI Solutions Center of Excellence
+            </h1>
+            <p class="section-subheading anim slide-rtl" style="--delay: 0.2s;">
+                 Intelligent AI for a Smarter Future. AI should not live in slides and pilots. It should run inside real workflows. StradIT builds secured, governed, and ready to scale enterprise-grade AI solutions across ML, generative AI, LLMs, guardrails, assurance AI, and maturity models
+
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-top: 10px;">
+                <a href="#carousel-section" class="btn">Start Your AI Transformation</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="carousel-section">
+        <div class="container text-center carousel-header">
+            <h2 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">AI Engineered for Real-World Impact</h2>
+            <h3 class="section-subheading anim slide-rtl" style="--delay: 0.2s;">
+                StradIT delivers measurable AI outcomes, not experiments. We pair deep engineering with strategic planning so every solution is designed to deploy, adopt, and perform, aligned to your business, risk posture, and operating model.
+            </h3>
+        </div>
+
+        <div class="carousel-container">
+            <button class="nav-btn prev" id="btn-prev" aria-label="Previous Slide">
+                <svg><use href="#icon-chevron-left"></use></svg>
+            </button>
+
+            <div class="carousel-track-wrapper">
+                <div class="carousel-track" id="slider-track">
+                    
+                    <div class="carousel-card anim zoom-out-reveal" style="--delay: 0s;">
+                        <div class="image-holder">
+                            <img src="AI Engineering.jpg" alt="Cloud Infrastructure">
+                        </div>
+                        <div class="card-content">
+                            <h4> AI Engineering</h4>
+                            <h5>From model designing to deployment, StradIT delivers meticulously formulated frameworks for AI solutions.</h5>
+                            <ul class="bullet-list">
+                                <li>Tailored ML and generative AI models </li>
+                                <li>Accelerators and integration toolkits </li>
+                                <li>LLMOps and MLOps foundations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card anim zoom-out-reveal" style="--delay: 0.15s;">
+                        <div class="image-holder">
+                            <img src="Testing Framework.jpg" alt="Data Lakes">
+                        </div>
+                        <div class="card-content">
+                            <h4>Testing & Validation Frameworks</h4>
+                            <h5>Enterprise-ready AI solutions delivered through stringent testing and validation.</h5>
+                            <ul class="bullet-list">
+                                <li>LLM evaluation frameworks for accuracy, reliability, and scalability</li>
+                                <li>Risk scoring models to surface vulnerabilities and guide mitigation</li>
+                                <li>Guardrails and assurance controls for responsible, policy-aligned AI</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card anim zoom-out-reveal" style="--delay: 0.3s;">
+                        <div class="image-holder">
+                            <img src="Business Copilots.jpg" alt="Security Operations">
+                        </div>
+                        <div class="card-content">
+                            <h4>Business Copilots & Knowledge Systems</h4>
+                            <h5>Domain-specific AI copilots and intelligent knowledge systems to embed AI into how teams work.</h5>
+                            <ul class="bullet-list">
+                                <li>Tailored AI copilots to address industry-specific challenges </li>
+                                <li>Enterprise knowledge systems powered by fine-tuned LLMs</li>
+                                <li>Knowledge graphs that connect data for smarter decisions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card anim zoom-out-reveal" style="--delay: 0.45s;">
+                        <div class="image-holder">
+                            <img src="Strategic AI Frameworks.jpg" alt="AI Analytics">
+                        </div>
+                        <div class="card-content">
+                            <h4>Strategic AI Frameworks</h4>
+                            <h5>Adopt AI with confidence .by aligning every solution to business goals, organizational readiness, and long-term strategy.</h5>
+                            <ul class="bullet-list">
+                                <li>Domain value assessment to define where AI will move the needle</li>
+                                <li>AI maturity models to guide adoption from pilot to scale</li>
+                                <li>Use case scoring to prioritize what delivers ROI fastest</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card anim zoom-out-reveal" style="--delay: 0.6s;">
+                        <div class="image-holder">
+                            <img src="Ai Literecy.jpg" alt="Cloud Monitoring">
+                        </div>
+                        <div class="card-content">
+                            <h4>AI Literacy & Enablement</h4>
+                            <h5>AI is as good as the person using it. This is why we go beyond building AI solutions and offer extensive AI literacy and upskilling programs.</h5>
+                            <ul class="bullet-list">
+                                <li>AI literacy programs for shared understanding and alignment</li>
+                                <li>Expert-led training across ML, LLMs, generative AI, and governance</li>
+                                <li>Ongoing masterclasses to keep skills sharp as the ecosystem evolves</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="nav-btn next" id="btn-next" aria-label="Next Slide">
+                <svg><use href="#icon-chevron-right"></use></svg>
+            </button>
+        </div>
+    </section>
+
+    <section id="final-cta">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">
+               AI That's More Than A Buzzword
+            </h2>
+            <h3 class="section-subheading anim slide-rtl" style="--delay: 0.2s;">
+                Our Core of Excellence around AI Solutions has helped global enterprises move from “let’s try AI” to “we can’t imagine running this operation without it.”
+            </h3>
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-top: 20px;">
+                <a href="#" class="btn">Validate AI With Confidence</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Animation Intersection Observer ---
+            const animatedElements = document.querySelectorAll('.anim');
+            
+            animatedElements.forEach(el => {
+                const delayValue = el.style.getPropertyValue('--delay');
+                if (delayValue) {
+                    el.style.transitionDelay = delayValue;
+                }
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(el => {
+                scrollObserver.observe(el);
+            });
+
+            // --- 2. Carousel Slider Logic ---
+            const track = document.getElementById('slider-track');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+
+            // Function to get the scroll amount based on 1 card width + gap
+            const getScrollAmount = () => {
+                const card = track.querySelector('.carousel-card');
+                const cardWidth = card.offsetWidth;
+                // Parse the CSS gap property. Default to 30 if not found.
+                const gap = parseInt(window.getComputedStyle(track).gap) || 30;
+                return cardWidth + gap;
+            };
+
+            // Event Listeners for Buttons
+            btnNext.addEventListener('click', () => {
+                track.scrollBy({
+                    left: getScrollAmount(),
+                    behavior: 'smooth'
+                });
+            });
+
+            btnPrev.addEventListener('click', () => {
+                track.scrollBy({
+                    left: -getScrollAmount(),
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -21,13 +21,12 @@ export default function Navbar() {
           <li className={styles.navItem}>
             <a href="/coe">CoE</a>
             <ul className={styles.dropdownMenu}>
-              <li><a href="/coe">AI</a></li>
+              <li><a href="/coe/ai">AI</a></li>
               <li><a href="/coe">Overview</a></li>
               <li><a href="/coe/data-analytics">Data Analytics</a></li>
               <li><a href="/coe/cloud">Cloud</a></li>
               <li><a href="/coe/cyber-security">Cyber Security</a></li>
-              <li><a href="/coe">Applied AI</a></li>
-              <li><a href="/coe">Testing CoE</a></li>
+              <li><a href="/coe/testing">Testing CoE</a></li>
               <li><a href="/coe">GCC CoE</a></li>
             </ul>
           </li>
@@ -60,13 +59,12 @@ export default function Navbar() {
           </button>
           {coeOpen && (
             <div className={styles.mobileSubMenu}>
-              <a href="/coe" onClick={() => setMenuOpen(false)}>AI</a>
+              <a href="/coe/ai" onClick={() => setMenuOpen(false)}>AI</a>
               <a href="/coe" onClick={() => setMenuOpen(false)}>Overview</a>
               <a href="/coe/data-analytics" onClick={() => setMenuOpen(false)}>Data Analytics</a>
               <a href="/coe/cloud" onClick={() => setMenuOpen(false)}>Cloud</a>
               <a href="/coe/cyber-security" onClick={() => setMenuOpen(false)}>Cyber Security</a>
-              <a href="/coe" onClick={() => setMenuOpen(false)}>Applied AI</a>
-              <a href="/coe" onClick={() => setMenuOpen(false)}>Testing CoE</a>
+              <a href="/coe/testing" onClick={() => setMenuOpen(false)}>Testing CoE</a>
               <a href="/coe" onClick={() => setMenuOpen(false)}>GCC CoE</a>
             </div>
           )}
