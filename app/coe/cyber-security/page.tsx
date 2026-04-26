@@ -7,13 +7,15 @@ export default function CyberSecurityCoePage() {
       <CoeEffects />
 
       <main className="coe-detail">
-        <section id="hero" aria-label="Cyber Security CoE hero">
+        <section id="hero" aria-label="Cyber Security CoE hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="auto">
             <source src="/Cybersecurity.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
+        </section>
 
-          <div className="container text-center hero-content">
+        <section id="hero-copy" aria-label="Cyber Security CoE intro" style={{ backgroundColor: '#0a0a0c' }}>
+          <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Cyber Security Center of Excellence
             </h1>

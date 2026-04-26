@@ -16,18 +16,29 @@
 
 .scrollingWrapper {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
   padding: 40px 0;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 5%;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge legacy */
+}
+
+.scrollingWrapper::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .scrollingTrack {
   display: flex;
   gap: 30px;
   width: max-content;
-  animation: scrollLoop 25s linear infinite;
+  animation: none;
+  padding: 0 5%;
 }
 
-.scrollingTrack:hover { animation-play-state: paused; }
+/* no auto-motion */
 
 .card {
   width: 280px;
@@ -38,6 +49,7 @@
   border: 1px solid transparent;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .card::before {
@@ -147,10 +159,7 @@
   left: 4px;
 }
 
-@keyframes scrollLoop {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-320px * 6 - 30px * 6)); }
-}
+/* removed auto scrolling loop */
 
 @media (max-width: 768px) {
   /* Mobile: no horizontal scrolling cards */

@@ -7,18 +7,20 @@ export default function DataAnalyticsCoePage() {
       <CoeEffects />
 
       <main className="coe-detail">
-        <section id="hero" aria-label="Data Analytics CoE hero">
+        <section id="hero" aria-label="Data Analytics CoE hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="auto">
             <source src="/Data%20Analytics.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
+        </section>
 
-          <div className="container text-center hero-content">
+        <section id="hero-copy" aria-label="Data Analytics CoE intro" style={{ backgroundColor: '#0a0a0c' }}>
+          <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Data Analytics Center of Excellence
             </h1>
             <p className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              Decode, Decide, and Dominate with Data. StradIT helps enterprises turn messy, fragmented information into clear insights and confident action through its AI-powered data analytics CoE. We unify data across systems, build analytics that teams actually use, and embed AI-driven intelligence into workflows so decisions get faster, smarter, and easier to defend.
+              From Insight to Innovation With AI and Tech Engineering. StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help Fortune 500 companies navigate the future with confidence.
             </p>
             <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.4s' }}>
               <a className="btn" href="#">

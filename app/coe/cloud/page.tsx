@@ -7,13 +7,15 @@ export default function CloudCoePage() {
       <CoeEffects />
 
       <main className="coe-detail">
-        <section id="hero" aria-label="Cloud & Infrastructure CoE hero">
+        <section id="hero" aria-label="Cloud & Infrastructure CoE hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="auto">
             <source src="/Cloud%20infrastructure.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
+        </section>
 
-          <div className="container text-center hero-content">
+        <section id="hero-copy" aria-label="Cloud & Infrastructure CoE intro" style={{ backgroundColor: '#0a0a0c' }}>
+          <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Cloud &amp; Infrastructure Centre of Excellence
             </h1>

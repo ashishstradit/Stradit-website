@@ -95,7 +95,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--nav-offset) 0 0 0; /* keep video below fixed navbar */
-  background: #0a0a0c;
+  background: transparent;
 }
 
 .coe-page .hero-video {

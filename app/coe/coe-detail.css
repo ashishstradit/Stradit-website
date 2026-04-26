@@ -61,11 +61,12 @@
 
 /* Hero */
 .coe-detail #hero {
-  height: 100vh;
+  height: 70vh;
+  min-height: 420px;
   display: grid;
   place-items: center;
   padding: 0;
-  background: #0a0a0c;
+  background: transparent;
 }
 
 .coe-detail .bg-video {
@@ -75,18 +76,23 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .coe-detail .hero-overlay {
   position: absolute;
   inset: 0;
-  
+  background: transparent;
   z-index: 1;
 }
 
 .coe-detail .hero-content {
   padding-top: 80px; /* navbar offset like landing */
+}
+
+.coe-detail .hero-copy {
+  padding-top: 40px;
+  padding-bottom: 10px;
 }
 
 .coe-detail .hero-title {
@@ -102,6 +108,13 @@
   color: rgba(255, 255, 255, 0.85);
   margin: 0 0 26px 0;
   max-width: 900px;
+}
+
+.coe-detail .hero-copy .hero-subtitle {
+  text-align: left;
+  text-align-last: left;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Animations hook */
@@ -178,6 +191,9 @@
   }
   .coe-detail .hero-content {
     padding-top: 100px;
+  }
+  .coe-detail #hero {
+    min-height: 360px;
   }
 }
 
