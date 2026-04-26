@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Transformation</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --brand-color: #f68723;
+            --brand-gradient: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+            --text-main: #ffffff;
+            --text-muted: #fff;
+            --bg-dark-1: #161a26;
+            --bg-dark-2: #11141e;
+            --bg-dark-3: #11141e;
+            --font-main: 'Montserrat', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.8s;
+            --hover-speed: 0.3s;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark-1);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            /*box-shadow: 0 20px 40px rgba(0,0,0,0.5);*/
+            display: block;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .section-subheading {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 350;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- UI COMPONENTS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--brand-color);
+            color: #fff;
+            padding: 10px 35px;
+            border-radius: 50px; /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--hover-speed) ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #d87116;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.5);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            color: var(--brand-color);
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        /* --- LAYOUTS --- */
+        section {
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-center {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .anim {
+            opacity: 0;
+            /* Slide from right to left */
+            transform: translateX(80px);
+            transition: opacity var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: opacity, transform;
+        }
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- SPECIFIC SECTION STYLES --- */
+        
+        /* Section 1: Hero */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(8,11,35,0.2) 0%, rgba(0,0,0,0) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            /* Explicitly align left for Hero */
+            margin-left: 0; 
+            text-align: left;
+        }
+
+        .hero-content .section-heading { font-size: 3rem; }
+
+        /* Section 2: Stats Loop */
+        #stats {
+            background-color: var(--bg-dark-2);
+            padding: 60px 0;
+        }
+
+        .marquee-wrapper {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 100px;
+            /* Loop right to left */
+            animation: slideLeft 30s linear infinite;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-number-wrapper {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--brand-color);
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .stat-text {
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 500;
+            line-height: 1.3;
+            max-width: 200px;
+        }
+
+        @keyframes slideLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 50px)); }
+        }
+
+        /* Section 6: Final CTA Background */
+        #final-cta {
+            background-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(10,10,10,0.6) 100%), 
+                              url('Background 01.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 5%;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .hero-content .section-heading { font-size: 3rem; }
+            /* Keep visual hierarchy on mobile (Image below text usually preferred, but matching split layouts) */
+            #section-4 .img-wrapper { grid-row: 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <video class="bg-video" autoplay loop muted playsinline>
+            <source src="Cloud infrastucture.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="section-heading gradient-text anim" style="--delay: 0s;">Cloud & Infrastructure Centre of Excellence</h1>
+            <p class="section-subheading anim" style="--delay: 0.2s;" style="color: #fff; font-size: 1.3rem;">
+                Strategic, Scalable, Future-Ready Cloud for All <br>
+StradIT helps enterprises move to the cloud with confidence, from multi-cloud strategy to legacy modernization and end-to-end migration. We design AI-enhanced cloud foundations that perform under load, stay secure, and scale with your business goals.
+
+            </p>
+            <div class="anim" style="--delay: 0.4s; margin-top: 30px;">
+                <a href="#" class="btn">Start Your Cloud Transformation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section id="stats" class="anim" style="--delay: 0.2s;">
+        <div class="marquee-wrapper">
+            <div class="marquee-track">
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="35">0</span>%
+                    </div>
+                    <div class="stat-text">Lower Cloud Spend</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="99.9">0</span>%
+                    </div>
+                    <div class="stat-text">Uptime Targets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="4">0</span>x
+                    </div>
+                    <div class="stat-text">Better Scalability</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="35">0</span>%
+                    </div>
+                    <div class="stat-text">Lower Cloud Spend</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="99.9">0</span>%
+                    </div>
+                    <div class="stat-text">Uptime Targets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="4">0</span>x
+                    </div>
+                    <div class="stat-text">Better Scalability</div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section id="section-3" style="background-color: var(--bg-dark-1);">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim" style="--delay: 0s;">Shaping Cloud You Need With Conviction </h2>
+            <h3 class="section-subheading anim" style="--delay: 0.2s;">
+                From early discovery and planning to 24/7 operations, we partner with you to build resilient, AI-optimized cloud systems built for production. 
+            </h3>
+        </div>
+    </section>
+
+    <section id="section-4" style="background-color: var(--bg-dark-2);">
+        <div class="container grid-2">
+            <div class="img-wrapper anim" style="--delay: 0s;">
+                <img src="Support.png" alt="Cloud Infrastructure">
+            </div>
+            <div>
+                <h2 class="section-heading gradient-text anim" style="--delay: 0.1s;">End-to-End Consulting & Service Delivery</h2>
+                <h3 class="section-subheading anim" style="--delay: 0.2s;">Identify needs, understand the utility of different cloud infrastructures, and make informed decisions. </h3>
+                <ul class="bullet-list anim" style="--delay: 0.3s;">
+                    <li>Cloud readiness assessment and a clear migration roadmap</li>
+                    <li>Architectures balancing performance, cost, and flexibility across platforms</li>
+                    <li>Legacy modernization planning to move from outdated systems to cloud</li>
+                </ul>
+                <div class="anim" style="--delay: 0.4s; margin-top: 20px;">
+                    <a href="#" class="btn">Explore Migration Strategies</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-5" style="background-color: var(--bg-dark-1);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="section-heading gradient-text anim" style="--delay: 0s;">Managed Services & Ongoing Support</h2>
+                <h3 class="section-subheading anim" style="--delay: 0.1s;">Keep your cloud reliable, optimized, and secure over the long term through AI- managed cloud services</h3>
+                <ul class="bullet-list anim" style="--delay: 0.2s;">
+                    <li>Proactive monitoring to spot issues before they escalate</li>
+                    <li>Continuous optimization across workloads, apps, and infrastructure</li>
+                    <li>24/7 support for mission-critical systems and business continuity</li>
+                </ul>
+                <div class="anim" style="--delay: 0.3s; margin-top: 20px;">
+                    <a href="#" class="btn">Define Your Cloud Roadmap</a>
+                </div>
+            </div>
+            <div class="img-wrapper anim" style="--delay: 0.4s;">
+                <img src="Manage Support.png" alt="Cyber Security">
+            </div>
+        </div>
+    </section>
+
+    <section id="final-cta">
+        <div class="container text-center">
+            <h2 class="section-heading gradient-text anim" style="--delay: 0s; font-size: 3rem;">Cloud Outcomes That Actually Hold Up In Production</h2>
+            <h3 class="section-subheading anim" style="--delay: 0.2s;" style="color: #fff; max-width: 600px; margin: 0 auto 2rem auto;">
+               Wondering how the cloud is becoming the backbone of modern businesses?<br>Read the case studies below to see how our cloud infrastructure has fixed performance bottlenecks, tamed costs, and laid the foundations of fast and stable growth.
+            </h3>
+            <div class="anim" style="--delay: 0.4s; margin-top: 30px;">
+                <a href="#" class="btn">Redefine Cloud With StradIT</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apply delay styling based on inline variables
+            const animElements = document.querySelectorAll('.anim');
+            
+            animElements.forEach(el => {
+                const delay = el.style.getPropertyValue('--delay');
+                if (delay) {
+                    el.style.transitionDelay = delay;
+                }
+            });
+
+            // Intersection Observer configuration
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 
+            };
+
+            // Number Counting Animation Logic (Supports Floats)
+            let countersFired = false;
+            const runCounters = () => {
+                if (countersFired) return;
+                countersFired = true;
+                const counters = document.querySelectorAll('.counter');
+                
+                counters.forEach(counter => {
+                    const targetAttr = counter.getAttribute('data-target');
+                    const target = parseFloat(targetAttr);
+                    // Determine if the target is a decimal (e.g., 99.9)
+                    const isFloat = !Number.isInteger(target); 
+                    
+                    const duration = 1500; // Animation duration in ms
+                    const increment = target / (duration / 16); 
+                    let currentCount = 0;
+
+                    const updateCount = () => {
+                        currentCount += increment;
+                        if (currentCount < target) {
+                            counter.innerText = isFloat ? currentCount.toFixed(1) : Math.ceil(currentCount);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = isFloat ? target.toFixed(1) : target;
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // Trigger JS Counters if stats section is visible
+                        if (entry.target.id === 'stats') {
+                            runCounters();
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

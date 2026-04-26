@@ -9,7 +9,7 @@ export default function CloudCoePage() {
       <main className="coe-detail">
         <section id="hero" aria-label="Cloud & Infrastructure CoE hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="auto">
-            <source src="/Cloud%20infrastructure.mp4" type="video/mp4" />
+            <source src="/Cloud/Cloud%20infrastucture.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
         </section>
@@ -46,9 +46,7 @@ export default function CloudCoePage() {
         <section>
           <div className="container grid-2">
             <div className="media-box anim slide-btt observe-me" style={{ ['--delay' as any]: '0s' }}>
-              <video autoPlay loop muted playsInline preload="metadata">
-                <source src="/Cloud%20infrastructure.mp4" type="video/mp4" />
-              </video>
+              <img src="/Cloud/Support.png" alt="Cloud consulting support" loading="lazy" />
             </div>
             <div>
               <h2 className="heading-main text-gradient anim slide-btt observe-me" style={{ ['--delay' as any]: '0.1s' }}>
@@ -92,14 +90,12 @@ export default function CloudCoePage() {
               </div>
             </div>
             <div className="media-box anim slide-btt observe-me" style={{ ['--delay' as any]: '0.4s' }}>
-              <video autoPlay loop muted playsInline preload="metadata">
-                <source src="/Cloud%20infrastructure.mp4" type="video/mp4" />
-              </video>
+              <img src="/Cloud/Manage%20Support.png" alt="Managed services support" loading="lazy" />
             </div>
           </div>
         </section>
 
-        <section id="final-cta">
+        <section id="final-cta" className="cloud-final">
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Cloud Outcomes That Actually Hold Up In Production

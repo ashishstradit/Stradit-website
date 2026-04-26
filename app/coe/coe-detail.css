@@ -126,6 +126,21 @@
   transition-delay: var(--delay, 0s);
   will-change: opacity, transform;
 }
+.coe-detail .anim.slide-rtl {
+  /* alias: same as AboutUs-style right-to-left reveal */
+  transform: translateX(60px);
+}
+.coe-detail .anim.slide-btt {
+  /* alias: same as AboutUs-style up reveal */
+  transform: translateY(60px);
+}
+.coe-detail .anim.slide-ttd {
+  transform: translateY(-60px);
+}
+.coe-detail .anim.fade-in,
+.coe-detail .anim.zoom-out {
+  transform: scale(0.95);
+}
 .coe-detail .anim.anim-up {
   transform: translateY(60px);
 }
@@ -200,10 +215,142 @@
   align-items: center;
 }
 
+.coe-detail .cloud-final {
+  background-image: url('/Cloud/Background%2001.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 520px;
+  display: grid;
+  align-items: center;
+}
+
+.coe-detail .cyber-cards {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  perspective: 1500px;
+}
+
+/* Flip cards (ported from public/Cyber/Cyber Security CoE.html) */
+.coe-detail .flip-card {
+  background-color: transparent;
+  height: 560px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.coe-detail .flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  border-radius: 20px;
+}
+
+.coe-detail .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.coe-detail .flip-card-front,
+.coe-detail .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.coe-detail .flip-card-front {
+  background-color: rgba(2, 11, 24, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.coe-detail .flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.coe-detail .flip-card:hover .flip-card-front img {
+  transform: scale(1.08);
+}
+
+.coe-detail .card-front-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 34px 26px;
+  text-align: left;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.coe-detail .card-front-overlay h3 {
+  color: var(--brand-color);
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.coe-detail .flip-card-back {
+  background-color: var(--brand-color);
+  color: #fff;
+  transform: rotateY(180deg);
+  padding: 44px 34px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.coe-detail .flip-card-back h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.coe-detail .flip-card-back p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+
+.coe-detail .flip-card-back .bullet-list li {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.coe-detail .flip-card-back .bullet-list li::before {
+  color: #fff;
+  opacity: 0.9;
+}
+
+.coe-detail .cyber-final {
+  background-image: url('/Cyber/Background%2001.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media (max-width: 992px) {
   .coe-detail .grid-2 {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .coe-detail .cyber-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .coe-detail .flip-card {
+    height: 520px;
   }
 }
 
