@@ -372,6 +372,12 @@
   .coe-page #hero {
     --nav-offset: 100px;
   }
+
+  /* Mobile: match landing page centered hero copy */
+  .coe-page .hero-copy .sub-heading {
+    text-align: center;
+    text-align-last: center;
+  }
   .coe-page .portrait-img-wrapper {
     height: 320px;
   }

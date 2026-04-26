@@ -554,24 +554,58 @@
     min-height: 420px;
   }
 
+  /* Mobile: all CoE detail "cards" should stack vertically */
+  .coe-detail .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
   .coe-detail .hero-copy {
     padding-top: 28px;
     padding-bottom: 10px;
   }
 
-  .coe-detail .ai-carousel .carousel-card {
-    flex: 0 0 85vw;
+  /* Mobile: match landing page centered hero copy */
+  .coe-detail .hero-copy .hero-subtitle {
+    text-align: center;
+    text-align-last: center;
   }
 
+  /* AI cards: vertical stack on mobile (no horizontal scroll) */
   .coe-detail .ai-carousel .nav-btn {
     display: none;
   }
 
+  .coe-detail .ai-carousel .carousel-container {
+    display: block;
+  }
+
   .coe-detail .ai-carousel .carousel-track-wrapper {
-    padding: 20px 0;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .coe-detail .ai-carousel .carousel-track {
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .coe-detail .ai-carousel .carousel-card {
+    flex: none;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
   }
 
   .coe-detail .testing-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Any other multi-card grids: force vertical stacking */
+  .coe-detail .cyber-cards {
     grid-template-columns: 1fr;
   }
 }
