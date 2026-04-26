@@ -4,7 +4,7 @@ import styles from './GlobeSection.module.css'
 export default function GlobeSection() {
   return (
     <section className={styles.globeSection}>
-      <video className={styles.globeVideo} autoPlay loop muted playsInline>
+      <video className={styles.globeVideo} autoPlay loop muted playsInline preload="metadata">
         <source src="/Globe.mp4" type="video/mp4" />
       </video>
       <div className={styles.content}>

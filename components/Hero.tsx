@@ -21,7 +21,7 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
-      <video ref={videoRef} className={styles.videoBg} autoPlay loop muted playsInline>
+      <video ref={videoRef} className={styles.videoBg} autoPlay loop muted playsInline preload="metadata">
         <source src="/VideoHand.mp4" type="video/mp4" />
       </video>
       <h1 className={`${styles.heroHeading} anim-hidden blur-zoom-out delay-2 observe-me`}>

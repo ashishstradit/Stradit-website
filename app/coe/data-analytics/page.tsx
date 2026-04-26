@@ -8,7 +8,7 @@ export default function DataAnalyticsCoePage() {
 
       <main className="coe-detail">
         <section id="hero" aria-label="Data Analytics CoE hero video">
-          <video className="bg-video" autoPlay loop muted playsInline preload="auto">
+          <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Data%20AnalyticsHero.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />

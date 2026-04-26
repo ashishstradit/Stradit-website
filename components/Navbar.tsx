@@ -66,6 +66,8 @@ export default function Navbar() {
               <a href="/coe/cloud" onClick={() => setMenuOpen(false)}>Cloud</a>
               <a href="/coe/cyber-security" onClick={() => setMenuOpen(false)}>Cyber Security</a>
               <a href="/coe" onClick={() => setMenuOpen(false)}>Applied AI</a>
+              <a href="/coe" onClick={() => setMenuOpen(false)}>Testing CoE</a>
+              <a href="/coe" onClick={() => setMenuOpen(false)}>GCC CoE</a>
             </div>
           )}
         </div>

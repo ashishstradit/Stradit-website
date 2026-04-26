@@ -8,7 +8,7 @@ export default function CyberSecurityCoePage() {
 
       <main className="coe-detail">
         <section id="hero" aria-label="Cyber Security CoE hero video">
-          <video className="bg-video" autoPlay loop muted playsInline preload="auto">
+          <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Cyber/Cyber%20COE01.mp4" type="video/mp4" />
             <source src="/Cyber/Cyber%20COE01.mov" type="video/quicktime" />
           </video>

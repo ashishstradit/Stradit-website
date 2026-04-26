@@ -65,7 +65,7 @@ export default function CoePage() {
 
       <main className="coe-page">
         <section id="hero" aria-label="Center of Excellence hero">
-          <video className="hero-video" autoPlay loop muted playsInline preload="auto">
+          <video className="hero-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Main%20COE%20hero.mp4" type="video/mp4" />
             <source src="/Main%20COE%20hero.mov" type="video/quicktime" />
           </video>

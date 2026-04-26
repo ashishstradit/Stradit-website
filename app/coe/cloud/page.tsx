@@ -8,7 +8,7 @@ export default function CloudCoePage() {
 
       <main className="coe-detail">
         <section id="hero" aria-label="Cloud & Infrastructure CoE hero video">
-          <video className="bg-video" autoPlay loop muted playsInline preload="auto">
+          <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Cloud/Cloud%20infrastucture.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
