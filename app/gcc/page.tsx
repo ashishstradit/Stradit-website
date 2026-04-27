@@ -10,16 +10,16 @@ export default function GccPage() {
         <section id="hero" aria-label="Global Capability Center hero">
           <img className="bg-media" src="/GCC/Hero%20Section.jpg" alt="" aria-hidden="true" />
           <div className="bg-overlay-gradient" />
-        </section>
 
-        <section id="hero-copy" aria-label="Global Capability Center intro">
-          <div className="container align-center hero-copy">
+          <div className="container align-center gcc-hero-content">
             <h1 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Your Global Capability Center
             </h1>
             <p className="sub-heading anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.15s', color: '#fff', margin: '0 0 28px 0' }}>
-              Built by StradIT. Owned by you. Your dedicated tech team, finance hub, or innovation center will be fully operational in weeks, not
-              months. We set it up. We run the backend. You call the shots.
+              Built by StradIT. Owned by you.
+              <br />
+              Your dedicated tech team, finance hub, or innovation center will be fully operational in weeks, not months. We set it up. We run the
+              backend. You call the shots.
             </p>
             <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.3s' }}>
               <a href="#infrastructure" className="cta-btn">

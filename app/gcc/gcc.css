@@ -31,6 +31,19 @@
   height: calc(100% - var(--nav-offset));
 }
 
+/* Hero content on image */
+.gcc-page .gcc-hero-content {
+  padding: 0 5%;
+}
+
+.gcc-page .gcc-hero-content .sub-heading {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  text-align-last: left;
+}
+
 .gcc-page .container {
   max-width: 1400px;
   margin: 0 auto;

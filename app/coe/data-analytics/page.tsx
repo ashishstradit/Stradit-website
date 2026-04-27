@@ -14,10 +14,10 @@ export default function DataAnalyticsCoePage() {
           <div className="hero-overlay" />
         </section>
 
-        <section id="hero-copy" aria-label="Data Analytics intro">
+        <section id="hero-copy" aria-label="Data Analytics - Applied AI intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim anim-up observe-me" style={{ ['--delay' as any]: '0s' }}>
-              Data Analytics
+              Data Analytics - Applied AI
             </h1>
             <p className="hero-subtitle anim anim-up observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               From Insight to Innovation With AI and Tech Engineering. StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help Fortune 500 companies navigate the future with confidence.
