@@ -8,4 +8,19 @@
 
 @media (max-width: 768px) {
   .ctaSection { padding: 80px 5%; }
+
+  /* Smaller button on mobile (CTA section only) */
+  .ctaSection :global(.cta-btn) {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ctaSection :global(.cta-btn) {
+    width: fit-content;
+    max-width: 100%;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
 }

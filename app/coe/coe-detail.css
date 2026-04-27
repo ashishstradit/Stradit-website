@@ -141,7 +141,7 @@
 
 .coe-detail .hero-title {
   font-size: clamp(2.1rem, 1.6rem + 2vw, 3.5rem);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.1;
   margin: 0 0 18px 0;
 }
@@ -227,7 +227,7 @@
   left: 0;
   top: -2px;
   color: var(--brand-color);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .coe-detail .media-box {
@@ -601,6 +601,13 @@
     min-height: 480px;
   }
 
+  /* Mobile buttons: match landing page */
+  .coe-detail .btn {
+    padding: 12px 22px;
+    font-size: 13px;
+    width: fit-content;
+  }
+
   /* Mobile: all CoE detail "cards" should stack vertically */
   .coe-detail .grid-2 {
     grid-template-columns: 1fr;
@@ -662,7 +669,7 @@
   .coe-detail .btn {
     width: 100%;
     max-width: 360px;
-    padding: 14px 18px;
+    padding: 12px 18px;
     font-size: 0.95rem;
   }
 

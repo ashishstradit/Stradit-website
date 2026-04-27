@@ -491,6 +491,13 @@
     padding: 60px 5%;
   }
 
+  /* Mobile buttons: match landing page */
+  .about-us-page .btn {
+    padding: 12px 22px;
+    font-size: 13px;
+    width: fit-content;
+  }
+
   .about-us-page #hero {
     height: 60vh;
     min-height: 360px;

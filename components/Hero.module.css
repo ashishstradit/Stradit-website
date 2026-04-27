@@ -58,19 +58,21 @@
     gap: 10px;
   }
   .heroButtons button {
-    width: auto;
-    font-size: 12px;
-    padding: 10px 18px;
-    white-space: nowrap;
+    width: fit-content;
+    font-size: 13px;
+    padding: 12px 22px;
+    white-space: normal;
+    text-align: center;
   }
 }
 
-/* Small mobile */
-@media (max-width: 380px) {
+/* Small mobile: full-width buttons like sitewide */
+@media (max-width: 480px) {
   .heroButtons button {
-    width: 140px;
-    font-size: 10px;
-    padding: 8px 10px;
+    width: 100%;
+    max-width: 360px;
+    padding: 12px 18px;
+    font-size: 0.95rem;
   }
 }
 

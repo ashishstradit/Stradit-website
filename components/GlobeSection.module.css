@@ -27,8 +27,21 @@
   .globeSection { padding: 60px 5%; min-height: 60vh; }
   .content { max-width: 100%; }
   .content h2 { font-size: 1.8rem !important; }
+
+  /* Smaller button on mobile (Globe section only) */
+  .content :global(.cta-btn) {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 480px) {
   .content h2 { font-size: 1.4rem !important; }
+
+  .content :global(.cta-btn) {
+    width: fit-content;
+    max-width: 100%;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
 }
