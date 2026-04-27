@@ -22,11 +22,9 @@ export default function AiCoePage() {
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               AI Solutions
             </h1>
-            <p className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              Intelligent AI for a Smarter Future. AI should not live in slides and pilots. It should run inside real workflows. StradIT builds
-              secured, governed, and ready-to-scale enterprise-grade AI solutions across ML, generative AI, LLMs, guardrails, assurance AI, and
-              maturity models.
-            </p>
+            <h2 className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
+              Intelligent AI for a Smarter Future. AI should not live in slides and pilots.
+            </h2>
             <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.4s' }}>
               <a className="btn" href="#carousel-section">
                 Start Your AI Transformation
