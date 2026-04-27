@@ -6,18 +6,18 @@ export default function DataAnalyticsCoePage() {
     <>
       <CoeEffects />
 
-      <main className="coe-detail">
-        <section id="hero" aria-label="Data Analytics CoE hero video">
+      <main className="coe-detail coe-page-tall-hero">
+        <section id="hero" aria-label="Data Analytics hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Data%20AnalyticsHero.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
         </section>
 
-        <section id="hero-copy" aria-label="Data Analytics CoE intro">
+        <section id="hero-copy" aria-label="Data Analytics intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim anim-up observe-me" style={{ ['--delay' as any]: '0s' }}>
-              Data Analytics Center of Excellence
+              Data Analytics
             </h1>
             <p className="hero-subtitle anim anim-up observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               From Insight to Innovation With AI and Tech Engineering. StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help Fortune 500 companies navigate the future with confidence.

@@ -4,7 +4,7 @@ import './coe.css'
 export default function CoePage() {
   const portraitCards = [
     {
-      title: 'AI Solutions',
+      title: 'Artificial Intelligence',
       desc: 'Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve.',
       img: '/AI%20readiness.svg',
       video: '/AI%20solution.mp4',
@@ -32,7 +32,7 @@ export default function CoePage() {
       href: '/coe/cloud',
     },
     {
-      title: 'Testing & Quality Engineering',
+      title: 'Testing & Quality',
       desc: 'Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards.',
       img: '/Qulaity.svg',
       video: '/Testing%20and%20Quality.mp4',

@@ -7,17 +7,17 @@ export default function CloudCoePage() {
       <CoeEffects />
 
       <main className="coe-detail">
-        <section id="hero" aria-label="Cloud & Infrastructure CoE hero video">
+        <section id="hero" aria-label="Cloud & Infrastructure hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Cloud/Cloud%20infrastucture.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
         </section>
 
-        <section id="hero-copy" aria-label="Cloud & Infrastructure CoE intro">
+        <section id="hero-copy" aria-label="Cloud & Infrastructure intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
-              Cloud &amp; Infrastructure Centre of Excellence
+              Cloud &amp; Infrastructure
             </h1>
             <p className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               Strategic, Scalable, Future-Ready Cloud for All. StradIT helps enterprises move to the cloud with confidence, from multi-cloud strategy to legacy modernization and end-to-end migration. We design AI-enhanced cloud foundations that perform under load, stay secure, and scale with your business goals.

@@ -4,12 +4,48 @@
   --bg-1: #161a26;
   --bg-2: #11141e;
   --transition-speed: 0.8s;
+  /* Alternating section bands (CoE detail pages) */
+  --coe-band-1: #0e141f;
+  --coe-band-2: #121a28;
+  --coe-band-3: #101824;
+  --coe-band-4: #0f1622;
 }
 
 .coe-detail section {
   padding: 100px 5%;
   position: relative;
   overflow: hidden;
+}
+
+/* Alternating section backgrounds (CoE detail pages; hero video + final image CTA stay distinct) */
+.coe-detail > section:not(#hero):not(#final-cta):nth-child(4n + 2) {
+  background: var(--coe-band-1);
+}
+.coe-detail > section:not(#hero):not(#final-cta):nth-child(4n + 3) {
+  background: var(--coe-band-2);
+}
+.coe-detail > section:not(#hero):not(#final-cta):nth-child(4n + 4) {
+  background: var(--coe-band-3);
+}
+.coe-detail > section:not(#hero):not(#final-cta):nth-child(4n + 5) {
+  background: var(--coe-band-4);
+}
+
+/* Final CTA (Section 3): justified paragraph */
+.coe-detail #final-cta .sub-heading {
+  text-align: justify;
+  text-align-last: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Tighter gap between Section 2 (main content) and Section 3 (blue CTA) */
+.coe-detail section:has(+ #final-cta) {
+  padding-bottom: 28px;
+}
+.coe-detail #final-cta {
+  padding-top: 28px;
 }
 
 .coe-detail .container {
@@ -67,7 +103,13 @@
   display: grid;
   place-items: center;
   padding: var(--nav-offset) 0 0 0; /* keep video below fixed navbar */
-  background: transparent;
+  background: transparent !important;
+}
+
+/* Taller hero video (AI, Data Analytics, Testing & Quality per spec) */
+.coe-detail.coe-page-tall-hero #hero {
+  height: 92vh;
+  min-height: 620px;
 }
 
 .coe-detail .bg-video {
@@ -216,7 +258,7 @@
 }
 
 .coe-detail .cloud-final {
-  background-image: url('/Cloud/Background%2001.png');
+  background-image: url('/Background%2001.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -226,7 +268,7 @@
 }
 
 .coe-detail .ai-final {
-  background-image: url('/Ai%20Coe/Background%2001.png');
+  background-image: url('/Background%2001.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -236,7 +278,7 @@
 }
 
 .coe-detail .testing-final {
-  background-image: url('/Testing%20Coe/Background%2001.png');
+  background-image: url('/Background%2001.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -285,7 +327,7 @@
 
 /* AI CoE carousel (ported from public/Ai Coe/AI Solution (1).html) */
 .coe-detail .ai-carousel {
-  padding: 90px 0;
+  padding: 56px 0 28px;
 }
 
 .coe-detail .ai-carousel .carousel-header {
@@ -512,7 +554,7 @@
 }
 
 .coe-detail .cyber-final {
-  background-image: url('/Cyber/Background%2001.png');
+  background-image: url('/Background%2001.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -552,6 +594,11 @@
     --nav-offset: 100px;
     height: 80vh;
     min-height: 420px;
+  }
+
+  .coe-detail.coe-page-tall-hero #hero {
+    height: 88vh;
+    min-height: 480px;
   }
 
   /* Mobile: all CoE detail "cards" should stack vertically */

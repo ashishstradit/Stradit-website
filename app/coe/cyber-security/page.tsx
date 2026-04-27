@@ -7,7 +7,7 @@ export default function CyberSecurityCoePage() {
       <CoeEffects />
 
       <main className="coe-detail">
-        <section id="hero" aria-label="Cyber Security CoE hero video">
+        <section id="hero" aria-label="Cyber Security hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Cyber/Cyber%20COE01.mp4" type="video/mp4" />
             <source src="/Cyber/Cyber%20COE01.mov" type="video/quicktime" />
@@ -15,10 +15,10 @@ export default function CyberSecurityCoePage() {
           <div className="hero-overlay" />
         </section>
 
-        <section id="hero-copy" aria-label="Cyber Security CoE intro">
+        <section id="hero-copy" aria-label="Cyber Security intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
-              Cyber Security Center of Excellence
+              Cyber Security
             </h1>
             <p className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               Securing Today for Quick Scalability Tomorrow. At StradIT, we deliver proactive, AI-enhanced, enterprise-grade resilience that grows with you. Our managed cybersecurity services cut risk, develop future-proof policies, and protect your most critical systems to drive business continuity and confidence.

@@ -7,9 +7,9 @@ export default function AiCoePage() {
     <>
       <CoeEffects />
 
-      <main className="coe-detail">
+      <main className="coe-detail coe-page-tall-hero">
         {/* Hero video (same layout style as Cloud/Cyber pages) */}
-        <section id="hero" aria-label="AI Solutions CoE hero video">
+        <section id="hero" aria-label="Artificial Intelligence hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Ai%20Coe/AI%20solution.mp4" type="video/mp4" />
           </video>
@@ -17,10 +17,10 @@ export default function AiCoePage() {
         </section>
 
         {/* Hero copy below the video */}
-        <section id="hero-copy" aria-label="AI Solutions CoE intro">
+        <section id="hero-copy" aria-label="AI Solutions intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
-              AI Solutions Center of Excellence
+              AI Solutions
             </h1>
             <p className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               Intelligent AI for a Smarter Future. AI should not live in slides and pilots. It should run inside real workflows. StradIT builds
