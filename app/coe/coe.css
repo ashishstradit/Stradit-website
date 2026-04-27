@@ -373,11 +373,7 @@
     --nav-offset: 100px;
   }
 
-  /* Mobile: match landing page centered hero copy */
-  .coe-page .hero-copy .sub-heading {
-    text-align: center;
-    text-align-last: center;
-  }
+  /* Keep hero-copy paragraph same as desktop (left) */
 
   /* Mobile buttons: match landing page */
   .coe-page .btn {

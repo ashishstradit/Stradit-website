@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Transformation | Next-Gen Ecosystems</title>
+    <style>
+        /* ==========================================================================
+           ADVANCED DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            /* Core Brand Colors */
+            --brand-primary: #f68723;
+            --brand-secondary: #e63946;
+            --brand-hover: #d87116;
+            --brand-gradient: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+            
+            /* Dark Theme Palette */
+            --bg-absolute-dark: #030303;
+            --bg-dark-base: #0a0a0a;
+            --bg-dark-surface: #121212;
+            --bg-dark-elevated: #1a1a1a;
+            
+            /* Typography Colors */
+            --text-main: #ffffff;
+            --text-muted: #fff;
+            --text-subtle: #7a7a7a;
+            
+            /* Typography Configuration */
+            --font-primary: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            
+            /* Animation & Structural Variables */
+            --transition-fluid: 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-swift: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 50px;
+        }
+
+        /* ==========================================================================
+           GLOBAL RESETS & BASE TYPOGRAPHY
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-dark-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Typography Scales */
+        .heading-hero { font-size: clamp(3.5rem, 6vw, 3rem); }
+        .heading-section { font-size: clamp(2.5rem, 5vw, 2rem); }
+        .heading-card { font-size: clamp(1.4rem, 2vw, 1.8rem); }
+        
+        .subheading {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* ==========================================================================
+           PREMIUM UI COMPONENTS
+           ========================================================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-primary);
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: var(--radius-pill); /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-swift);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(246, 135, 35, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* Content Holders (Sections 2 & 4) */
+        .content-holder {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            padding: 35px 30px;
+            background: var(--bg-dark-surface);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform var(--transition-swift), background var(--transition-swift), border-color var(--transition-swift);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-holder::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--brand-gradient);
+            opacity: 0;
+            transition: opacity var(--transition-swift);
+        }
+
+        .content-holder:hover {
+            transform: translateY(-8px);
+            background: var(--bg-dark-elevated);
+            border-color: rgba(246, 135, 35, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .content-holder:hover::after {
+            opacity: 1;
+        }
+
+        .icon-box {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background: rgba(246, 135, 35, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-primary);
+        }
+
+        .icon-box svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .content-text h4 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .content-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ==========================================================================
+           LAYOUT ARCHITECTURE
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 140px 5%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .layout-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .align-left {
+            max-width: 800px;
+            margin-right: auto;
+        }
+
+        .align-center {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Background Media Utilities */
+        .bg-media {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .bg-overlay-gradient {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(8,11,35,0.2) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.3) 100%);
+            z-index: 1;
+        }
+
+        .bg-overlay-dark {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /*background: rgba(10, 10, 10, 0.85);*/
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           SECTION 3: PHOTO COLLAGE (5 IMAGES)
+           ========================================================================== */
+        .collage-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 350px;
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .collage-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .collage-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            background: var(--bg-dark-surface);
+        }
+
+        .collage-image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+            border-radius: var(--radius-md);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .collage-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-fluid);
+        }
+
+        .collage-item:hover .collage-image-wrapper img {
+            transform: scale(1.06);
+        }
+
+        .collage-text {
+            padding: 5px 10px;
+        }
+
+        .collage-text h4 {
+            font-size: 1.5rem;
+            color: #f68723;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .collage-text p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Complex Asymmetric Grid Placements */
+        .item-1 { grid-column: 1 / 8; grid-row: 1 / 2; } /* Large top left */
+        .item-2 { grid-column: 8 / 13; grid-row: 1 / 2; } /* Medium top right */
+        .item-3 { grid-column: 1 / 5; grid-row: 2 / 3; } /* Small bottom left */
+        .item-4 { grid-column: 5 / 9; grid-row: 2 / 3; } /* Small bottom middle */
+        .item-5 { grid-column: 9 / 13; grid-row: 2 / 3; } /* Small bottom right */
+
+        /* ==========================================================================
+           HIGH-FIDELITY ANIMATION ENGINE
+           ========================================================================== */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+        }
+
+        /* Right to Left Slide */
+        .anim.slide-rtl {
+            transform: translateX(100px);
+            transition: opacity var(--transition-fluid), transform var(--transition-fluid);
+        }
+
+        /* Top to Bottom Slide */
+        .anim.slide-ttb {
+            transform: translateY(-80px);
+            transition: opacity var(--transition-fluid), transform var(--transition-fluid);
+        }
+
+        /* Zoom Out Reveal Effect */
+        .anim.zoom-out {
+            transform: scale(1.15);
+            transition: opacity var(--transition-fluid), transform var(--transition-fluid);
+        }
+
+        /* Trigger State */
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE OVERRIDES
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .layout-grid-2 { grid-template-columns: 1fr; }
+            .collage-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: minmax(300px, auto); }
+            .item-1 { grid-column: 1 / 3; grid-row: auto; }
+            .item-2 { grid-column: 1 / 2; grid-row: auto; }
+            .item-3 { grid-column: 2 / 3; grid-row: auto; }
+            .item-4 { grid-column: 1 / 2; grid-row: auto; }
+            .item-5 { grid-column: 2 / 3; grid-row: auto; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 100px 5%; }
+            .collage-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .item-1, .item-2, .item-3, .item-4, .item-5 { grid-column: 1 / -1; height: 300px; }
+            .collage-item { height: auto; }
+            .collage-image-wrapper { height: 300px; }
+            .bg-overlay-gradient { background: linear-gradient(90deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.85) 100%); }
+            .text-justify { text-align: left; } /* Improve mobile readability */
+        }
+    </style>
+</head>
+<body>
+
+    <svg style="display: none;">
+        <symbol id="icon-server" viewBox="0 0 24 24">
+            <path d="M22 12H2v-2h20v2zm0-6H2V4h20v2zm0 12H2v-2h20v2z" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-code" viewBox="0 0 24 24">
+            <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-cloud" viewBox="0 0 24 24">
+            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-chart" viewBox="0 0 24 24">
+            <path d="M3 3v18h18v-2H5V3H3zm6 14h2v-6H9v6zm4 0h2V7h-2v10zm4 0h2v-4h-2v4z" fill="currentColor"/>
+        </symbol>
+    </svg>
+
+    <section id="hero" style="height: 100vh; min-height: 700px; display: flex; align-items: center; padding: 0 5%;">
+        <img src="Hero Section.jpg" class="bg-media" alt="Technology Architecture Background">
+        <div class="bg-overlay-gradient"></div>
+        
+        <div class="container align-left">
+            <h1 class="heading-hero gradient-text anim slide-rtl" style="--delay: 0s;">
+                Your Global Capability Center
+            </h1>
+            <p class="subheading text-justify anim slide-rtl" style="--delay: 0.15s; max-width: 800px; margin-right: auto;">
+                 Built by StradIT. Owned by you.<br>Your dedicated tech team, finance hub, or innovation center will be fully operational in weeks, not months. We set it up. We run the backend. You call the shots.
+
+            <div class="anim slide-rtl" style="--delay: 0.3s;">
+                <a href="#infrastructure" class="btn-primary">Build What's Yours</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="infrastructure" style="background-color: var(--bg-absolute-dark);">
+        <div class="container align-center">
+            <h2 class="heading-section gradient-text anim slide-rtl" style="--delay: 0s;">
+                The StradIT Difference
+            </h2>
+            <p class="subheading anim slide-rtl" style="--delay: 0.15s; max-width: 900px;">
+                With StradIT’s GCC, you hire top-tier talent with zero headaches <br> and with full control.This isn't outsourcing. This is ownership.
+            </p>
+        </div>
+
+        <div class="container layout-grid-2" style="margin-top: 50px;">
+            <div class="content-holder anim slide-rtl" style="--delay: 0.2s;">
+                <div class="icon-box"><svg><use href="#icon-cloud"></use></svg></div>
+                <div class="content-text">
+                    <h4>First hires in 2–4 weeks. Not quarters.</h4>
+                    <!-- <p>Transition from legacy monoliths to dynamic, auto-scaling microservices utilizing Kubernetes and serverless frameworks for ultimate agility.</p> -->
+                </div>
+            </div>
+
+            <div class="content-holder anim slide-rtl" style="--delay: 0.35s;">
+                <div class="icon-box"><svg><use href="#icon-shield"></use></svg></div>
+                <div class="content-text">
+                    <h4>Cut costs up to 50% without cutting corners.</h4>
+                    <!-- <p>Military-grade encryption algorithms, continuous behavioral authentication, and automated threat telemetry embedded into the deployment pipeline.</p> -->
+                </div>
+            </div>
+
+            <div class="content-holder anim slide-rtl" style="--delay: 0.5s;">
+                <div class="icon-box"><svg><use href="#icon-server"></use></svg></div>
+                <div class="content-text">
+                    <h4>Go from 5 to 50 to 500. We grow when you grow.</h4>
+                    <!-- <p>Distributed data ecosystems engineered for sub-millisecond query execution, automated failover, and global multi-region redundancy.</p> -->
+                </div>
+            </div>
+
+            <div class="content-holder anim slide-rtl" style="--delay: 0.65s;">
+                <div class="icon-box"><svg><use href="#icon-code"></use></svg></div>
+                <div class="content-text">
+                    <h4>One partner. Full stack. No juggling vendors.</h4>
+                    <!-- <p>Self-healing deployment pipelines that automate code validation, security scanning, and seamless production rollouts multiple times a day.</p> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="collage" style="background-color: var(--bg-dark-base);">
+        <div class="container align-center">
+            <h2 class="heading-section gradient-text anim zoom-out" style="--delay: 0s;">
+                 What You Unlock
+            </h2>
+            <p class="subheading text-justify anim zoom-out" style="--delay: 0.15s; max-width: 900px;">
+                StradIT helps you establish and run a captive center that functions as a seamless extension of your headquarters.
+From IT and finance to R&D and customer operations, we help you centralize, scale, and innovate. 
+
+            </p>
+        </div>
+
+        <div class="container collage-grid">
+            
+            <div class="collage-item item-1 anim zoom-out" style="--delay: 0.2s;">
+                <div class="collage-image-wrapper">
+                    <img src="Globe Talent.jpg" alt="Data Centers">
+                </div>
+                <div class="collage-text">
+                    <h4>Global Talent, Local Expertise</h4>
+                    <p>Access world-class professionals in tech, analytics, finance, and beyond in locations that make strategic sense.</p>
+                </div>
+            </div>
+
+            <div class="collage-item item-2 anim zoom-out" style="--delay: 0.35s;">
+                <div class="collage-image-wrapper">
+                    <img src="Low Cost.png" alt="Cyber Security Protocol">
+                </div>
+                <div class="collage-text">
+                    <h4>Cost Without Compromise</h4>
+                    <p>Reduce operational costs by up to 50% while elevating quality and output.</p>
+                </div>
+            </div>
+
+            <div class="collage-item item-3 anim zoom-out" style="--delay: 0.5s;">
+                <div class="collage-image-wrapper">
+                    <img src="Speed to scale.png" alt="Artificial Intelligence">
+                </div>
+                <div class="collage-text">
+                    <h4>Speed to Scale </h4>
+                    <p>Ramp up (or down) with agility. Your GCC grows with your ambitions.</p>
+                </div>
+            </div>
+
+            <div class="collage-item item-4 anim zoom-out" style="--delay: 0.65s;">
+                <div class="collage-image-wrapper">
+                    <img src="Innovation.jpg" alt="UX Design">
+                </div>
+                <div class="collage-text">
+                    <h4>Innovation at the Core</h4>
+                    <p>Transform your center into a hub for R&D, digital transformation, and next-gen capabilities.</p>
+                </div>
+            </div>
+
+            <div class="collage-item item-5 anim zoom-out" style="--delay: 0.8s;">
+                <div class="collage-image-wrapper">
+                    <img src="Total Transparency.png" alt="Code Architecture">
+                </div>
+                <div class="collage-text">
+                    <h4>Total Visibility</h4>
+                    <p>Track payroll, team performance, costs, and compliance.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="advanced-systems" style="background-color: var(--bg-absolute-dark);">
+        <div class="container align-center">
+            <h2 class="heading-section gradient-text anim slide-rtl" style="--delay: 0s;">
+                Built for Builders
+            </h2>
+            <p class="subheading anim slide-rtl" style="--delay: 0.15s; max-width: 900px;">
+                StradIT GCCs power:
+            </p>
+        </div>
+
+        <div class="container layout-grid-2" style="margin-top: 50px;">
+            <div class="content-holder anim slide-rtl" style="--delay: 0.2s;">
+                <div class="icon-box"><svg><use href="#icon-brain"></use></svg></div>
+                <div class="content-text">
+                    <h4>AI & Machine Learning teams</h4>
+                    <!-- <p>Custom algorithmic models trained on your proprietary data to forecast market trends, optimize logistics, and automate highly complex cognitive tasks.</p> -->
+                </div>
+            </div>
+
+            <div class="content-holder anim slide-rtl" style="--delay: 0.35s;">
+                <div class="icon-box"><svg><use href="#icon-chart"></use></svg></div>
+                <div class="content-text">
+                    <h4>Cloud & DevOps operations</h4>
+                    <!-- <p>High-throughput data pipelines using Apache Kafka and Spark to ingest, process, and visualize millions of concurrent data points with zero latency.</p> -->
+                </div>
+            </div>
+
+            <div class="content-holder anim slide-rtl" style="--delay: 0.5s;">
+                <div class="icon-box"><svg><use href="#icon-code"></use></svg></div>
+                <div class="content-text">
+                    <h4>Data Analytics hubs</h4>
+                    <!-- <p>Seamlessly embed Large Language Models (LLMs) into your internal workflows to generate hyper-personalized content and enhance customer support automation.</p> -->
+                </div>
+            </div>
+
+            <div class="content-holder anim slide-rtl" style="--delay: 0.65s;">
+                <div class="icon-box"><svg><use href="#icon-server"></use></svg></div>
+                <div class="content-text">
+                    <h4>Cybersecurity centers</h4>
+                    <!-- <p>Edge-computing frameworks designed to aggregate and synchronize massive volumes of sensor data, enabling smart factories and connected environments.</p> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="final-cta" style="min-height: 80vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-media" alt="Technology Network Grid">
+        <div class="bg-overlay-dark"></div>
+
+        <div class="container align-center">
+            <h2 class="heading-section gradient-text anim slide-ttb" style="--delay: 0s;">
+                Ready to Build Your Global Powerhouse?
+            </h2>
+            <p class="subheading text-justify anim slide-ttb" style="--delay: 0.2s; max-width: 900px; color: #ffffff;">
+                Let's talk about what your GCC could look like and how fast we can get you there.
+            </p>
+            <div class="anim slide-ttb" style="--delay: 0.4s; margin-top: 20px;">
+                <a href="#" class="btn-primary">Book a Free Strategy Call</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Select all elements flagged for animation
+            const animateElements = document.querySelectorAll('.anim');
+            
+            // 2. Map inline custom CSS properties (--delay) to actual transition-delays
+            animateElements.forEach(element => {
+                const delayStr = element.style.getPropertyValue('--delay');
+                if (delayStr) {
+                    element.style.transitionDelay = delayStr;
+                }
+            });
+
+            // 3. Configure the Intersection Observer for high-performance scroll detection
+            const observerConfiguration = {
+                root: null, // Use the viewport
+                rootMargin: '0px 0px -12% 0px', // Trigger slightly before it hits the bottom of the screen
+                threshold: 0.05 // Trigger when 5% of the element is visible
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Append trigger class to activate CSS transformations
+                        entry.target.classList.add('is-visible');
+                        
+                        // Unobserve to ensure animations only play once to preserve UX
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerConfiguration);
+
+            // 4. Attach observer to node list
+            animateElements.forEach(element => {
+                scrollObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
