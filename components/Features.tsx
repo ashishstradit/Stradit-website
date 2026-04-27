@@ -12,9 +12,9 @@ const portraits = [
   {
     img: '/Blue4.png',
     title: 'Data Analytics - Applied AI',
-    sub: 'Turn fragmented data into trusted insights; built for speed, accuracy, and action.',
-    bullets: ['Modern analytics foundations', 'AI-powered data quality and observability', 'Executive dashboards', 'Predictive and prescriptive models'],
-    link: '#'
+    sub: 'Decode, Decide, and Dominate with Data — clear insights and confident action through our AI-powered data analytics CoE.',
+    bullets: ['Unified data across systems', 'Analytics teams actually use', 'AI-driven intelligence in workflows', 'Governed, defendable metrics'],
+    link: '/coe/data-analytics'
   },
   {
     img: '/Blue3.png',

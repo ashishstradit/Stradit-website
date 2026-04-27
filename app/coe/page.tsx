@@ -12,7 +12,7 @@ export default function CoePage() {
     },
     {
       title: 'Data Analytics - Applied AI',
-      desc: 'Transform raw data into actionable understandings through our AI-enabled data analytics.',
+      desc: 'Decode messy data into clear insights — unify systems, embed AI in workflows, and defend every metric with our analytics CoE.',
       img: '/Graph.svg',
       video: '/Data%20Analytics.mp4',
       href: '/coe/data-analytics',
@@ -78,8 +78,12 @@ export default function CoePage() {
               <h1 className="heading-main text-gradient anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.1s' }}>
                 Center of Excellence
               </h1>
-              <p className="sub-heading anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.3s', color: '#fff', margin: '0 0 28px 0' }}>
-                From Insight to Innovation With AI and Tech Engineering. StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help Fortune 500 companies navigate the future with confidence.
+              <h2 className="coe-hero-tagline anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.22s', color: '#fff' }}>
+                From Insight to Innovation With AI and Tech Engineering.
+              </h2>
+              <p className="sub-heading coe-hero-lede anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.34s', color: '#fff', margin: '0 0 28px 0' }}>
+                StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help
+                Fortune 500 companies navigate the future with confidence.
               </p>
               <div className="anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.5s' }}>
                 <a href="#" className="btn">

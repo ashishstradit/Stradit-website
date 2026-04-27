@@ -147,6 +147,28 @@
   text-align-last: left;
 }
 
+.coe-page .hero-copy .coe-hero-tagline {
+  font-size: clamp(1rem, 0.92rem + 0.45vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  max-width: 900px;
+  margin: 0 0 18px 0;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  text-align-last: center;
+}
+
+.coe-page .hero-copy .coe-hero-lede {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+  text-align-last: left;
+}
+
 /* Keep other hero paragraphs default (do not override hero-copy alignment) */
 
 /* Scroll animations (same mechanism as useObserver + observe-me) */

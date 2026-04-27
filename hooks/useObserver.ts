@@ -12,7 +12,12 @@ export function useObserver() {
           }
         })
       },
-      { threshold: 0.15 }
+      {
+        // Match when any pixel enters; 0.15 was hiding stacked hero lines (subtitle/paragraph/button)
+        // until the user scrolled further, so copy looked "missing".
+        threshold: 0,
+        rootMargin: '0px 0px 25% 0px',
+      }
     )
     document.querySelectorAll('.observe-me').forEach(el => observer.observe(el))
     return () => observer.disconnect()

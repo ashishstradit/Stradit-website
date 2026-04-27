@@ -21,9 +21,12 @@ export default function TestingCoePage() {
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Testing &amp; Quality Engineering
             </h1>
-            <p className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              Engineering trust in every line of code. StradIT provides bespoke and AI-powered Testing &amp; Quality Engineering that enables faster
-              time-to-market without compromising on quality, reduces defect leakage, and lowers TCO while enhancing customer satisfaction.
+            <h2 className="hero-subtitle hero-subtitle-centered anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
+              Engineering trust in every line of code.
+            </h2>
+            <p className="hero-body anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.32s' }}>
+              StradIT provides bespoke and AI-powered Testing &amp; Quality Engineering that enables faster time-to-market without compromising on quality,
+              reduces defect leakage, and lowers TCO while enhancing customer satisfaction.
             </p>
             <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.4s' }}>
               <a className="btn" href="#capabilities">

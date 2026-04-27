@@ -139,6 +139,12 @@
   padding-bottom: 10px;
 }
 
+/* Hero copy must always be readable (scroll observer was leaving stacked lines invisible). */
+.coe-detail #hero-copy .anim {
+  opacity: 1;
+  transform: translate(0);
+}
+
 .coe-detail .hero-title {
   font-size: clamp(2.1rem, 1.6rem + 2vw, 3.5rem);
   font-weight: 600;
@@ -159,6 +165,25 @@
   text-align-last: left;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+}
+
+.coe-detail .hero-copy .hero-subtitle.hero-subtitle-centered {
+  text-align: center;
+  text-align-last: center;
+}
+
+.coe-detail .hero-copy .hero-body {
+  font-size: clamp(1rem, 0.92rem + 0.4vw, 1.25rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 26px 0;
+  max-width: 900px;
+  text-align: left;
+  text-align-last: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 /* Animations hook */
@@ -673,5 +698,17 @@
     line-height: 1.65;
     margin-bottom: 22px;
   }
+}
+
+/* Data Analytics CoE — mid CTA */
+.coe-detail .data-empower-cta {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+/* AI CoE — mid CTA (after carousel) */
+.coe-detail .ai-deploy-cta {
+  padding-top: 56px;
+  padding-bottom: 56px;
 }
 

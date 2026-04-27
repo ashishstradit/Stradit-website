@@ -2,6 +2,8 @@ import CoeEffects from '../CoeEffects'
 import '../coe-detail.css'
 import AiCarousel from './AiCarousel'
 
+const CONTACT_HREF = 'mailto:reachout@stradit.com?subject=AI%20Solutions%20inquiry'
+
 export default function AiCoePage() {
   return (
     <>
@@ -19,13 +21,16 @@ export default function AiCoePage() {
         {/* Hero copy below the video */}
         <section id="hero-copy" aria-label="AI Solutions intro">
           <div className="container text-center hero-content hero-copy">
-            <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
+            <h1 className="hero-title text-gradient anim slide-rtl" style={{ ['--delay' as any]: '0s' }}>
               AI Solutions
             </h1>
-            <h2 className="hero-subtitle anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              Intelligent AI for a Smarter Future. AI should not live in slides and pilots.
+            <h2 className="hero-subtitle hero-subtitle-centered anim slide-rtl" style={{ ['--delay' as any]: '0.2s' }}>
+              Intelligent AI for a Smarter Future
             </h2>
-            <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.4s' }}>
+            <p className="hero-body anim slide-rtl" style={{ ['--delay' as any]: '0.3s' }}>
+              AI should not live in slides and pilots. It should run inside real workflows. StradIT builds secured, governed, and ready to scale enterprise-grade AI solutions across ML, generative AI, LLMs, guardrails, assurance AI, and maturity models.
+            </p>
+            <div className="anim slide-rtl" style={{ ['--delay' as any]: '0.5s' }}>
               <a className="btn" href="#carousel-section">
                 Start Your AI Transformation
               </a>
@@ -34,6 +39,16 @@ export default function AiCoePage() {
         </section>
 
         <AiCarousel />
+
+        <section id="deploy-cta" className="ai-deploy-cta" aria-label="Deploy AI call to action">
+          <div className="container text-center">
+            <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.1s' }}>
+              <a className="btn" href={CONTACT_HREF}>
+                Deploy Smart AI
+              </a>
+            </div>
+          </div>
+        </section>
 
         <section id="final-cta" className="ai-final">
           <div className="container text-center">
@@ -45,7 +60,7 @@ export default function AiCoePage() {
               operation without it.”
             </p>
             <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.4s', marginTop: 20 }}>
-              <a className="btn" href="#">
+              <a className="btn" href={CONTACT_HREF}>
                 Validate AI With Confidence
               </a>
             </div>
