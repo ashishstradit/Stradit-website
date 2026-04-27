@@ -4,35 +4,35 @@ import './coe.css'
 export default function CoePage() {
   const portraitCards = [
     {
-      title: 'Artificial Intelligence',
+      title: 'Artificial Intelligence - Applied AI',
       desc: 'Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve.',
       img: '/AI%20readiness.svg',
       video: '/AI%20solution.mp4',
       href: '/coe/ai',
     },
     {
-      title: 'Data Analytics',
+      title: 'Data Analytics - Applied AI',
       desc: 'Transform raw data into actionable understandings through our AI-enabled data analytics.',
       img: '/Graph.svg',
       video: '/Data%20Analytics.mp4',
       href: '/coe/data-analytics',
     },
     {
-      title: 'Cyber Security',
+      title: 'Cyber Security - Applied AI',
       desc: 'Guard digital assets across applications, data, and identities while downsizing risks with AI-driven threat intelligence.',
       img: '/CoE.svg',
       video: '/Cyber%20Security.mp4',
       href: '/coe/cyber-security',
     },
     {
-      title: 'Cloud & Infrastructure',
+      title: 'Cloud & Infrastructure - Applied AI',
       desc: 'End-to-end consulting and service delivery to support cloud migration and modernization.',
       img: '/Limit.svg',
       video: '/Cloud%20cards.mp4',
       href: '/coe/cloud',
     },
     {
-      title: 'Testing & Quality',
+      title: 'Automated AI Testing',
       desc: 'Supply scalable, reusable AI-powered QA frameworks to meet the highest quality standards.',
       img: '/Qulaity.svg',
       video: '/Testing%20and%20Quality.mp4',

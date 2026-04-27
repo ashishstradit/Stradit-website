@@ -11,28 +11,28 @@ const portraits = [
   },
   {
     img: '/Blue4.png',
-    title: 'Data Analytics',
+    title: 'Data Analytics - Applied AI',
     sub: 'Turn fragmented data into trusted insights; built for speed, accuracy, and action.',
     bullets: ['Modern analytics foundations', 'AI-powered data quality and observability', 'Executive dashboards', 'Predictive and prescriptive models'],
     link: '#'
   },
   {
     img: '/Blue3.png',
-    title: 'Cybersecurity',
+    title: 'Cyber Security - Applied AI',
     sub: 'Strengthen security posture with AI-driven threat intelligence.',
     bullets: ['Security architecture and controls', 'AI-enhanced threat and risk visibility', 'Compliance alignment and audit readiness', 'Secure AI and data protection'],
     link: '#'
   },
   {
     img: '/Blue2.png',
-    title: 'Cloud & Infrastructure',
+    title: 'Cloud & Infra - Applied AI',
     sub: 'AI-optimized cloud & infrastructure that\'s resilient, scalable, and cost-aware.',
     bullets: ['AI-assisted cloud migration', 'Infrastructure modernization', 'Reliability engineering', 'Platform standardization'],
     link: '#'
   },
   {
     img: '/Blue6.png',
-    title: 'Testing & Quality Engineering',
+    title: 'Automated AI Testing',
     sub: 'Ship faster with AI-powered testing woven into every release.',
     bullets: ['Automation-first QA', 'Performance and resilience testing', 'Test strategy and tooling', 'Continuous quality systems'],
     link: '#'
