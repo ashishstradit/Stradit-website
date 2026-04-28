@@ -86,6 +86,17 @@
   text-align-last: left;
 }
 
+.gcc-page .gcc-hero-subheading {
+  text-align: center;
+  text-align-last: center;
+  font-weight: 600;
+}
+
+.gcc-page .gcc-hero-body {
+  text-align: left;
+  text-align-last: left;
+}
+
 .gcc-page .heading-hero {
   font-size: clamp(2.6rem, 4.8vw, 3.4rem);
   font-weight: 600;

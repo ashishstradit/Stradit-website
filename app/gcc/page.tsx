@@ -15,9 +15,10 @@ export default function GccPage() {
             <h1 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               Your Global Capability Center
             </h1>
-            <p className="sub-heading anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.15s', color: '#fff', margin: '0 0 28px 0' }}>
+            <h2 className="sub-heading gcc-hero-subheading anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.15s', color: '#fff' }}>
               Built by StradIT. Owned by you.
-              <br />
+            </h2>
+            <p className="sub-heading gcc-hero-body anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.24s', color: '#fff', margin: '0 0 28px 0' }}>
               Your dedicated tech team, finance hub, or innovation center will be fully operational in weeks, not months. We set it up. We run the
               backend. You call the shots.
             </p>
