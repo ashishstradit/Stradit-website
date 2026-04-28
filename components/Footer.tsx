@@ -10,19 +10,19 @@ export default function Footer() {
         </div>
         <div className={styles.footerCol}>
           <h4>Quick Links</h4>
-          <a href="#">About us</a>
-          <a href="#">CoE</a>
-          <a href="#">GCC</a>
+          <a href="/">Home</a>
+          <a href="/about-us/">About us</a>
+          <a href="/coe/">Center of Excellence</a>
+          <a href="/gcc/">Global Capability Centre</a>
           <a href="#">StartIT</a>
         </div>
         <div className={styles.footerCol}>
-          <h4>CoE</h4>
-          <a href="#">Data Analytics</a>
-          <a href="#">Applied AI</a>
-          <a href="#">Cyber Security</a>
-          <a href="#">Testing</a>
-          <a href="#">Cloud Infrastructure</a>
-          <a href="#">GCC CoE</a>
+          <h4>Center Of Excellence</h4>
+          <a href="/coe/ai/">Applied Artificial Intelligence</a>
+          <a href="/coe/data-analytics/">Data Analytics - Applied AI</a>
+          <a href="/coe/cyber-security/">Cyber Security - Applied AI</a>
+          <a href="/coe/cloud/">Cloud &amp; Infra - Applied AI</a>
+          <a href="/coe/testing/">Automated AI Testing</a>
         </div>
         <div className={styles.footerCol}>
           <h4>Get in Touch</h4>

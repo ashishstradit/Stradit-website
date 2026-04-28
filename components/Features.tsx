@@ -1,10 +1,11 @@
 'use client'
+import { useRef } from 'react'
 import styles from './Features.module.css'
 
 const portraits = [
   {
     img: '/Bule1.png',
-    title: 'Applied AI',
+    title: 'Applied Artificial Intelligence',
     sub: 'Production-grade AI workflows with guardrails, human oversight, and clear ROI paths.',
     bullets: ['Intelligent process automation', 'LLM governance and guardrails', 'AI readiness training for teams', 'Responsible AI playbooks'],
     link: '#'
@@ -25,7 +26,7 @@ const portraits = [
   },
   {
     img: '/Blue2.png',
-    title: 'Cloud & Infra - Applied AI',
+    title: 'Cloud & Infrastructure - Applied AI',
     sub: 'AI-optimized cloud & infrastructure that\'s resilient, scalable, and cost-aware.',
     bullets: ['AI-assisted cloud migration', 'Infrastructure modernization', 'Reliability engineering', 'Platform standardization'],
     link: '#'
@@ -47,6 +48,18 @@ const portraits = [
 ]
 
 export default function Features() {
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+  const scrollByOneCard = (dir: 1 | -1) => {
+    const wrapper = wrapperRef.current
+    if (!wrapper) return
+    const card = wrapper.querySelector<HTMLElement>(`[data-feature-card]`)
+    if (!card) return
+    const gap = parseInt(getComputedStyle(wrapper).gap || '30', 10) || 30
+    const amount = card.offsetWidth + gap
+    wrapper.scrollBy({ left: dir * amount, behavior: 'smooth' })
+  }
+
   // No duplicates: on mobile we stack vertically
   const cards = portraits
   return (
@@ -55,10 +68,15 @@ export default function Features() {
         <h2 className="heading-main text-gradient anim-hidden blur-zoom-out observe-me">Automate. Elevate. Accelerate</h2>
         <p className="sub-heading anim-hidden fade-up observe-me">AI built into every layer so your enterprise doesn't just keep up, it pulls ahead.</p>
       </div>
-      <div className={styles.scrollingWrapper}>
-        <div className={styles.scrollingTrack}>
+      <div className={styles.carouselShell}>
+        <button className={styles.navBtn} type="button" aria-label="Previous cards" onClick={() => scrollByOneCard(-1)}>
+          ‹
+        </button>
+
+        <div className={styles.scrollingWrapper} ref={wrapperRef}>
+          <div className={styles.scrollingTrack}>
           {cards.map((p, i) => (
-            <div key={i} className={`${styles.card} anim-hidden zoom-out-element observe-me delay-${(i % 6) + 1}`}>
+            <div key={i} data-feature-card className={`${styles.card} anim-hidden zoom-out-element observe-me delay-${(i % 6) + 1}`}>
               <div className={styles.cardImgWrapper}>
                 <img src={p.img} alt={p.title} />
               </div>
@@ -72,6 +90,11 @@ export default function Features() {
             </div>
           ))}
         </div>
+      </div>
+
+        <button className={styles.navBtn} type="button" aria-label="Next cards" onClick={() => scrollByOneCard(1)}>
+          ›
+        </button>
       </div>
     </section>
   )

@@ -68,6 +68,18 @@ ul { list-style: none; }
   margin: 0 auto;
 }
 
+/* Typography alignment */
+p {
+  text-align: justify;
+  text-align-last: left;
+}
+
+.sub-heading,
+.hero-body {
+  text-align: justify;
+  text-align-last: left;
+}
+
 section {
   position: relative;
   padding: 120px 5%;

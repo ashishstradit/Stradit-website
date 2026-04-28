@@ -1,10 +1,12 @@
+'use client'
 import CoeEffects from './CoeEffects'
+import { useRef } from 'react'
 import './coe.css'
 
 export default function CoePage() {
   const portraitCards = [
     {
-      title: 'Artificial Intelligence - Applied AI',
+      title: 'Applied Artificial Intelligence',
       desc: 'Converting intricate AI into a simplified solution that enterprises use to stay ahead of the curve.',
       img: '/AI%20readiness.svg',
       video: '/AI%20solution.mp4',
@@ -48,6 +50,18 @@ export default function CoePage() {
     { title: 'Smarter Teams, Bigger Wins', icon: '/Team.svg' },
   ]
 
+  const portraitWrapperRef = useRef<HTMLDivElement | null>(null)
+  const gainsWrapperRef = useRef<HTMLDivElement | null>(null)
+
+  const scrollByOneCard = (wrapper: HTMLDivElement | null, dir: 1 | -1) => {
+    if (!wrapper) return
+    const card = wrapper.querySelector<HTMLElement>(`[data-coe-card]`)
+    if (!card) return
+    const gap = parseInt(getComputedStyle(wrapper).gap || '40', 10) || 40
+    const amount = card.offsetWidth + gap
+    wrapper.scrollBy({ left: dir * amount, behavior: 'smooth' })
+  }
+
   return (
     <>
       <CoeEffects />
@@ -79,7 +93,7 @@ export default function CoePage() {
                 Center of Excellence
               </h1>
               <h2 className="coe-hero-tagline anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.22s', color: '#fff' }}>
-                From Insight to Innovation With AI and Tech Engineering.
+                From Insight to Innovation With AI and Tech Engineering
               </h2>
               <p className="sub-heading coe-hero-lede anim anim-from-right observe-me" style={{ ['--delay' as any]: '0.34s', color: '#fff', margin: '0 0 28px 0' }}>
                 StradIT bridges the gap between complex technology and real-world results. From Cybersecurity to AI, our Centers of Excellence help
@@ -95,13 +109,24 @@ export default function CoePage() {
         </section>
 
         <section id="portrait-section">
-          <div className="slider-wrapper">
-            <div className="slider-track no-motion">
+          <div className="coe-carousel-shell">
+            <button
+              className="coe-nav-btn"
+              type="button"
+              aria-label="Previous cards"
+              onClick={() => scrollByOneCard(portraitWrapperRef.current, -1)}
+            >
+              ‹
+            </button>
+
+            <div className="slider-wrapper" ref={portraitWrapperRef}>
+              <div className="slider-track no-motion">
               {portraitCards.map((c, idx) => (
                 <div
                   className="portrait-card anim anim-fade observe-me"
                   style={{ ['--delay' as any]: `${0.1 + idx * 0.08}s` }}
                   key={c.title}
+                  data-coe-card
                 >
                   <div className="portrait-img-wrapper">
                     {c.video ? (
@@ -121,7 +146,17 @@ export default function CoePage() {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
+
+            <button
+              className="coe-nav-btn"
+              type="button"
+              aria-label="Next cards"
+              onClick={() => scrollByOneCard(portraitWrapperRef.current, 1)}
+            >
+              ›
+            </button>
           </div>
         </section>
 
@@ -135,13 +170,24 @@ export default function CoePage() {
             </p>
           </div>
 
-          <div className="slider-wrapper">
-            <div className="slider-track no-motion">
+          <div className="coe-carousel-shell">
+            <button
+              className="coe-nav-btn"
+              type="button"
+              aria-label="Previous cards"
+              onClick={() => scrollByOneCard(gainsWrapperRef.current, -1)}
+            >
+              ‹
+            </button>
+
+            <div className="slider-wrapper" ref={gainsWrapperRef}>
+              <div className="slider-track no-motion">
               {gains.map((t, idx) => (
                 <div
                   className="rect-card anim anim-fade observe-me"
                   style={{ ['--delay' as any]: `${0.2 + (idx % 6) * 0.1}s` }}
                   key={`${t.title}-${idx}`}
+                  data-coe-card
                 >
                   <div className="rect-icon">
                     <img src={t.icon} alt="" aria-hidden="true" data-icon={t.iconKey ?? ''} />
@@ -151,7 +197,17 @@ export default function CoePage() {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
+
+            <button
+              className="coe-nav-btn"
+              type="button"
+              aria-label="Next cards"
+              onClick={() => scrollByOneCard(gainsWrapperRef.current, 1)}
+            >
+              ›
+            </button>
           </div>
 
           <div className="cta-wrapper anim anim-up observe-me" style={{ ['--delay' as any]: '0.3s' }}>

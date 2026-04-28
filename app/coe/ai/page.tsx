@@ -22,7 +22,7 @@ export default function AiCoePage() {
         <section id="hero-copy" aria-label="AI Solutions intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl" style={{ ['--delay' as any]: '0s' }}>
-              AI Solutions
+              Applied Artificial Intelligence
             </h1>
             <h2 className="hero-subtitle hero-subtitle-centered anim slide-rtl" style={{ ['--delay' as any]: '0.2s' }}>
               Intelligent AI for a Smarter Future
@@ -55,7 +55,10 @@ export default function AiCoePage() {
             <h2 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
               AI That&apos;s More Than A Buzzword
             </h2>
-            <p className="sub-heading anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
+            <p
+              className="sub-heading anim slide-rtl observe-me"
+              style={{ ['--delay' as any]: '0.2s', textAlign: 'left', textAlignLast: 'left' }}
+            >
               Our Core of Excellence around AI Solutions has helped global enterprises move from “let’s try AI” to “we can’t imagine running this
               operation without it.”
             </p>

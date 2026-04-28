@@ -1,11 +1,33 @@
 'use client'
+import { useEffect, useRef, useState } from 'react'
 import styles from './GlobeSection.module.css'
 
 export default function GlobeSection() {
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false)
+
+  useEffect(() => {
+    const node = videoRef.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px 0px' }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className={styles.globeSection}>
-      <video className={styles.globeVideo} autoPlay loop muted playsInline preload="metadata">
-        <source src="/Globe.mp4" type="video/mp4" />
+      <video ref={videoRef} className={styles.globeVideo} autoPlay loop muted playsInline preload="none">
+        {shouldLoadVideo ? <source src="/Globe.web.mp4" type="video/mp4" /> : null}
       </video>
       <div className={styles.content}>
         <h2 className="heading-main anim-hidden blur-zoom-out observe-me"><span className="text-gradient">Global Scale, Local Impact</span></h2>

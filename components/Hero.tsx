@@ -21,8 +21,8 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
-      <video ref={videoRef} className={styles.videoBg} autoPlay loop muted playsInline preload="metadata">
-        <source src="/VideoHand.mp4" type="video/mp4" />
+      <video ref={videoRef} className={styles.videoBg} autoPlay loop muted playsInline preload="none">
+        <source src="/VideoHand.web.mp4" type="video/mp4" />
       </video>
       <h1 className={`${styles.heroHeading} anim-hidden blur-zoom-out delay-2 observe-me`}>
         <TypeWriter text="Applied AI" /> and Engineering That Delivers Measurable Change

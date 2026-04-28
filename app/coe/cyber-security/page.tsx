@@ -21,17 +21,12 @@ export default function CyberSecurityCoePage() {
               Cyber Security - Applied AI
             </h1>
             <h2 className="hero-subtitle hero-subtitle-centered anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              Securing Today for Quick Scalability Tomorrow.
+              Securing Today for Quick Scalability Tomorrow
             </h2>
             <p className="hero-body anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.32s' }}>
               At StradIT, we deliver proactive, AI-enhanced, enterprise-grade resilience that grows with you. Our managed cybersecurity services cut risk,
               develop future-proof policies, and protect your most critical systems to drive business continuity and confidence.
             </p>
-            <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.4s' }}>
-              <a className="btn" href="#">
-                Strengthen Your Security Posture
-              </a>
-            </div>
           </div>
         </section>
 
@@ -102,22 +97,21 @@ export default function CyberSecurityCoePage() {
             ))}
           </div>
 
-          <div className="container text-center anim anim-up observe-me" style={{ ['--delay' as any]: '0.65s', marginTop: 20 }}>
-            <a className="btn" href="#">
-              Deploy 24/7 Managed Defense
-            </a>
-          </div>
         </section>
 
         <section id="final-cta" className="cyber-final">
           <div className="container text-center">
             <h2 className="heading-main text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
-              Don&apos;t Wait for a Breach.
+              Learn How Security Wins From The Front Line
             </h2>
             <p className="sub-heading anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              Proactively defend your intellectual property and customer data with resilient security protocols.
+              Cybersecurity should feel like stability, not constant fire drills. The stories below show how teams like yours reduced noise, contained
+              threats faster, and built a security posture that holds up on the toughest days.
             </p>
-            <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.4s' }}>
+            <div className="cta-row anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.45s' }}>
+              <a className="btn" href="#">
+                Deploy 24/7 Managed Defense
+              </a>
               <a className="btn" href="#">
                 Strengthen Your Security Posture
               </a>

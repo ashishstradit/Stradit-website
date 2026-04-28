@@ -16,7 +16,7 @@ export default function GccPage() {
               Your Global Capability Center
             </h1>
             <h2 className="sub-heading gcc-hero-subheading anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.15s', color: '#fff' }}>
-              Built by StradIT. Owned by you.
+              Built by StradIT. Owned by you
             </h2>
             <p className="sub-heading gcc-hero-body anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.24s', color: '#fff', margin: '0 0 28px 0' }}>
               Your dedicated tech team, finance hub, or innovation center will be fully operational in weeks, not months. We set it up. We run the
@@ -124,7 +124,13 @@ export default function GccPage() {
           </div>
 
           <div className="container layout-grid-2 mt-50">
-            {['AI & Machine Learning teams', 'Cloud & DevOps operations', 'Data Analytics hubs', 'Cybersecurity centers'].map((t, i) => (
+            {[
+              'AI & Machine Learning teams',
+              'Cloud & DevOps operations',
+              'Data Analytics hubs',
+              'Cybersecurity centers',
+              'Automated AI Testing',
+            ].map((t, i) => (
               <div className="content-holder anim slide-rtl observe-me" style={{ ['--delay' as any]: `${0.2 + i * 0.15}s` }} key={t}>
                 <div className="content-text">
                   <h4>{t}</h4>

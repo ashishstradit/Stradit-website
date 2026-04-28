@@ -134,6 +134,13 @@
   gap: 40px;
 }
 
+/* If grid has odd items, center the last one */
+.gcc-page .layout-grid-2 > .content-holder:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(620px, 100%);
+}
+
 /* Hero media */
 .gcc-page .bg-media {
   position: absolute;

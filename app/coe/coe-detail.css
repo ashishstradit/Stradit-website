@@ -31,13 +31,18 @@
   background: var(--coe-band-4);
 }
 
-/* Final CTA (Section 3): justified paragraph */
+/* Final CTA (Section 3): left-aligned paragraph + button spacing */
 .coe-detail #final-cta .sub-heading {
-  text-align: justify;
-  text-align-last: center;
+  text-align: left;
+  text-align-last: left;
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 24px;
+}
+
+.coe-detail #final-cta .sub-heading + div {
+  margin-top: 0 !important;
 }
 
 /* Tighter gap between Section 2 (main content) and Section 3 (blue CTA) */
@@ -310,6 +315,30 @@
   min-height: 520px;
   display: grid;
   align-items: center;
+}
+
+.coe-detail .cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.coe-detail .cyber-final .cta-row {
+  margin-top: 28px;
+}
+
+@media (max-width: 480px) {
+  .coe-detail .cta-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .coe-detail .cta-row .btn {
+    width: 100%;
+    max-width: 360px;
+  }
 }
 
 /* Testing CoE grid cards (ported from public/Testing Coe/Testing CoE.html) */

@@ -20,7 +20,7 @@ export default function CloudCoePage() {
               Cloud &amp; Infrastructure - Applied AI
             </h1>
             <h2 className="hero-subtitle hero-subtitle-centered anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
-              Strategic, Scalable, Future-Ready Cloud for All.
+              Strategic, Scalable, Future-Ready Cloud for All
             </h2>
             <p className="hero-body anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.32s' }}>
               StradIT helps enterprises move to the cloud with confidence, from multi-cloud strategy to legacy modernization and end-to-end migration.
