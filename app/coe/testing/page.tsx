@@ -8,7 +8,7 @@ export default function TestingCoePage() {
 
       <main className="coe-detail coe-page-tall-hero">
         {/* Hero video (same layout style as other CoE detail pages) */}
-        <section id="hero" aria-label="Testing & Quality hero video">
+        <section id="hero" aria-label="Automated AI Testing hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
             <source src="/Testing%20and%20Quality.mp4" type="video/mp4" />
           </video>
@@ -16,10 +16,10 @@ export default function TestingCoePage() {
         </section>
 
         {/* Hero copy below the video */}
-        <section id="hero-copy" aria-label="Testing & Quality Engineering intro">
+        <section id="hero-copy" aria-label="Automated AI Testing intro">
           <div className="container text-center hero-content hero-copy">
             <h1 className="hero-title text-gradient anim slide-rtl observe-me" style={{ ['--delay' as any]: '0s' }}>
-              Testing &amp; Quality Engineering
+              Automated AI Testing
             </h1>
             <h2 className="hero-subtitle hero-subtitle-centered anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               Engineering trust in every line of code

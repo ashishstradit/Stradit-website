@@ -21,7 +21,7 @@ export default function Footer() {
           <a href="/coe/ai/">Applied Artificial Intelligence</a>
           <a href="/coe/data-analytics/">Data Analytics - Applied AI</a>
           <a href="/coe/cyber-security/">Cyber Security - Applied AI</a>
-          <a href="/coe/cloud/">Cloud &amp; Infra - Applied AI</a>
+          <a href="/coe/cloud/">Cloud &amp; Infrastructure - Applied AI</a>
           <a href="/coe/testing/">Automated AI Testing</a>
         </div>
         <div className={styles.footerCol}>
