@@ -71,7 +71,7 @@ export default function AboutUsPage() {
       <main className="about-us-page">
         <section id="hero" aria-label="About StradIT hero">
           <video className="hero-video" autoPlay loop muted playsInline preload="none">
-            <source src="/StraditLogo.web.mp4" type="video/mp4" />
+            <source src="/Stradit%20Logo%20Animation1.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
         </section>
@@ -249,7 +249,7 @@ export default function AboutUsPage() {
             <p className="pride-subtext anim anim-up observe-me" style={{ ['--delay' as any]: '0.15s' }}>
               At StradIT, excellence isn’t a promise; it’s our North Star, and we make this possible through:
             </p>
-            <div className="anim anim-up observe-me" style={{ ['--delay' as any]: '0.2s', marginBottom: 16 }}>
+            <div className="pride-cta anim anim-up observe-me" style={{ ['--delay' as any]: '0.2s' }}>
               <a href="#" className="btn">
                 Experience Our Excellence <svg>
                   <use href="#icon-arrow" />

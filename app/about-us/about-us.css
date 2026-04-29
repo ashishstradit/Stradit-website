@@ -3,6 +3,23 @@
   padding-top: 0;
 }
 
+/* Extra breathing room before footer */
+.about-us-page #pride {
+  padding-bottom: 140px;
+}
+
+/* Pride section: tune text-to-button spacing */
+.about-us-page #pride .sub-heading {
+  margin-bottom: 12px;
+}
+.about-us-page #pride .pride-subtext {
+  margin-bottom: 26px;
+}
+.about-us-page #pride .pride-cta {
+  margin-top: 18px;
+  margin-bottom: 44px;
+}
+
 .about-us-page {
   --brand-color: var(--primary);
   --text-muted-about: rgba(255, 255, 255, 0.65);
