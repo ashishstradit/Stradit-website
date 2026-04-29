@@ -29,6 +29,16 @@
   transition: color 0.3s ease;
 }
 
+.footerCol p {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  text-align: left;
+  text-align-last: auto;
+  line-height: 1.6;
+  max-width: 42ch;
+}
+
 .footerCol a:hover { color: var(--primary); }
 
 .socialIcons {
