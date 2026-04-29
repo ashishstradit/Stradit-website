@@ -213,8 +213,8 @@
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(15, 22, 34, 0.6);
+  border: 1px solid rgba(246, 135, 35, 0.45);
+  background: var(--primary);
   color: #fff;
   display: grid;
   place-items: center;
@@ -226,8 +226,8 @@
 
 .coe-page .coe-nav-btn:hover {
   transform: translateY(-1px);
-  background: rgba(15, 22, 34, 0.85);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: #d87116;
+  border-color: rgba(246, 135, 35, 0.8);
 }
 
 .coe-page .coe-nav-btn:active {

@@ -131,6 +131,13 @@
   filter: none !important;
 }
 
+/* Automated AI Testing: zoom out hero video slightly */
+.coe-detail.coe-testing-zoomout .bg-video {
+  object-fit: cover;
+  background: transparent;
+  transform: none;
+}
+
 .coe-detail .hero-overlay {
   display: none;
 }
@@ -472,8 +479,8 @@
   transform: translateY(-50%);
   width: 46px;
   height: 46px;
-  background-color: rgba(26, 26, 26, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: var(--brand-color);
+  border: 1px solid rgba(246, 135, 35, 0.45);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -488,8 +495,8 @@
 }
 
 .coe-detail .ai-carousel .nav-btn:hover {
-  background-color: var(--brand-color);
-  border-color: var(--brand-color);
+  background-color: #d87116;
+  border-color: rgba(246, 135, 35, 0.8);
 }
 
 .coe-detail .ai-carousel .nav-btn.prev {

@@ -11,19 +11,45 @@
 /* Pride section: tune text-to-button spacing */
 .about-us-page #pride .sub-heading {
   margin-bottom: 12px;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center !important;
+  text-align-last: center !important;
 }
 .about-us-page #pride .pride-subtext {
   margin-bottom: 26px;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center !important;
+  text-align-last: center !important;
 }
 .about-us-page #pride .pride-cta {
   margin-top: 18px;
   margin-bottom: 44px;
 }
 
+/* Keep Pride CTA button centered */
+.about-us-page #pride .pride-cta {
+  text-align: center;
+}
+
+/* Use full container width in Pride header block */
+.about-us-page #pride .container.text-center {
+  max-width: 800px;
+}
+
 .about-us-page {
   --brand-color: var(--primary);
   --text-muted-about: rgba(255, 255, 255, 0.65);
   --transition-speed: 0.8s;
+  /* Alternating bands (match CoE vibe) */
+  --about-band-1: #0a0a0c;
+  --about-band-2: #020b18;
+  --about-band-3: #0a0a0c;
 }
 
 .about-us-page img {
@@ -107,6 +133,14 @@
   padding: 100px 5%;
   position: relative;
   overflow: hidden;
+}
+
+/* Alternating section backgrounds (exclude hero video section) */
+.about-us-page > section:not(#hero):nth-child(odd) {
+  background: var(--about-band-1);
+}
+.about-us-page > section:not(#hero):nth-child(even) {
+  background: var(--about-band-2);
 }
 
 /* Hero */

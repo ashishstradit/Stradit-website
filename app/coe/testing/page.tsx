@@ -6,7 +6,7 @@ export default function TestingCoePage() {
     <>
       <CoeEffects />
 
-      <main className="coe-detail coe-page-tall-hero">
+      <main className="coe-detail coe-page-tall-hero coe-testing-zoomout">
         {/* Hero video (same layout style as other CoE detail pages) */}
         <section id="hero" aria-label="Automated AI Testing hero video">
           <video className="bg-video" autoPlay loop muted playsInline preload="metadata">
