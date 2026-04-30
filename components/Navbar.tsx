@@ -50,12 +50,12 @@ export default function Navbar() {
         <a href="/about-us/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>About us</a>
 
         <div className={styles.mobileAccordion}>
-          <button className={styles.mobileAccordionBtn} onClick={() => setCoeOpen(!coeOpen)}>
+          <button type="button" className={styles.mobileAccordionBtn} onClick={() => setCoeOpen(!coeOpen)}>
             Center of Excellence <span className={`${styles.chevron} ${coeOpen ? styles.chevronOpen : ''}`}>▾</span>
           </button>
           {coeOpen && (
             <div className={styles.mobileSubMenu}>
-              <a href="/coe/" onClick={() => setMenuOpen(false)}>All Center of Excellence</a>
+              <a href="/coe/" onClick={() => setMenuOpen(false)}>Center of Excellence</a>
               <a href="/coe/ai/" onClick={() => setMenuOpen(false)}>Applied Artificial Intelligence</a>
               <a href="/coe/data-analytics/" onClick={() => setMenuOpen(false)}>Data Analytics - Applied AI</a>
               <a href="/coe/cyber-security/" onClick={() => setMenuOpen(false)}>Cyber Security - Applied AI</a>
