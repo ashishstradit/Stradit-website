@@ -71,7 +71,7 @@ export default function AboutUsPage() {
       <main className="about-us-page">
         <section id="hero" aria-label="About StradIT hero">
           <video className="hero-video" autoPlay loop muted playsInline preload="none">
-            <source src="/Stradit%20Logo%20Animation1.mp4" type="video/mp4" />
+            <source src="/Logo.mp4" type="video/mp4" />
           </video>
           <div className="hero-overlay" />
         </section>
