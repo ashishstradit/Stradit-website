@@ -48,8 +48,6 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
         <a href="/about-us/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>About us</a>
-        {/* CoE main page */}
-        <a href="/coe/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Center of Excellence</a>
 
         <div className={styles.mobileAccordion}>
           <button className={styles.mobileAccordionBtn} onClick={() => setCoeOpen(!coeOpen)}>
@@ -57,6 +55,7 @@ export default function Navbar() {
           </button>
           {coeOpen && (
             <div className={styles.mobileSubMenu}>
+              <a href="/coe/" onClick={() => setMenuOpen(false)}>All Center of Excellence</a>
               <a href="/coe/ai/" onClick={() => setMenuOpen(false)}>Applied Artificial Intelligence</a>
               <a href="/coe/data-analytics/" onClick={() => setMenuOpen(false)}>Data Analytics - Applied AI</a>
               <a href="/coe/cyber-security/" onClick={() => setMenuOpen(false)}>Cyber Security - Applied AI</a>
