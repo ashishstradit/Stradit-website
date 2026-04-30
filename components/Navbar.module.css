@@ -140,19 +140,42 @@
 
 .mobileAccordion { border-bottom: 1px solid rgba(255,255,255,0.06); }
 
-.mobileAccordionBtn {
-  width: 100%;
-  background: none;
-  border: none;
-  color: #fff;
+.mobileAccordionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.mobileAccordionLink {
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: 15px;
   font-weight: 500;
-  padding: 12px 0;
-  text-align: left;
+  color: #fff;
+}
+
+.mobileAccordionLink:hover {
+  color: var(--primary);
+}
+
+.mobileAccordionArrow {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  color: #fff;
+}
+
+.mobileAccordionArrow:hover {
+  border-color: rgba(246, 135, 35, 0.6);
+  color: var(--primary);
 }
 
 .chevron { transition: transform 0.3s ease; font-style: normal; }

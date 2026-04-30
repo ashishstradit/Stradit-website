@@ -50,12 +50,30 @@ export default function Navbar() {
         <a href="/about-us/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>About us</a>
 
         <div className={styles.mobileAccordion}>
-          <button type="button" className={styles.mobileAccordionBtn} onClick={() => setCoeOpen(!coeOpen)}>
-            Center of Excellence <span className={`${styles.chevron} ${coeOpen ? styles.chevronOpen : ''}`}>▾</span>
-          </button>
+          <div className={styles.mobileAccordionRow}>
+            <a
+              href="/coe/"
+              className={styles.mobileAccordionLink}
+              onClick={() => setMenuOpen(false)}
+            >
+              Center of Excellence
+            </a>
+            <button
+              type="button"
+              className={styles.mobileAccordionArrow}
+              aria-label={coeOpen ? 'Collapse Center of Excellence links' : 'Expand Center of Excellence links'}
+              aria-expanded={coeOpen}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setCoeOpen((v) => !v)
+              }}
+            >
+              <span className={`${styles.chevron} ${coeOpen ? styles.chevronOpen : ''}`}>▾</span>
+            </button>
+          </div>
           {coeOpen && (
             <div className={styles.mobileSubMenu}>
-              <a href="/coe/" onClick={() => setMenuOpen(false)}>Center of Excellence</a>
               <a href="/coe/ai/" onClick={() => setMenuOpen(false)}>Applied Artificial Intelligence</a>
               <a href="/coe/data-analytics/" onClick={() => setMenuOpen(false)}>Data Analytics - Applied AI</a>
               <a href="/coe/cyber-security/" onClick={() => setMenuOpen(false)}>Cyber Security - Applied AI</a>
