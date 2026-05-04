@@ -1,0 +1,24 @@
+# Static export — Apache / cPanel: serve videos & compress text assets
+<IfModule mod_mime.c>
+  AddType video/mp4 .mp4 .m4v
+  AddType video/quicktime .mov
+  AddType image/svg+xml .svg
+  AddType application/javascript .js
+</IfModule>
+
+# Progressive playback (Range requests work better with correct MIME)
+<IfModule mod_headers.c>
+  <FilesMatch "\.(mp4|mov|webm)$">
+    Header set Accept-Ranges bytes
+  </FilesMatch>
+</IfModule>
+
+# Gzip text (JS/CSS/HTML) — mp4 already compressed; don’t gzip binary video
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Large uploads not needed for static site; avoid blocking big media reads
+<IfModule mod_reqtimeout.c>
+  RequestReadTimeout body=0
+</IfModule>

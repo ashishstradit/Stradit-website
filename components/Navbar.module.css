@@ -205,4 +205,13 @@
   .hamburger { display: flex; }
   .mobileMenu { display: flex; }
   .nav { padding: 16px 5%; }
+
+  .mobileLink,
+  .mobileAccordionLink {
+    letter-spacing: -0.02em;
+  }
+
+  .mobileSubMenu a {
+    letter-spacing: -0.015em;
+  }
 }

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STARTIT</title>
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & THEME SETTINGS
+           ========================================================================== */
+        :root {
+            --brand-primary: #f68723;
+            --brand-hover: #e0751a;
+            --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
+            
+            --bg-dark-base: #060606;
+            --bg-dark-surface: #121212;
+            --bg-dark-elevated: #1a1a1a;
+            
+            --text-main: #ffffff;
+            --text-muted: #fff;
+            
+            --font-family: 'montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --transition-fluid: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-pill: 50px;
+        }
+
+        /* ==========================================================================
+           RESET & TYPOGRAPHY
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Let the parent iframe set height; avoid a second scrollbar inside the frame */
+        html {
+            overflow-x: hidden;
+            overflow-y: visible;
+            height: auto;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            overflow-y: visible;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        h1, h2, h3, h4, h5 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Typography Scales */
+        .heading-xl { font-size: clamp(3rem, 6vw, 3rem); }
+        .heading-lg { font-size: clamp(2.2rem, 4vw, 2rem); }
+        .heading-md { font-size: clamp(1.6rem, 3vw, 1.5rem); }
+        
+        .subheading {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* ==========================================================================
+           UI COMPONENTS
+           ========================================================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0751a;
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding: 0;
+            text-align: left;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -4px;
+            color: var(--brand-primary);
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        /* ==========================================================================
+           LAYOUT STRUCTURES
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 120px 5%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Backgrounds */
+        .bg-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(6,6,6,0.85);
+            z-index: 1;
+        }
+
+        /* Animated Background Gradient */
+        .bg-animated-gradient {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(-45deg, #050505, #1a0a00, #0a0a0a, #2a1100);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ==========================================================================
+           SCROLL ANIMATION ENGINE & WORD SPLITTING
+           ========================================================================== */
+        
+        /* General Blocks */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity var(--transition-fluid), transform var(--transition-fluid);
+        }
+
+        .anim.slide-rtl { transform: translateX(80px); }
+        .anim.slide-ltr { transform: translateX(-80px); }
+        .anim.slide-ttb { transform: translateY(-50px); }
+        .anim.zoom-out { transform: scale(1.15); }
+        .anim.is-visible { opacity: 1; transform: translate(0) scale(1); }
+
+        /* Word-by-Word Animations */
+        .split-word {
+            display: inline-block;
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            /* Calculate delay based on JS assigned index */
+            transition-delay: calc(var(--word-index) * 0.08s); 
+        }
+
+        /* RTL Word Slide */
+        .anim-words-rtl .split-word { transform: translateX(40px); }
+        .anim-words-rtl.is-visible .split-word { opacity: 100; transform: translateX(0); }
+
+        /* Zoom Out Reveal Word */
+        .anim-words-zoom .split-word { transform: scale(1.3); }
+        .anim-words-zoom.is-visible .split-word { opacity: 100; transform: scale(1); }
+
+        /* ==========================================================================
+           SECTION 3: CAROUSEL WIDGET
+           ========================================================================== */
+        .carousel-box {
+            position: relative;
+            background: var(--bg-dark-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            overflow: hidden;
+            margin: 50px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .carousel-slide.active { opacity: 1; }
+
+        .carousel-content {
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+        }
+
+        /* Controls */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(246, 135, 35, 0.9);
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        .carousel-btn:hover { background: var(--brand-hover); transform: translateY(-50%) scale(1.1); }
+        .carousel-btn.prev { left: 20px; }
+        .carousel-btn.next { right: 20px; }
+        .carousel-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* ==========================================================================
+           SECTION 4: 3:3 GRID
+           ========================================================================== */
+        .grid-3x2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .icon-box-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 30px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .icon-box-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(246, 135, 35, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(246, 135, 35, 0.1);
+            color: var(--brand-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .icon-wrapper svg { width: 30px; height: 30px; fill: currentColor; }
+
+        .icon-box-card h4 { font-size: 1.25rem; color: #fff; margin: 0; }
+
+        /* ==========================================================================
+           SECTION 6: FAQ ACCORDION
+           ========================================================================== */
+        .accordion-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 25px 0;
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #fff;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .accordion-icon {
+            color: var(--brand-primary);
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: transform 0.4s ease;
+            line-height: 1;
+        }
+
+        .accordion-item.active .accordion-icon { transform: rotate(45deg); }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .accordion-item.active .accordion-content { opacity: 1; }
+
+        .accordion-inner {
+            padding: 0 0 30px 35px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .carousel-slide { grid-template-columns: 1fr; }
+            .carousel-image { height: 300px; min-height: auto; }
+            .carousel-content { padding: 40px 30px; }
+            .grid-3x2 { grid-template-columns: repeat(2, 1fr); }
+            .carousel-btn { display: none; } /* Better to rely on swipe on mobile, or move buttons */
+        }
+        @media (max-width: 600px) {
+            .grid-3x2 { grid-template-columns: 1fr; }
+            .text-justify { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG Icons -->
+    <svg style="display: none;">
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </symbol>
+        <symbol id="icon-layer" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-code" viewBox="0 0 24 24">
+            <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" fill="currentColor"/>
+        </symbol>
+    </svg>
+
+    <!-- SECTION 1: HERO -->
+    <section style="height: 100vh; min-height: 600px; display: flex; align-items: center; padding: 0 5%; text-align: center;">
+        <div class="bg-animated-gradient"></div>
+        <div class="bg-overlay" style="background: rgba(8,11,35,0.8);"></div>
+        
+        <div class="container content-center">
+            <h1 class="heading-xl gradient-text split-text-rtl anim-words-rtl">
+                Turning Your Teams Into AI Powerhouses 
+            </h1>
+            <p class="subheading anim slide-ltr" style="--delay: 0.2s; color: #fff;">
+                From ‘AI Curious’ to ‘AI Certified’ in Only 8 Weeks with StartIT.
+            </p>
+            <div class="anim slide-ltr" style="--delay: 0.4s; margin-top: 10px;">
+                <a href="#section-two" class="btn-primary">Join Our AI Training</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: 2 PARTS -->
+    <section id="section-two" style="background-color: var(--bg-surface);">
+        <div class="container grid-2">
+            <!-- Left Column -->
+            <div>
+                <h2 class="heading-lg gradient-text split-text-rtl anim-words-rtl">
+                    Lead AI and Technology With Confidence 
+                </h2>
+                <h3 class="subheading anim slide-ltr" style="--delay: 0.1s; color: #fff; text-align: left;">
+                    StradIT turns learning AI and tech engineering from an uphill battle to a strategic leap forward through guided learning, hands-on labs, mentorship, and a clear path from concepts to outcomes.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim slide-rtl" style="--delay: 0.2s;">8-week cohort model </li>
+                    <li class="anim slide-rtl" style="--delay: 0.3s;">5 role-based tracks</li>
+                    <li class="anim slide-rtl" style="--delay: 0.4s;">Capstone outputs </li>
+                    <!-- <li class="anim slide-rtl" style="--delay: 0.5s;">Real-time event streaming processing.</li> -->
+                </ul>
+                
+                <!-- <p class="anim slide-rtl" style="--delay: 0.6s; color: var(--text-muted); margin-top: 20px;">
+                    By decoupling monolithic architectures, we empower your internal teams to iterate rapidly without risking production stability.
+                </p> -->
+            </div>
+            
+            <!-- Right Column -->
+            <div>
+                <h2 class="heading-lg gradient-text split-text-rtl anim-words-rtl">
+                    Fuel Your Career with StartIT
+                </h2>
+                <h3 class="subheading anim slide-ltr" style="--delay: 0.1s; color: #fff; text-align: left;">
+                    StartIT, our AI training and returnship program, helps leaders and tech professionals to make AI concepts their second nature, with training mapped to enterprise roles and grounded in domain realities.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim slide-rtl" style="--delay: 0.2s;">Guided learning paths</li>
+                    <li class="anim slide-rtl" style="--delay: 0.3s;">Mentored projects based on realistic scenarios</li>
+                    <li class="anim slide-rtl" style="--delay: 0.4s;">Exposure to StradIT’s AI Centers of Excellence </li>
+                    <li class="anim slide-rtl" style="--delay: 0.5s;">Support to build confidence, portfolios, and interview-ready stories</li>
+                </ul>
+                
+                <!-- <p class="anim slide-rtl" style="--delay: 0.6s; color: var(--text-muted); margin-top: 20px;">
+                    Our advanced analytics pipelines convert operational friction into absolute clarity, providing a true competitive advantage.
+                </p> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: CAROUSEL WIDGET -->
+    <section style="background-color: var(--bg-dark);">
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text split-text-zoom anim-words-zoom">
+                Build Rock-solid Confidence 
+            </h2>
+            <h3 class="subheading anim slide-ltr" style="--delay: 0.2s; color: #fff;">
+                StartIT is organized into four tracks, so every participant learns what they need, at the right depth, with a shared language across business and technology.
+            </h3>
+        </div>
+
+        <div class="container">
+            <div class="carousel-box anim slide-ttb" style="--delay: 0.4s;">
+                <button class="carousel-btn prev" id="c-prev"><svg><use href="#icon-chevron-left"></use></svg></button>
+                <button class="carousel-btn next" id="c-next"><svg><use href="#icon-chevron-right"></use></svg></button>
+                
+                <div class="carousel-track" id="c-track">
+                    
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide active">
+                        <div class="carousel-content">
+                            <h3 class="heading-md" style="color: #fff;">AI Literacy</h3>
+                            <h4 style="color: var(--brand-color); font-weight: 400; margin-bottom: 25px;">Nail the AI Basics
+Learn what AI is, what it can do, and how to use it responsibly in daily workflows.
+</h4>
+                            <ul class="bullet-list">
+                                <li>Blockchain ledger implementation.</li>
+                                <li>Sub-second transaction processing speeds.</li>
+                                <li>PCI-DSS Level 1 compliance integration.</li>
+                                <li>Automated fraud detection AI modules.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="Ai Literacy.jpg" class="carousel-image" alt="FinTech">
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="carousel-content">
+                            <h3 class="heading-md" style="color: #fff;">AI Strategy</h3>
+                            <h4 style="color: var(--brand-color); font-weight: 400; margin-bottom: 25px;">From Hype to ROI
+Built for senior leaders and business heads who need to connect AI to business value.
+</h4>
+                            <ul class="bullet-list">
+                                <li>Translate business goals into AI portfolios</li>
+                                <li>Identify invest vs pause decisions </li>
+                                <li>Design adoption roadmaps </li>
+                                <li>Align stakeholders around measurable AI outcomes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="AI Strategy.jpg" class="carousel-image" alt="HealthTech">
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <div class="carousel-content">
+                            <h3 class="heading-md" style="color: #fff;">AI Technical</h3>
+                            <h4 style="color: var(--brand-color); font-weight: 500; margin-bottom: 25px;">Production-Ready AI
+
+A hands-on track for data scientists, engineers, and technical teams, grounded in production realities.
+</h4>
+                            <ul class="bullet-list">
+                                <li>ML pipelines and model lifecycle</li>
+                                <li>Deep learning and NLP fundamentals</li>
+                                <li>Combining traditional ML with LLMs </li>
+                                <li>Integrating AI into existing architectures </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="AI Technical.jpg" class="carousel-image" alt="E-Commerce">
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide">
+                        <div class="carousel-content">
+                            <h3 class="heading-md" style="color: #fff;">AI Applied</h3>
+                            <h4 style="color: var(--brand-color); font-weight: 500; margin-bottom: 25px;"> Build the Breakthrough
+
+AI Applied brings everything into real workflows. Hands-on creation and domain-specific prototyping.
+</h4>
+                            <ul class="bullet-list">
+                                <li>Asset management research</li>
+                                <li>Intelligent document processing</li>
+                                <li>Wealth engagement and personalization</li>
+                                <li>AI agents, copilots, and customer interaction flows</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="AI Applied.jpg" class="carousel-image" alt="IoT">
+                        </div>
+                    </div>
+
+                    <!-- Slide 5 -->
+                    <div class="carousel-slide">
+                        <div class="carousel-content">
+                            <h3 class="heading-md" style="color: #fff;">Quantum AI Training</h3>
+                            <h4 style="color: var(--brand-color); font-weight: 500; margin-bottom: 25px;">Prepare for the Next Frontier
+StartIT helps your teams explore quantum computing and AI through a practical, business-first approach.
+</h4>
+                            <ul class="bullet-list">
+                                <li>Fundamentals of quantum computing</li>
+                                <li>Quantum-inspired optimization techniques </li>
+                                <li>Hybrid quantum-AI model prototyping</li>
+                                <li>Organization-wide quantum readiness</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="Quantum AI Training.jpg" class="carousel-image" alt="AI SaaS">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="content-center anim slide-ttb" style="--delay: 0.6s;">
+                <a href="#" class="btn-primary">Upskill Your Teams With StartIT</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: 3:3 GRID -->
+    <section style="min-height: 80vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-img" alt="Network Grid">
+        <div class="bg-overlay-center"></div>
+
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-ttb" style="--delay: 0s;">
+                The StartIT Transformation
+            </h2>
+            <p class="subheading text-justify anim slide-ttb" style="--delay: 0.15s;" style="color: #fff;">
+               Move your organization away from scattered pilots and toward a unified, AI-driven future. After completing StartIT, your organization will achieve critical pillars of maturity. 
+
+            <div class="grid-3x2" style="width: 100%;">
+                <div class="icon-box-card anim zoom-out" style="--delay: 0.2s;">
+                    <div class="icon-wrapper"><svg><use href="#icon-layer"></use></svg></div>
+                    <h4>A Unified AI Vocabulary</h4>
+                </div>
+                <div class="icon-box-card anim zoom-out" style="--delay: 0.3s;">
+                    <div class="icon-wrapper"><svg><use href="#icon-code"></use></svg></div>
+                    <h4>Strategic Decision-Making </h4>
+                </div>
+                <div class="icon-box-card anim zoom-out" style="--delay: 0.4s;">
+                    <div class="icon-wrapper"><svg><use href="#icon-shield"></use></svg></div>
+                    <h4>Actionable Product Roadmaps</h4>
+                </div>
+                <div class="icon-box-card anim zoom-out" style="--delay: 0.5s;">
+                    <div class="icon-wrapper"><svg><use href="#icon-layer"></use></svg></div>
+                    <h4>Responsible Technical Excellence </h4>
+                </div>
+                <div class="icon-box-card anim zoom-out" style="--delay: 0.6s;">
+                    <div class="icon-wrapper"><svg><use href="#icon-code"></use></svg></div>
+                    <h4>Re-entry with AI Confidence</h4>
+                </div>
+                <div class="icon-box-card anim zoom-out" style="--delay: 0.7s;">
+                    <div class="icon-wrapper"><svg><use href="#icon-shield"></use></svg></div>
+                    <h4>A Culture of AI-First Thinking</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: CTA BG IMAGE -->
+    <section style="min-height: 60vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-img" alt="Cloud Base">
+        <div class="bg-overlay" style="background: linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,0.7) 100%);"></div>
+
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                 Ready to make your organization truly AI-ready?
+            </h2>
+            <p class="subheading text-justify anim slide-rtl" style="--delay: 0.2s;" style="color: #fff;">
+                Book a strategy call and see how StartIT can turn your people into confident builders, decision-makers, and leaders in the age of AI.
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-top: 15px;">
+                <a href="#" class="btn-primary">Talk to Our AI Training Team</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: FAQ ACCORDION -->
+    <section style="background-color: var(--bg-dark);">
+        <div class="container">
+            <h2 class="heading-lg gradient-text anim slide-ttb" style="--delay: 0s;" style="text-align: center;">
+               Frequently Asked Questions
+            </h2>
+            
+            <div class="accordion-wrapper anim slide-ttb" style="--delay: 0.2s;">
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                         How long does the StartIT program run?
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            Many clients start with a 6-12 week plan. StartIT is designed to adapt to your calendar, intensity, and cohort size.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Can the training focus on financial services use cases only?
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                           Yes. We can tailor tracks for banking, asset management, treasury, and risk, including regulatory and governance needs.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Do you offer in-person, remote, or hybrid training?
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            All three. We align delivery to your locations and time zones.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                         Is this suitable if we are just starting our AI journey?
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            Yes. StartIT meets teams where they are, from first pilots to scaling across functions..
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Can we integrate StartIT with internal L&D programs?
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            Yes. We align with existing curriculum, certification plans, and learning platforms.
+                        </div>
+                    </div>
+                </div>
+<div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                         How do we measure impact?
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            We define success metrics upfront, such as skill assessments, validated use cases, roadmap progress, and stakeholder feedback.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            /* --- 1. WORD-BY-WORD TEXT SPLITTING LOGIC --- */
+            function splitTextForAnimation(selector, animClass) {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    const text = el.innerText;
+                    const words = text.split(' ');
+                    el.innerHTML = '';
+                    
+                    words.forEach((word, index) => {
+                        const span = document.createElement('span');
+                        span.textContent = word;
+                        span.className = 'split-word';
+                        // Add index variable for staggered delay in CSS
+                        span.style.setProperty('--word-index', index);
+                        
+                        el.appendChild(span);
+                        // Add physical space back
+                        el.appendChild(document.createTextNode(' '));
+                    });
+                });
+            }
+
+            // Apply to specific classes requested in prompt
+            splitTextForAnimation('.split-text-rtl', 'anim-words-rtl');
+            splitTextForAnimation('.split-text-zoom', 'anim-words-zoom');
+
+
+            /* --- 2. SCROLL TRIGGER ANIMATIONS --- */
+            const animElements = document.querySelectorAll('.anim, .anim-words-rtl, .anim-words-zoom');
+            
+            // Map inline custom CSS properties (--delay) to block level transitions
+            animElements.forEach(el => {
+                if(el.classList.contains('anim')) {
+                    const delayStr = el.style.getPropertyValue('--delay');
+                    if (delayStr) el.style.transitionDelay = delayStr;
+                }
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => scrollObserver.observe(el));
+
+
+            /* --- 3. CUSTOM CAROUSEL SLIDER --- */
+            const track = document.getElementById('c-track');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const btnPrev = document.getElementById('c-prev');
+            const btnNext = document.getElementById('c-next');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                slides.forEach((slide, index) => {
+                    if(index === currentIndex) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+            }
+
+            if(btnNext && btnPrev) {
+                btnNext.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                    updateCarousel();
+                });
+
+                btnPrev.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                    updateCarousel();
+                });
+            }
+
+            /* --- 4. SMOOTH WATER FLOW ACCORDION --- */
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const content = header.nextElementSibling;
+                    const isActive = item.classList.contains('active');
+
+                    // Close all open accordions first (for clean UX)
+                    document.querySelectorAll('.accordion-item').forEach(accItem => {
+                        accItem.classList.remove('active');
+                        accItem.querySelector('.accordion-content').style.maxHeight = null;
+                    });
+
+                    // If it was NOT active before click, open it smoothly
+                    if (!isActive) {
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // Re-calculate heights on window resize for responsiveness
+            window.addEventListener('resize', () => {
+                document.querySelectorAll('.accordion-item.active .accordion-content').forEach(content => {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                });
+            });
+
+        });
+    </script>
+    <script>
+      (function () {
+        function measure() {
+          var el = document.documentElement;
+          var b = document.body;
+          return Math.max(
+            el.scrollHeight,
+            b.scrollHeight,
+            el.offsetHeight,
+            b.offsetHeight,
+            el.getBoundingClientRect ? Math.ceil(b.getBoundingClientRect().bottom + window.scrollY) : 0
+          );
+        }
+        function sendHeight() {
+          try {
+            if (window.parent === window) return;
+            var h = measure();
+            /* buffer so accordion / images don’t clip; parent iframe grows = one page scroll only */
+            h = Math.ceil(h + 64);
+            window.parent.postMessage({ type: 'startit-height', h: h }, '*');
+          } catch (e) {}
+        }
+        var t;
+        function debounce() {
+          clearTimeout(t);
+          t = setTimeout(sendHeight, 50);
+        }
+        window.addEventListener('load', function () {
+          sendHeight();
+          [0, 200, 600, 1200, 2400].forEach(function (ms) { setTimeout(sendHeight, ms); });
+        });
+        window.addEventListener('resize', debounce);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(debounce);
+        try {
+          var mo = new MutationObserver(debounce);
+          mo.observe(document.body, { childList: true, subtree: true, attributes: true });
+        } catch (e) {}
+      })();
+    </script>
+</body>
+</html>

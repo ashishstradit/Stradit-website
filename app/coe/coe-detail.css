@@ -161,6 +161,7 @@
   font-size: clamp(2.1rem, 1.6rem + 2vw, 3.5rem);
   font-weight: 600;
   line-height: 1.1;
+  letter-spacing: -0.06em;
   margin: 0 0 18px 0;
 }
 
@@ -680,6 +681,15 @@
     padding-bottom: 10px;
   }
 
+  .coe-detail .hero-title {
+    letter-spacing: -0.085em;
+  }
+
+  .coe-detail .hero-subtitle,
+  .coe-detail .hero-copy .hero-body {
+    letter-spacing: -0.035em;
+  }
+
   /* Keep hero-copy paragraph same as desktop (left) */
 
   /* AI cards: vertical stack on mobile (no horizontal scroll) */
@@ -719,6 +729,11 @@
   .coe-detail .cyber-cards {
     grid-template-columns: 1fr;
   }
+
+  .coe-detail p,
+  .coe-detail .bullet-list li {
+    letter-spacing: -0.02em;
+  }
 }
 
 @media (max-width: 480px) {
@@ -728,6 +743,15 @@
     max-width: 360px;
     padding: 12px 18px;
     font-size: 0.95rem;
+  }
+
+  .coe-detail .hero-title {
+    letter-spacing: -0.095em;
+  }
+
+  .coe-detail .hero-subtitle,
+  .coe-detail .hero-copy .hero-body {
+    letter-spacing: -0.045em;
   }
 
   .coe-detail .hero-subtitle {

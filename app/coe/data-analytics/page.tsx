@@ -114,8 +114,7 @@ export default function DataAnalyticsCoePage() {
             </div>
             <div className="media-box anim anim-down observe-me" style={{ ['--delay' as any]: '0.3s' }}>
               <video autoPlay loop muted playsInline preload="metadata">
-                <source src="/Predictive%20Intelligence.mp4" type="video/mp4" />
-                <source src="/Predictive%20Intelligence.mov" type="video/quicktime" />
+                <source src="/Decision%20Intelligence%20Platforms.mp4" type="video/mp4" />
               </video>
             </div>
           </div>

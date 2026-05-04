@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "build:site": "next build && node scripts/trim-static-export.mjs",
+    "build:compressed": "npm run build:site && cd out && zip -9 -r ../stradit-site.zip . && cd .. && ls -lh stradit-site.zip && du -sh out",
+    "build:compressed:media": "npm run optimize:media && npm run build:compressed",
+    "start": "next start",
+    "optimize:media": "node scripts/optimize-media.mjs",
+    "pack:zip": "npm run build:compressed"
   },
   "dependencies": {
     "next": "15.5.15",

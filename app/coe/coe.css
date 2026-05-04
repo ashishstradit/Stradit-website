@@ -151,7 +151,7 @@
   font-size: clamp(1rem, 0.92rem + 0.45vw, 1.3rem);
   font-weight: 600;
   line-height: 1.55;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   max-width: 900px;
   margin: 0 0 18px 0;
   margin-left: auto;
@@ -162,14 +162,12 @@
 }
 
 .coe-page #hero-copy .heading-main {
-  /* Make CoE title spacing consistent across devices */
-  letter-spacing: clamp(-1px, -0.06vw, -0.4px);
+  letter-spacing: clamp(-1.4px, -0.06vw, -0.4px);
   line-height: 1.06;
 }
 
 .coe-page #hero-copy .coe-hero-tagline {
-  /* Prevent overly "spaced" look on small screens */
-  letter-spacing: clamp(0em, 0.15vw, 0.012em);
+  letter-spacing: clamp(-0.04em, 0.04vw, 0.008em);
 }
 
 .coe-page .hero-copy .coe-hero-lede {
@@ -451,12 +449,12 @@
   /* Keep hero-copy paragraph same as desktop (left) */
 
   .coe-page #hero-copy .heading-main {
-    letter-spacing: -0.6px;
+    letter-spacing: -1.25px;
     line-height: 1.08;
   }
 
   .coe-page #hero-copy .coe-hero-tagline {
-    letter-spacing: 0.004em;
+    letter-spacing: -0.045em;
     line-height: 1.45;
   }
 
@@ -495,6 +493,16 @@
     max-width: 560px;
     margin: 0 auto;
   }
+
+  .coe-page .portrait-content h4,
+  .coe-page .rect-content h4 {
+    letter-spacing: -0.035em;
+  }
+
+  .coe-page .portrait-content p,
+  .coe-page .rect-content p {
+    letter-spacing: -0.025em;
+  }
 }
 
 @media (max-width: 480px) {
@@ -506,11 +514,11 @@
   }
 
   .coe-page #hero-copy .heading-main {
-    letter-spacing: -0.4px;
+    letter-spacing: -1.4px;
   }
 
   .coe-page #hero-copy .coe-hero-tagline {
-    letter-spacing: 0em;
+    letter-spacing: -0.055em;
     line-height: 1.4;
   }
 }

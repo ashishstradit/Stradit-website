@@ -218,9 +218,9 @@
   }
 
   .cardImgWrapper { height: 260px; }
-  .cardTitle { font-size: 1rem; }
-  .cardSub { font-size: 0.85rem; }
-  .cardBullets li { font-size: 0.78rem; }
+  .cardTitle { font-size: 1rem; letter-spacing: -0.03em; }
+  .cardSub { font-size: 0.85rem; letter-spacing: -0.02em; }
+  .cardBullets li { font-size: 0.78rem; letter-spacing: -0.02em; }
   .sectionHeader h2 { font-size: 2rem; }
 }
 

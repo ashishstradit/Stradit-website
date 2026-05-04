@@ -586,9 +586,13 @@
     margin-top: 12px;
   }
 
+  .about-us-page .bullet-list li {
+    letter-spacing: -0.02em;
+  }
+
   .about-us-page .section-kicker {
     font-size: 0.78rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.1em;
     margin-bottom: 8px;
   }
 
@@ -626,6 +630,10 @@
     max-width: 360px;
     padding: 12px 18px;
     font-size: 0.95rem;
+  }
+
+  .about-us-page .section-kicker {
+    letter-spacing: 0.08em;
   }
 }
 

@@ -82,4 +82,13 @@
   .footerGrid { grid-template-columns: 1fr; }
   .footer { padding: 60px 5% 30px; }
   .socialIcons { flex-wrap: wrap; }
+
+  .footerCol h4 {
+    letter-spacing: -0.02em;
+  }
+
+  .footerCol p,
+  .footerCol a {
+    letter-spacing: -0.02em;
+  }
 }

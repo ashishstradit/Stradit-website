@@ -91,11 +91,11 @@
 }
 
 @media (max-width: 768px) {
-  .heroHeading { font-size: 2rem; letter-spacing: -1px; }
+  .heroHeading { font-size: 2rem; letter-spacing: -1.25px; }
 }
 
 @media (max-width: 480px) {
-  .heroHeading { font-size: 1.6rem; }
+  .heroHeading { font-size: 1.6rem; letter-spacing: -1.4px; }
 }
 
 .heroButtons .heroCta {

@@ -28,8 +28,8 @@ export default function Navbar() {
               <li><a href="/coe/testing/">Automated AI Testing</a></li>
             </ul>
           </li>
-          <li className={styles.navItem}><a href="/gcc/">Global Capability Centers</a></li>
-          <li className={styles.navItem}><a href="#">StartIT</a></li>
+          <li className={styles.navItem}><a href="#">Global Capability Center</a></li>
+          <li className={styles.navItem}><a href="/startit/">StartIT</a></li>
         </ul>
         <button className="cta-btn" style={{padding: '10px 18px', fontSize: '13px'}}>Contact Us</button>
       </div>
@@ -83,8 +83,8 @@ export default function Navbar() {
           )}
         </div>
 
-        <a href="/gcc/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Global Capability Centers</a>
-        <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>StartIT</a>
+        <a href="#" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Global Capability Center</a>
+        <a href="/startit/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>StartIT</a>
         <button className={`cta-btn ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>Contact Us</button>
       </div>
     </nav>
