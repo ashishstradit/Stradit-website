@@ -13,6 +13,7 @@ export default function Footer() {
           <a href="/">Home</a>
           <a href="/about-us/">About us</a>
           <a href="/coe/">Center of Excellence</a>
+          <a href="/gcc/">Global Capability Center</a>
           <a href="/startit/">StartIT</a>
         </div>
         <div className={styles.footerCol}>

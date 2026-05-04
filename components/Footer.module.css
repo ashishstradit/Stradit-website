@@ -21,8 +21,10 @@
 .footerCol a {
   color: var(--text-muted);
   font-size: 0.95rem;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   display: block;
+  text-align: left;
+  text-align-last: auto;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

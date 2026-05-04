@@ -17,6 +17,11 @@ body {
   line-height: 1.6;
 }
 
+/* Hero is full-viewport — don’t stack global section padding on it */
+section.landing-hero {
+  padding: 0 !important;
+}
+
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 

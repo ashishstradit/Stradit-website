@@ -1,4 +1,6 @@
 .globeSection {
+  /* Override global `section` padding — was stacking with min-height: 100vh */
+  padding: 72px 5% !important;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -24,7 +26,7 @@
 .content .heading-main { text-align: left; font-size: 2.5rem; }
 
 @media (max-width: 768px) {
-  .globeSection { padding: 60px 5%; min-height: 60vh; }
+  .globeSection { padding: 60px 5% !important; min-height: 60vh; }
   .content { max-width: 100%; }
   .content h2 { font-size: 1.8rem !important; }
 

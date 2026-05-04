@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * After `next build` (output: 'export'), deletes from `out/` anything not needed for:
- *   /  |  /about-us/  |  /coe/*  |  Navbar + Footer  |  coe-detail.css backgrounds
+ *   /  |  /about-us/  |  /coe/*  |  /gcc/  |  /startit/  |  Navbar + Footer  |  coe-detail.css backgrounds
  * Keeps: out/_next/**, allowed route HTML, public assets listed in page-asset-paths.mjs,
  *        .htaccess
  * Run via: npm run build:site  →  npm run build:compressed (zip)
@@ -29,6 +29,7 @@ const ALLOWED_HTML = new Set([
   'coe/cyber-security/index.html',
   'coe/data-analytics/index.html',
   'coe/testing/index.html',
+  'gcc/index.html',
   'startit/index.html',
   'StartIT/index.html',
 ])
@@ -51,7 +52,8 @@ function shouldKeepFile(fullPath) {
   if (rel.startsWith('_next/')) return true
   // Apache/cPanel: MIME + gzip (copied from public/.htaccess)
   if (rel === '.htaccess') return true
-  if (rel.endsWith('.html')) return ALLOWED_HTML.has(rel)
+  /* Route HTML (ALLOWED_HTML) + static HTML listed in page-asset-paths */
+  if (rel.endsWith('.html')) return ALLOWED_HTML.has(rel) || keepAssets.has(rel)
   if (keepAssets.has(rel)) return true
   return false
 }

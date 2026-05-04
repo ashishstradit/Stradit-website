@@ -78,7 +78,7 @@ export const PAGE_ASSET_PATHS = [
   'Testing Coe/Testing Framework.jpg',
   'Testing Coe/Ai Domain.jpg',
 
-  // /startit iframe → public/StartIT/index.html + assets
+  // /startit — StartITView images (+ optional static HTML)
   'StartIT/index.html',
   'StartIT/Ai Literacy.jpg',
   'StartIT/AI Strategy.jpg',
@@ -86,4 +86,14 @@ export const PAGE_ASSET_PATHS = [
   'StartIT/AI Applied.jpg',
   'StartIT/Quantum AI Training.jpg',
   'StartIT/Background 01.png',
+
+  // /gcc — iframe → GCC/GCC.html + assets
+  'GCC/GCC.html',
+  'GCC/Hero Section.jpg',
+  'GCC/Globe Talent.jpg',
+  'GCC/innovation.jpg',
+  'GCC/Low Cost.png',
+  'GCC/Speed to scale.png',
+  'GCC/Total Transparency.png',
+  'GCC/Background 01.png',
 ]

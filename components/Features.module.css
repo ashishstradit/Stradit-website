@@ -151,15 +151,6 @@
 
 .cardSub { font-size: 0.95rem; color: white; margin-bottom: 12px; }
 
-.cardBullets {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 .cardBullets li {
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.65);

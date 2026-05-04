@@ -20,7 +20,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className={styles.hero}>
+    <section className={`${styles.hero} landing-hero`}>
       <video ref={videoRef} className={styles.videoBg} autoPlay loop muted playsInline preload="none">
         <source src="/VideoHand.web.mp4" type="video/mp4" />
       </video>

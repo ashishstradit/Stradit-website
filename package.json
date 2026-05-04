@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:site": "next build && node scripts/trim-static-export.mjs",
+    "build:site": "next build && node scripts/trim-static-export.mjs && node scripts/verify-out.mjs",
     "build:compressed": "npm run build:site && cd out && zip -9 -r ../stradit-site.zip . && cd .. && ls -lh stradit-site.zip && du -sh out",
+    "optimize:media:site": "node scripts/optimize-media.mjs --page-assets",
+    "build:compressed:site": "npm run optimize:media:site && npm run build:compressed",
     "build:compressed:media": "npm run optimize:media && npm run build:compressed",
     "start": "next start",
     "optimize:media": "node scripts/optimize-media.mjs",

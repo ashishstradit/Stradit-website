@@ -3,18 +3,22 @@
  * Re-encodes videos in public/ — smaller files + faststart for streaming on cheap hosting.
  * Run BEFORE npm run build. Uses ffmpeg-static (no system ffmpeg needed).
  *
- * Usage: npm run optimize:media
+ * Usage: npm run optimize:media              # all .mp4/.mov under public/
+ *        npm run optimize:media:site        # only videos listed in page-asset-paths.mjs
  *        node scripts/optimize-media.mjs --dry-run
+ *        node scripts/optimize-media.mjs --page-assets --dry-run
  */
 import { spawnSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import ffmpegStatic from 'ffmpeg-static'
+import { PAGE_ASSET_PATHS } from './page-asset-paths.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PUBLIC = path.join(__dirname, '..', 'public')
 const dryRun = process.argv.includes('--dry-run')
+const pageAssetsOnly = process.argv.includes('--page-assets')
 
 function walk(dir, acc = []) {
   if (!fs.existsSync(dir)) return acc
@@ -118,14 +122,26 @@ function optimize(file) {
   return { saved: before - after }
 }
 
+function videosFromPageAssetList() {
+  const list = []
+  for (const rel of PAGE_ASSET_PATHS) {
+    if (!/\.(mp4|mov)$/i.test(rel)) continue
+    const full = path.join(PUBLIC, rel)
+    if (fs.existsSync(full)) list.push(full)
+    else console.warn(`warn: listed video missing: ${rel}`)
+  }
+  return list
+}
+
 function main() {
   if (!fs.existsSync(PUBLIC)) {
     console.error('public/ not found')
     process.exit(1)
   }
 
-  const files = walk(PUBLIC)
-  console.log(`optimize-media: ${files.length} video(s)\n`)
+  const files = pageAssetsOnly ? videosFromPageAssetList() : walk(PUBLIC)
+  const label = pageAssetsOnly ? 'optimize-media (page-assets only)' : 'optimize-media (all public videos)'
+  console.log(`${label}: ${files.length} video(s)\n`)
 
   let total = 0
   for (const f of files) {

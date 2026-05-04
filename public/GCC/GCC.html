@@ -47,12 +47,17 @@
             box-sizing: border-box;
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             font-family: var(--font-primary);
             background-color: var(--bg-dark-base);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            overflow-y: visible;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -73,14 +78,15 @@
         .gradient-text {
             background: var(--brand-gradient);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
 
-        /* Typography Scales */
-        .heading-hero { font-size: clamp(3.5rem, 6vw, 3rem); }
-        .heading-section { font-size: clamp(2.5rem, 5vw, 2rem); }
-        .heading-card { font-size: clamp(1.4rem, 2vw, 1.8rem); }
+        /* Typography Scales — clamp(MIN, PREFERRED, MAX) requires MIN ≤ MAX */
+        .heading-hero { font-size: clamp(2rem, 4vw + 1rem, 3.5rem); }
+        .heading-section { font-size: clamp(1.5rem, 3vw + 0.75rem, 2.75rem); }
+        .heading-card { font-size: clamp(1.15rem, 1.5vw + 0.5rem, 1.85rem); }
         
         .subheading {
             font-size: clamp(1.1rem, 2vw, 1.25rem);
@@ -212,6 +218,16 @@
             overflow: hidden;
         }
 
+        /* CTA — standalone file; embedded overrides below */
+        section#final-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: min(72vh, 720px);
+            padding-top: 88px;
+            padding-bottom: 88px;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -239,27 +255,40 @@
             text-align: center;
         }
 
-        /* Background Media Utilities */
+        /* Background Media Utilities — max-width:none beats global img { max-width:100%; height:auto } */
         .bg-media {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            inset: 0;
+            max-width: none;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
             object-fit: cover;
             z-index: 0;
             opacity: 0.5;
+            pointer-events: none;
         }
 
         .bg-overlay-gradient {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
             background: linear-gradient(90deg, rgba(8,11,35,0.2) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.3) 100%);
             z-index: 1;
+            pointer-events: none;
         }
 
         .bg-overlay-dark {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            /*background: rgba(10, 10, 10, 0.85);*/
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            background: rgba(10, 10, 10, 0.72);
             z-index: 1;
+            pointer-events: none;
         }
 
         /* ==========================================================================
@@ -368,6 +397,68 @@
             transform: translate(0) scale(1);
         }
 
+        /* Shown inside Next.js /gcc/ iframe: IntersectionObserver often never fires → copy stayed opacity:0 */
+        html.gcc-embedded .anim,
+        html.gcc-embedded .anim.is-visible {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+        }
+
+        /* Solid headline/body when embedded — gradient clip can fail inside iframes in some engines */
+        html.gcc-embedded .gradient-text {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            background-clip: unset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            color: #ffffff !important;
+        }
+
+        html.gcc-embedded .subheading,
+        html.gcc-embedded .content-text h4,
+        html.gcc-embedded .collage-text p {
+            color: #ffffff !important;
+        }
+
+        html.gcc-embedded .collage-text h4 {
+            color: var(--brand-primary) !important;
+        }
+
+        html.gcc-embedded .container {
+            position: relative;
+            z-index: 5 !important;
+        }
+
+        html.gcc-embedded body {
+            overflow: hidden !important;
+        }
+
+        /*
+         * CRITICAL: Inside a tall iframe, 100vh = iframe height (e.g. 10000px), not the browser tab.
+         * Hero had style="height:100vh" → one giant hero, all real sections pushed below the fold → looks "blank".
+         */
+        html.gcc-embedded section#hero {
+            height: auto !important;
+            min-height: 560px !important;
+            max-height: none !important;
+            padding-top: clamp(72px, 14vw, 120px) !important;
+            padding-bottom: clamp(48px, 8vw, 96px) !important;
+        }
+
+        /*
+         * Embedded: 80vh / huge section padding = empty band above site footer.
+         * Tight vertical rhythm; content-sized block.
+         */
+        html.gcc-embedded section#final-cta {
+            min-height: unset !important;
+            height: auto !important;
+            padding-top: clamp(32px, 5vw, 56px) !important;
+            padding-bottom: clamp(36px, 6vw, 64px) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
         /* ==========================================================================
            RESPONSIVE OVERRIDES
            ========================================================================== */
@@ -391,6 +482,11 @@
             .text-justify { text-align: left; } /* Improve mobile readability */
         }
     </style>
+    <script>
+      try {
+        if (window.parent !== window) document.documentElement.classList.add('gcc-embedded');
+      } catch (e) {}
+    </script>
 </head>
 <body>
 
@@ -416,7 +512,7 @@
     </svg>
 
     <section id="hero" style="height: 100vh; min-height: 700px; display: flex; align-items: center; padding: 0 5%;">
-        <img src="Hero Section.jpg" class="bg-media" alt="Technology Architecture Background">
+        <img src="Hero%20Section.jpg" class="bg-media" alt="Technology Architecture Background">
         <div class="bg-overlay-gradient"></div>
         
         <div class="container align-left">
@@ -425,7 +521,7 @@
             </h1>
             <p class="subheading text-justify anim slide-rtl" style="--delay: 0.15s; max-width: 800px; margin-right: auto;">
                  Built by StradIT. Owned by you.<br>Your dedicated tech team, finance hub, or innovation center will be fully operational in weeks, not months. We set it up. We run the backend. You call the shots.
-
+            </p>
             <div class="anim slide-rtl" style="--delay: 0.3s;">
                 <a href="#infrastructure" class="btn-primary">Build What's Yours</a>
             </div>
@@ -493,7 +589,7 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
             
             <div class="collage-item item-1 anim zoom-out" style="--delay: 0.2s;">
                 <div class="collage-image-wrapper">
-                    <img src="Globe Talent.jpg" alt="Data Centers">
+                    <img src="Globe%20Talent.jpg" alt="Data Centers">
                 </div>
                 <div class="collage-text">
                     <h4>Global Talent, Local Expertise</h4>
@@ -503,7 +599,7 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
 
             <div class="collage-item item-2 anim zoom-out" style="--delay: 0.35s;">
                 <div class="collage-image-wrapper">
-                    <img src="Low Cost.png" alt="Cyber Security Protocol">
+                    <img src="Low%20Cost.png" alt="Cyber Security Protocol">
                 </div>
                 <div class="collage-text">
                     <h4>Cost Without Compromise</h4>
@@ -513,7 +609,7 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
 
             <div class="collage-item item-3 anim zoom-out" style="--delay: 0.5s;">
                 <div class="collage-image-wrapper">
-                    <img src="Speed to scale.png" alt="Artificial Intelligence">
+                    <img src="Speed%20to%20scale.png" alt="Artificial Intelligence">
                 </div>
                 <div class="collage-text">
                     <h4>Speed to Scale </h4>
@@ -523,7 +619,7 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
 
             <div class="collage-item item-4 anim zoom-out" style="--delay: 0.65s;">
                 <div class="collage-image-wrapper">
-                    <img src="Innovation.jpg" alt="UX Design">
+                    <img src="innovation.jpg" alt="UX Design">
                 </div>
                 <div class="collage-text">
                     <h4>Innovation at the Core</h4>
@@ -533,7 +629,7 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
 
             <div class="collage-item item-5 anim zoom-out" style="--delay: 0.8s;">
                 <div class="collage-image-wrapper">
-                    <img src="Total Transparency.png" alt="Code Architecture">
+                    <img src="Total%20Transparency.png" alt="Code Architecture">
                 </div>
                 <div class="collage-text">
                     <h4>Total Visibility</h4>
@@ -589,8 +685,8 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
         </div>
     </section>
 
-    <section id="final-cta" style="min-height: 80vh; display: flex; align-items: center;">
-        <img src="Background 01.png" class="bg-media" alt="Technology Network Grid">
+    <section id="final-cta">
+        <img src="Background%2001.png" class="bg-media" alt="Technology Network Grid">
         <div class="bg-overlay-dark"></div>
 
         <div class="container align-center">
@@ -608,11 +704,15 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            
-            // 1. Select all elements flagged for animation
+            try {
+                if (window.parent !== window) {
+                    document.documentElement.classList.add('gcc-embedded');
+                }
+            } catch (e) {}
+
             const animateElements = document.querySelectorAll('.anim');
-            
-            // 2. Map inline custom CSS properties (--delay) to actual transition-delays
+            const embedded = document.documentElement.classList.contains('gcc-embedded');
+
             animateElements.forEach(element => {
                 const delayStr = element.style.getPropertyValue('--delay');
                 if (delayStr) {
@@ -620,30 +720,66 @@ From IT and finance to R&D and customer operations, we help you centralize, scal
                 }
             });
 
-            // 3. Configure the Intersection Observer for high-performance scroll detection
+            if (embedded) {
+                animateElements.forEach(element => element.classList.add('is-visible'));
+                return;
+            }
+
             const observerConfiguration = {
-                root: null, // Use the viewport
-                rootMargin: '0px 0px -12% 0px', // Trigger slightly before it hits the bottom of the screen
-                threshold: 0.05 // Trigger when 5% of the element is visible
+                root: null,
+                rootMargin: '0px 0px -12% 0px',
+                threshold: 0.05
             };
 
             const scrollObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Append trigger class to activate CSS transformations
                         entry.target.classList.add('is-visible');
-                        
-                        // Unobserve to ensure animations only play once to preserve UX
                         observer.unobserve(entry.target);
                     }
                 });
             }, observerConfiguration);
 
-            // 4. Attach observer to node list
             animateElements.forEach(element => {
                 scrollObserver.observe(element);
             });
         });
+    </script>
+    <script>
+        /* Tell Next.js parent iframe (/gcc/) full document height — one page scroll, no nested scrollbar */
+        (function () {
+            function measure() {
+                try {
+                    if (window.parent === window) return;
+                    var h = Math.max(
+                        document.body.scrollHeight,
+                        document.documentElement.scrollHeight,
+                        document.body.offsetHeight,
+                        document.documentElement.offsetHeight
+                    );
+                    var o = window.location.origin || '*';
+                    window.parent.postMessage({ type: 'stradit-gcc-frame-height', height: h }, o);
+                } catch (e) {}
+            }
+            var t;
+            function debounce() {
+                clearTimeout(t);
+                t = setTimeout(measure, 150);
+            }
+            window.addEventListener('load', measure);
+            window.addEventListener('resize', debounce);
+            window.addEventListener('orientationchange', function () { setTimeout(measure, 200); });
+            if (typeof ResizeObserver !== 'undefined') {
+                new ResizeObserver(debounce).observe(document.body);
+            }
+            document.querySelectorAll('img').forEach(function (img) {
+                if (img.complete) return;
+                img.addEventListener('load', debounce, { once: true });
+            });
+            setTimeout(measure, 0);
+            setTimeout(measure, 400);
+            setTimeout(measure, 1200);
+        })();
     </script>
 </body>
 </html>

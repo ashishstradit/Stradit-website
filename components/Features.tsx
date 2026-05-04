@@ -40,10 +40,10 @@ const portraits = [
   },
   {
     img: '/Blue5.png',
-    title: 'AI Readiness & Enablement',
-    sub: 'Prepare teams, tooling, and governance so AI delivery scales with confidence.',
-    bullets: ['AI readiness assessment', 'Team training and playbooks', 'Governance and guardrails', 'Delivery acceleration frameworks'],
-    link: '#',
+    title: 'Global Capability Center (GCC)',
+    sub: 'AI-enabled centers that operate as a true extension of your business.',
+    bullets: ['GCC setup and operating model', 'Talent, tooling, and delivery governance', 'CoE design and scaling', 'Continuous performance improvement'],
+    link: '/gcc'
   },
 ]
 
