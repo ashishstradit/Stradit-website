@@ -13,7 +13,8 @@ const RESIZE_DEBOUNCE_MS = 140
 
 export default function GccFrame() {
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  const debounceTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  /* DOM `setTimeout` id is a number; Node’s `Timeout` type conflicts in Next/Vercel builds */
+  const debounceTimer = useRef<number | undefined>(undefined)
   const [height, setHeight] = useState(FALLBACK)
 
   /**
@@ -63,7 +64,7 @@ export default function GccFrame() {
     const el = iframeRef.current
     if (!el) return
 
-    const timers: ReturnType<typeof setTimeout>[] = []
+    const timers: number[] = []
     let ro: ResizeObserver | undefined
 
     const attach = () => {
