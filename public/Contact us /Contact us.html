@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Premium Solutions</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --brand-color: #f68723;
+            --brand-gradient: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+            --text-main: #ffffff;
+            --text-muted: #fff;
+            --bg-dark-1: #0a0a0a;
+            --bg-dark-2: #161a26;
+            --bg-dark-3: #11141e;
+            --font-main: 'Montserrat', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.8s;
+            --hover-speed: 0.3s;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark-1);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-heading {
+            font-size: 4rem;
+            font-weight: 650;
+        }
+
+        .section-subheading {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        p {
+            color: var(--text-muted);
+        }
+
+        /* --- UI COMPONENTS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--brand-color);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 50px; /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--hover-speed) ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.3);
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #d87116;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.5);
+        }
+
+        /* --- LAYOUTS --- */
+        section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .anim {
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
+            will-change: opacity, transform;
+        }
+
+        /* Slide from Right to Left */
+        .anim.slide-rtl { transform: translateX(80px); }
+        .anim.fade-up { transform: translateY(40px); }
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.5;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /*background: linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,0.4) 100%);*/
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content .section-heading {
+            font-size: 4rem;
+        }
+
+        /* --- CONTACT SECTION & FORM --- */
+        #contact {
+            background-color: var(--bg-dark-2);
+            flex-grow: 1; /* Pushes footer to bottom */
+        }
+
+        .form-wrapper {
+            background-color: var(--bg-dark-3);
+            padding: 40px;
+            border-radius: 16px;
+            /*border: 1px solid rgba(255,255,255,0.05);*/
+            /*box-shadow: 0 20px 40px rgba(0,0,0,0.4);*/
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--bg-dark-1);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-main);
+            transition: border-color var(--hover-speed) ease, box-shadow var(--hover-speed) ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 3px rgba(246, 135, 35, 0.15);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .disclaimer-text {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.5;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .disclaimer-text span {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-dark-1);
+            padding: 40px 5%;
+            border-top: 1px solid #222;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-dark-3);
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: all var(--hover-speed) ease;
+            border: 1px solid #333;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--brand-color);
+            border-color: var(--brand-color);
+            transform: translateY(-3px);
+        }
+
+        .social-icons svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .hero-content .section-heading { font-size: 3rem; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-content { flex-direction: column; gap: 20px; text-align: center; }
+            .form-wrapper { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <svg style="display: none;">
+        <symbol id="icon-linkedin" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </symbol>
+    </svg>
+
+    <section id="hero">
+        <video class="video-bg" autoplay loop muted playsinline>
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="section-heading gradient-text anim slide-rtl" style="--delay: 0s;">Let's Build the Future Together.</h1>
+            <p class="section-subheading anim slide-rtl" style="--delay: 0.2s;" style="color: #fff; font-size: 1.5rem; max-width: 600px;">
+                Connect with our experts today and embark on a digital transformation journey tailored to your enterprise.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container grid-2">
+            <div style="padding-top: 20px;">
+                <h2 class="section-heading gradient-text anim fade-up" style="--delay: 0s; font-size: 3rem;">Get in Touch</h2>
+                <h3 class="section-subheading anim fade-up" style="--delay: 0.1s;">We are ready to align technology with your business vision.</h3>
+                <p class="anim fade-up" style="--delay: 0.2s; margin-top: 20px; font-size: 1.1rem;">
+                    Whether you have a fully fleshed-out RFP or just a visionary idea, our Center of Excellence is equipped to guide you from concept to deployment. Drop us a line, and a strategic consultant will reach out shortly.
+                </p>
+            </div>
+
+            <div class="form-wrapper anim fade-up" style="--delay: 0.3s;">
+                <form action="#" method="POST" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Work Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Company / Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+
+                <div class="disclaimer-text">
+                    <span>Your information stays with us. No spam. Ever.</span><br>
+                    No matter where you are and what your concerns are, we're just a message away.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <p>&copy; 2026 Premium Digital Solutions. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <div class="social-icons">
+                    <a href="#" aria-label="LinkedIn">
+                        <svg><use href="#icon-linkedin"></use></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter / X">
+                        <svg><use href="#icon-twitter"></use></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg><use href="#icon-instagram"></use></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Apply delay styling based on inline variables
+            const animElements = document.querySelectorAll('.anim');
+            
+            animElements.forEach(el => {
+                const delay = el.style.getPropertyValue('--delay');
+                if (delay) {
+                    el.style.transitionDelay = delay;
+                }
+            });
+
+            // Intersection Observer configuration
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Triggers when 15% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

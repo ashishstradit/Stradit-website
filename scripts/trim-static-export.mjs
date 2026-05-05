@@ -31,6 +31,7 @@ const ALLOWED_HTML = new Set([
   'coe/testing/index.html',
   'gcc/index.html',
   'startit/index.html',
+  'contact-us/index.html',
   'StartIT/index.html',
 ])
 

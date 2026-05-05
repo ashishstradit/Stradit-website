@@ -134,7 +134,6 @@ export default function GccPage() {
 
       {/* Final CTA */}
       <section className="gcc-cta">
-        <img src="/Background%20Data22.png" className="gcc-cta-bg" alt="CTA Background" />
         <div className="gcc-cta-overlay" />
         <div className="gcc-cta-content">
           <h2 className="gcc-anim-up">Ready to Build Your Global Powerhouse?</h2>

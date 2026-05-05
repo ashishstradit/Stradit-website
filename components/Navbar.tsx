@@ -31,7 +31,7 @@ export default function Navbar() {
           <li className={styles.navItem}><a href="/gcc/">Global Capability Center</a></li>
           <li className={styles.navItem}><a href="/startit/">StartIT</a></li>
         </ul>
-        <button className="cta-btn" style={{padding: '10px 18px', fontSize: '13px'}}>Contact Us</button>
+        <a href="/contact-us" className="cta-btn" style={{padding: '10px 18px', fontSize: '13px'}}>Contact Us</a>
       </div>
 
       {/* Hamburger Button */}
@@ -85,7 +85,7 @@ export default function Navbar() {
 
         <a href="/gcc/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Global Capability Center</a>
         <a href="/startit/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>StartIT</a>
-        <button className={`cta-btn ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>Contact Us</button>
+        <a href="/contact-us" className={`cta-btn ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>Contact Us</a>
       </div>
     </nav>
   )

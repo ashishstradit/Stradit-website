@@ -20,6 +20,7 @@ const required = [
   'gcc/index.html',
   'startit/index.html',
   'GCC/GCC.html',
+  'contact-us/index.html',
 ]
 
 function main() {

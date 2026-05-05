@@ -249,7 +249,7 @@
   justify-content: center;
   overflow: hidden;
   text-align: center;
-  background: #020b18;
+  background: url('/Background01.png') center/cover no-repeat;
 }
 
 .gcc-cta-bg {
@@ -267,7 +267,7 @@
 .gcc-cta-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10,10,10,0.75);
+  background: rgba(10,10,10,0.45);
   z-index: 1;
 }
 

@@ -96,4 +96,7 @@ export const PAGE_ASSET_PATHS = [
   'GCC/Speed to scale.png',
   'GCC/Total Transparency.png',
   'GCC/Background 01.png',
+
+  // /contact-us — iframe → public/contact-us/index.html
+  'contact-us/index.html',
 ]
