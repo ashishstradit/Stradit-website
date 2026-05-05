@@ -31,7 +31,7 @@ export default function Navbar() {
           <li className={styles.navItem}><a href="/gcc/">Global Capability Center</a></li>
           <li className={styles.navItem}><a href="/startit/">StartIT</a></li>
         </ul>
-        <a href="/contact-us" className="cta-btn" style={{padding: '10px 18px', fontSize: '13px'}}>Contact Us</a>
+        <a href="/contact-us/" className="cta-btn" style={{padding: '10px 18px', fontSize: '13px'}}>Contact Us</a>
       </div>
 
       {/* Hamburger Button */}

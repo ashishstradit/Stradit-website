@@ -38,10 +38,16 @@
   letter-spacing: -0.02em;
 }
 .startit-page .gradient-text {
-  background: var(--brand-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline-block;
+}
+
+.startit-page .text-gradient .split-word {
+  color: #f68723;
+  -webkit-text-fill-color: #f68723;
+  background: none;
 }
 /* Typography Scales */
 .startit-page .heading-xl { font-size: clamp(3rem, 6vw, 3rem); }
@@ -361,10 +367,9 @@
   text-align: center;
 }
 
-/* Same yellow→orange gradient as CoE / globals (.text-gradient); JS splits words into spans */
+/* Same orange as landing page Applied AI */
 .startit-page .text-gradient .split-word {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #f68723;
+  -webkit-text-fill-color: #f68723;
+  background: none;
 }
