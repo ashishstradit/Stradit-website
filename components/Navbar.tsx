@@ -5,6 +5,7 @@ import styles from './Navbar.module.css'
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [coeOpen, setCoeOpen] = useState(false)
+  const [caseOpen, setCaseOpen] = useState(false)
 
   return (
     <nav className={styles.nav}>
@@ -30,6 +31,13 @@ export default function Navbar() {
           </li>
           <li className={styles.navItem}><a href="/gcc/">Global Capability Center</a></li>
           <li className={styles.navItem}><a href="/startit/">StartIT</a></li>
+          <li className={styles.navItem}>
+            <a href="/case-study/">Case Study</a>
+            <ul className={styles.dropdownMenu}>
+              <li><a href="/case-study/">Cloud Advisory</a></li>
+              <li><a href="/case-study/data-analytics/">Data Analytics</a></li>
+            </ul>
+          </li>
         </ul>
         <a href="/contact-us/" className="cta-btn" style={{padding: '10px 18px', fontSize: '13px'}}>Contact Us</a>
       </div>
@@ -85,6 +93,21 @@ export default function Navbar() {
 
         <a href="/gcc/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Global Capability Center</a>
         <a href="/startit/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>StartIT</a>
+        <div className={styles.mobileAccordion}>
+          <div className={styles.mobileAccordionRow}>
+            <a href="/case-study/" className={styles.mobileAccordionLink} onClick={() => setMenuOpen(false)}>Case Study</a>
+            <button type="button" className={styles.mobileAccordionArrow} aria-label="Expand Case Study links" aria-expanded={caseOpen}
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setCaseOpen(v => !v) }}>
+              <span className={`${styles.chevron} ${caseOpen ? styles.chevronOpen : ''}`}>▾</span>
+            </button>
+          </div>
+          {caseOpen && (
+            <div className={styles.mobileSubMenu}>
+              <a href="/case-study/" onClick={() => setMenuOpen(false)}>Cloud Advisory</a>
+              <a href="/case-study/data-analytics/" onClick={() => setMenuOpen(false)}>Data Analytics</a>
+            </div>
+          )}
+        </div>
         <a href="/contact-us" className={`cta-btn ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>Contact Us</a>
       </div>
     </nav>

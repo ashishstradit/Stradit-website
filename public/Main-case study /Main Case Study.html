@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Case Study</title>
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & GLOBAL THEME
+           ========================================================================== */
+        :root {
+            --brand-color: #f68723;
+            --brand-hover: #e0751a;
+            --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
+            
+            --bg-dark: #11141e;
+            --bg-surface: #11141e;
+            --bg-elevated: #1a1a1a;
+            
+            --text-main: #ffffff;
+            --text-muted: #fff;
+            
+            --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --transition-speed: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           TYPOGRAPHY
+           ========================================================================== */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .heading-xl { font-size: clamp(3rem, 5vw, 3rem); }
+        .heading-lg { font-size: clamp(2.2rem, 4vw, 2.5rem); }
+        
+        .subheading {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* ==========================================================================
+           UI COMPONENTS
+           ========================================================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-color);
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: 50px; /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.25);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -4px;
+            color: var(--brand-color);
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        /* ==========================================================================
+           LAYOUTS & CONTAINERS
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 60px 5%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Background Images & Overlays */
+        .bg-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .bg-overlay-left {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(8,35,11,0.2) 0%, rgba(8,8,8,0.7) 50%, rgba(8,8,8,0.2) 100%);
+            z-index: 1;
+        }
+
+        .bg-overlay-center {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /*background: rgba(8,8,8,0.85);*/
+            z-index: 1;
+        }
+
+        .split-image {
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* ==========================================================================
+           SCROLL ANIMATIONS
+           ========================================================================== */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .anim.slide-rtl { transform: translateX(80px); }
+        .anim.slide-ttb { transform: translateY(-50px); }
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* ==========================================================================
+           SECTION SPECIFIC STYLES
+           ========================================================================== */
+        
+        /* Section 6: Accordion FAQ */
+        .accordion-wrapper {
+            max-width: 900px;
+            margin: 50px auto 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 25px 0;
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #fff;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .accordion-icon {
+            color: var(--brand-color);
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: transform 0.4s ease;
+            line-height: 1;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .accordion-item.active .accordion-content {
+            opacity: 1;
+        }
+
+        .accordion-inner {
+            padding: 0 0 30px 30px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Section 7: Stats Layout */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--brand-color);
+            line-height: 1;
+        }
+
+        .stat-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .split-image { height: 400px; }
+            .stats-row { grid-template-columns: 1fr; gap: 30px; }
+            .stat-box { justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <section style="height: 100vh; min-height: 600px; display: flex; align-items: center; padding: 0 5%;">
+        <img src="Hero.jpg" class="bg-img" alt="Hero Background">
+        <div class="bg-overlay-left"></div>
+        
+        <div class="container" style="max-width: 800px; margin-left: 0;">
+            <h1 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                Our AI-led Cloud Advisory Resulted in 30% Less Operations Cost
+            </h1>
+            <p class="subheading text-justify anim slide-rtl" style="--delay: 0.15s;">
+                Learn how StradIT helped a US-based financial institution move from a fragmented legacy data-center landscape to a cloud-ready, cost-optimized portfolio, without compromising regulatory, security, or data-residency requirements.
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.3s;">
+                <a href="#section-two" class="btn-primary">Build What's Yours</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-two" style="background-color: var(--bg-surface);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="heading-lg gradient-text anim slide-ttb" style="--delay: 0s;">
+                    Client Overview
+                </h2>
+                <h3 class="subheading text-justify anim slide-ttb" style="--delay: 0.1s;">
+                    A leading US-based financial institution, operating under strict regulatory, audit, and data residency requirements, with a heterogeneous landscape of mainframe, mid-tier, and distributed systems. <br>The client faced several structural challenges:
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim slide-ttb" style="--delay: 0.2s;">Fragmented application portfolios</li>
+                    <li class="anim slide-ttb" style="--delay: 0.3s;">Deep dependencies on proprietary middleware</li>
+                    <li class="anim slide-ttb" style="--delay: 0.4s;">Limited observability across environments</li>
+                    <li class="anim slide-ttb" style="--delay: 0.5s;">Multiple regulators enforcing stringent compliance requirements</li>
+                </ul>
+                
+                <p class="text-justify anim slide-ttb" style="--delay: 0.6s;">
+                   The absence of a common framework to assess cloud readiness resulted in higher operational costs and eroding margins. A simple lift-and-shift approach would have only moved costs, not optimized them. A structured, evidence-based cloud advisory approach was required.
+
+                </p>
+            </div>
+            
+            <div class="anim slide-ttb" style="--delay: 0.3s;">
+                <img src="Client Overview.jpg" class="split-image" alt="Server Architecture">
+            </div>
+        </div>
+    </section>
+
+    <section style="min-height: 60vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-img" alt="Network Background">
+        <div class="bg-overlay-center"></div>
+
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-ttb" style="--delay: 0s;">
+                Our Proven Scale and Experience in Cloud Advisory
+            </h2>
+            <p class="subheading text-justify anim slide-ttb" style="--delay: 0.15s;" style="color: #fff;">
+                StradIT brings a mature, execution focused cloud practice to engagements. With 5+ years of dedicated experience in AI-powered cloud solutions and a core group of 30+ cloud and infrastructure specialists, our CoE in Cloud & Infrastructure has successfully managed 7+ data centers and 5,000+ cloud instances for clients across regulated industries. 
+These accelerators allow StradIT to move from assessment to repeatable, codified implementation without relying on one-off scripts. 
+
+        </div>
+    </section>
+
+    <section style="background-color: var(--bg-surface);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="heading-lg gradient-text anim slide-ttb" style="--delay: 0s;">
+                    Scope Of StradIT Cloud Advisory
+                </h2>
+                <h3 class="subheading text-justify anim slide-ttb" style="--delay: 0.1s;">
+                    When the client reached StradIT for our Cloud Advisory Services, we played at the front foot and came up with a fully-optimized cloud advisory covering: 
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim slide-ttb" style="--delay: 0.2s;">End-to-end IT service assessment</li>
+                    <li class="anim slide-ttb" style="--delay: 0.3s;">Detailed cloud readiness assessment </li>
+                    <li class="anim slide-ttb" style="--delay: 0.4s;">100% personalized cloud deployment </li>
+                    <li class="anim slide-ttb" style="--delay: 0.5s;">Extensive technology evaluation</li>
+                    <li class="anim slide-ttb" style="--delay: 0.5s;">Multi-year cloud roadmap </li>
+                </ul>
+                
+                <!-- <p class="text-justify anim slide-ttb" style="--delay: 0.6s;">
+                    Security is not an afterthought. Our DevSecOps pipelines ensure that vulnerability scanning is embedded into every deployment, shielding your intellectual property.
+                </p> -->
+            </div>
+            
+            <div class="anim slide-ttb" style="--delay: 0.3s;">
+                <img src="Cloud Advisory.jpg" class="split-image" alt="Cyber Security">
+            </div>
+        </div>
+    </section>
+
+    <section style="min-height: 70vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-img" alt="Cloud Environment">
+        <div class="bg-overlay-center"></div>
+
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                Solutions Offered 
+            </h2>
+            <p class="subheading text-justify anim slide-rtl" style="--delay: 0.15s;" style="color: #fff;">
+                We bring our hands-on mastery over cloud and infrastructure, backed by AI-driven analysis, to create a multi-step cloud strategy.
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.3s; margin-top: 20px;">
+                <a href="#" class="btn-primary">Explore our CoE</a>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: var(--bg-dark);">
+        <div class="container">
+            <!-- <h2 class="heading-lg gradient-text anim slide-rtl" style="--delay: 0s;">
+                Strategic Core Initiatives
+            </h2> -->
+            
+            <div class="accordion-wrapper anim slide-rtl" style="--delay: 0.2s;">
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 1: IT Service Catalogue
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            Our team from Cloud & Infrastructure CoE first collected and rationalized the complete IT service catalogue across lines of business. It then mapped each service to underlying applications, infrastructure components, and data domains. We helped the client identify services with redundant or overlapping functionality.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 2: Cloud Readiness Assessment
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            We then performed functional, financial, and technical feasibility analysis for each service so that the client is able to easily evaluate application architecture patterns, integration style, and data flows. We also applied a scoring model for cloud suitability. 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                       Step 3: Cloud Deployment Strategy
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            To achieve result-driven cloud deployment, the team classified workloads into public, private, and hybrid cloud candidates and defined isolation requirements for regulated data, customer PII, and payment workload.<br>
+
+Additionally, we mapped non-functional requirements to avoid resource wastage. This allowed the client to pick deployment models based on evidence instead of generic best practices.
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 4: Technology Selection
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            Based on the assessment and client’s requirement, the team constructs a detailed and viable evaluation framework around IaaS, PaaS, and managed services while comparing hyperscaler offerings. We carefully identified preferred vendors and implementation partners offering solutions aligned with the client’s objectives.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 5: Cloud Roadmap And Governance
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            We create the cloud roadmap that defines migration waves, covering quick wins, and establish a cloud governance, and help our client to realize early benefits while preparing for deeper modernization. 
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section style="min-height: 90vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-img" alt="Data Network">
+        <div class="bg-overlay-center"></div>
+
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-ttb" style="--delay: 0s;">
+                Outcomes And Benefits Delivered 
+            </h2>
+            <p class="subheading text-justify anim slide-ttb" style="--delay: 0.15s;" style="color: #fff;">
+                Within the first phases of execution of our cloud advisory, the client realized tangible benefits driven by the advisory outputs.
+            </p>
+
+            <div class="stats-row anim slide-ttb" style="--delay: 0.3s;">
+                <div class="stat-box">
+                    <div class="stat-number">30</div>
+                    <div class="stat-text">% reduction in operations cost</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-text">eduction in software license cost</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50</div>
+                    <div class="stat-text">% faster application deployment</div>
+                </div>
+            </div>
+
+            <p class="text-justify anim slide-ttb" style="--delay: 0.45s;" style="color: var(--text-muted); margin-bottom: 2.5rem;">
+                Peace of mind and hassle-free migration, backed by a clear, executable roadmap and an agreed operating model, come built in with every engagement.If you are finding it hard to navigate complex cloud decisions, talk to StradIT’s Cloud Advisory team today and get a structured plan your teams can execute with confidence.
+
+            </p>
+
+            <div class="anim slide-ttb" style="--delay: 0.6s;">
+                <a href="#" class="btn-primary">Request a Cloud Readiness Assessment</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            /* --- 1. SCROLL TRIGGER ANIMATIONS --- */
+            const animElements = document.querySelectorAll('.anim');
+            
+            animElements.forEach(el => {
+                const delay = el.style.getPropertyValue('--delay');
+                if (delay) el.style.transitionDelay = delay;
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.05
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => scrollObserver.observe(el));
+
+            /* --- 2. SMOOTH WATER FLOW ACCORDION --- */
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const content = header.nextElementSibling;
+                    const isActive = item.classList.contains('active');
+
+                    // Optional: Close all open accordions first
+                    document.querySelectorAll('.accordion-item').forEach(accItem => {
+                        accItem.classList.remove('active');
+                        accItem.querySelector('.accordion-content').style.maxHeight = null;
+                    });
+
+                    // Open the clicked one if it wasn't already active
+                    if (!isActive) {
+                        item.classList.add('active');
+                        // Calculate exact scroll height for smooth CSS transition
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // Re-calculate heights on window resize
+            window.addEventListener('resize', () => {
+                document.querySelectorAll('.accordion-item.active .accordion-content').forEach(content => {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

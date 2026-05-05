@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics Case Studies</title>
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & GLOBAL THEME
+           ========================================================================== */
+        :root {
+            --brand-color: #f68723;
+            --brand-hover: #e0751a;
+            --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
+            
+            --bg-dark-base: #050505;
+            --bg-dark-surface: #111111;
+            --bg-dark-elevated: #1a1a1a;
+            
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            
+            --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --transition-speed: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           TYPOGRAPHY
+           ========================================================================== */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .heading-xl { font-size: clamp(3rem, 5vw, 3rem); }
+        .heading-lg { font-size: clamp(2.2rem, 4vw, 2rem); }
+        
+        .subheading {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* ==========================================================================
+           UI COMPONENTS
+           ========================================================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-color);
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: 50px; /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -4px;
+            color: var(--brand-color);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        .img-wrapper {
+            width: 100%;
+            height: 550px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            background: #111;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ==========================================================================
+           LAYOUTS & CONTAINERS
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 120px 5%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           SCROLL ANIMATION ENGINE
+           ========================================================================== */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .anim.slide-rtl { transform: translateX(80px); }
+        .anim.slide-ltr { transform: translateX(-80px); }
+        .anim.fade-in { transform: scale(0.98); }
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* ==========================================================================
+           SECTION 1: HERO
+           ========================================================================== */
+        #hero {
+            height: 100vh;
+            min-height: 600px;
+            padding: 0;
+            position: relative;
+        }
+
+        .hero-img-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-bg-zoom {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.4);
+            animation: heroZoomOut 2.5s cubic-bezier(0.21, 1.11, 0.81, 0.99) forwards;
+            opacity: 0.6;
+        }
+
+        @keyframes heroZoomOut {
+            to { transform: scale(1); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,0.2) 100%);
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           SECTION 6: HOVER ACCORDION (3:3 GRID)
+           ========================================================================== */
+        .grid-3x2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+            align-items: start;
+        }
+
+        .hover-card {
+            background: var(--bg-dark-surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 35px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hover-card:hover {
+            border-color: rgba(246, 135, 35, 0.4);
+            background: var(--bg-dark-elevated);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transform: translateY(-5px);
+        }
+
+        .hover-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stroke-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--brand-color);
+            line-height: 1;
+        }
+
+        .hover-card h4 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .hover-card-body {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            /* Smooth water flow expansion */
+            transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, margin-top 0.4s ease;
+        }
+
+        .hover-card:hover .hover-card-body {
+            /* Generous max height to allow flow */
+            max-height: 400px;
+            opacity: 1;
+            margin-top: 20px;
+        }
+
+        .hover-card-inner p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .grid-3x2 { grid-template-columns: repeat(2, 1fr); }
+            /* Force images below text on mobile for S4 */
+            #section-4 .img-wrapper { grid-row: 2; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-3x2 { grid-template-columns: 1fr; }
+            .img-wrapper { height: 400px; }
+            section { padding: 90px 5%; }
+            .text-justify { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         SECTION 1: HERO
+         ========================================================================== -->
+    <section id="hero">
+        <div class="hero-img-container">
+            <img src="Data Analytics Case Studies hero.jpg" class="hero-bg-zoom" alt="Architectural Tech Background">
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: CENTER HEADING & CTA
+         ========================================================================== -->
+    <section id="section-2" style="background-color: var(--bg-dark-surface);">
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                Reduction in Manual Reporting and Scalability Delivered With Strategic Data Analytics
+            </h2>
+            <p class="subheading anim slide-ltr" style="--delay: 0.15s;">
+                From hours to minutes, StradIT delivered a leading investment bank by <br>modernizing its data infrastructure 360°.
+            <div class="anim slide-rtl" style="--delay: 0.3s;">
+                <!-- <a href="#section-3" class="btn-primary">Discover Our Ecosystem</a> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: LEFT CONTENT | RIGHT IMAGE (Fade In)
+         ========================================================================== -->
+    <section id="section-3" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- Left Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim fade-in" style="--delay: 0s;">
+                    Client Overview
+                </h2>
+                <h3 class="subheading text-justify anim fade-in" style="--delay: 0.1s;">
+                    A global investment bank running multi-asset trading operations spanning equities, fixed income, foreign exchange, and derivatives.<br>The bank was wrestling with:
+
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.2s;">Data lived in silos across the system.</li>
+                    <li class="anim fade-in" style="--delay: 0.3s;">Reporting ran on batch processes.</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Analysts spent countless hours on manual reporting.</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Complex risk models are required for FRTB, Basel III, and MiFID II compliance.</li>
+                </ul>
+                <p class="subheading anim slide-ltr" style="--delay: 0.15s;">
+                For them, patching the old system wasn’t the answer. They required a complete data and analytics transformation, and StradIT was their best bet.
+            </div>
+            
+            <!-- Right Side Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.3s;">
+                <img src="Client Overview.jpg" alt="Cloud Data Center">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: LEFT IMAGE | RIGHT CONTENT (Fade In)
+         ========================================================================== -->
+    <section id="section-4" style="background-color: var(--bg-dark-surface);">
+        <div class="container grid-2">
+            <!-- Left Side Image (visually on left via grid order) -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.3s; order: -1;">
+                <img src="Data Analytics Modernization" alt="Cyber Security Command Center">
+            </div>
+
+            <!-- Right Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim fade-in" style="--delay: 0s;">
+                    StradIT: The Leader in Data and Analytics Modernization
+                </h2>
+                <h3 class="subheading text-justify anim fade-in" style="--delay: 0.1s;">
+                   StradIT’s Data Analytics CoE combines deep technical expertise with a practical understanding of how trading floors, risk functions, and compliance teams actually work.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.2s;">Fully tailored data intelligence</li>
+                    <li class="anim fade-in" style="--delay: 0.3s;">AI/ML-driven data analytics</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Lean, high-impact squad for every client</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Expertise to handle structured and unstructured data</li>
+                </ul>
+                 <p class="subheading anim slide-ltr" style="--delay: 0.15s;">
+                We partnered with the bank and their system integrator, deploying a focused team of four Data Engineers, one Data Scientist, and one Data Architect. This lean, high-impact squad worked side by side with client teams to design and deliver a platform built for speed, scale, and governance.
+            </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: LEFT CONTENT | RIGHT IMAGE (Fade In)
+         ========================================================================== -->
+    <section id="section-5" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- Left Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim fade-in" style="--delay: 0s;">
+                    What We Offered
+                </h2>
+                <h3 class="subheading text-justify anim fade-in" style="--delay: 0.1s;">
+                    The bank needed more than a technology upgrade. They needed a platform that could unify scattered data sources, deliver real-time insights, and scale gracefully as trading volumes grow.<br>
+We took the charge and planned to back the client with a variety of 100% customized solutions, including:
+
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.2s;">Building a cloud-native enterprise data lake</li>
+                    <li class="anim fade-in" style="--delay: 0.3s;">Enabling real-time data ingestion</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Creating a unified data model</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Delivering high-performance analytics</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Empowering business users with self-service reporting tools</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Embedding governance, lineage, and audit controls from day one</li>
+                </ul>
+            </div>
+            
+            <!-- Right Side Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" alt="Artificial Intelligence">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: CENTER HEADER + 3:3 HOVER ACCORDION GRID
+         ========================================================================== -->
+    <section id="section-6" style="background-color: var(--bg-dark-surface);">
+        <div class="container content-center">
+            <h2 class="heading-lg gradient-text anim slide-rtl" style="--delay: 0s;">
+                How We Delivered it
+            </h2>
+            <p class="subheading anim slide-ltr" style="--delay: 0.15s;">
+                StradIT assembled a data squad featuring the best minds in analytics and AI, bringing clarity to chaos and confidence to the client through a structured approach.
+        </div>
+
+        <div class="container grid-3x2">
+            <!-- Grid Item 1 -->
+            <div class="hover-card anim fade-in" style="--delay: 0.2s;">
+                <div class="hover-card-header">
+                    <span class="stroke-number">01</span>
+                    <h4> Step 1: Laying the Foundation with a Scalable Data Lake</h4>
+                </div>
+                <div class="hover-card-body">
+                    <div class="hover-card-inner">
+                        <p class="text-justify">We designed and implemented an Enterprise Data Lake on Microsoft Azure. This helped the client to have a centralized repository with elastic storage and compute.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Item 2 -->
+            <div class="hover-card anim fade-in" style="--delay: 0.3s;">
+                <div class="hover-card-header">
+                    <span class="stroke-number">02</span>
+                    <h4>Step 2: Bringing Data to Life in Real Time</h4>
+                </div>
+                <div class="hover-card-body">
+                    <div class="hover-card-inner">
+                        <p class="text-justify">As Batch processing was killing the agility of our client, our data squad introduced real-time data ingestion using Kafka and Spark Streaming. This resulted in the low-latency processing of trade executions and market data.
+</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Item 3 -->
+            <div class="hover-card anim fade-in" style="--delay: 0.4s;">
+                <div class="hover-card-header">
+                    <span class="stroke-number">03</span>
+                    <h4>Step 3: Creating One Version of the Truth</h4>
+                </div>
+                <div class="hover-card-body">
+                    <div class="hover-card-inner">
+                        <p class="text-justify">We built a Unified Data Model and implemented Master Data Management to deal with the inconsistent data, plaguing the bank. This standardized the trade data, counterparty information, and reference data, resulting in confusion-free data processing across the teams.
+</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Item 4 -->
+            <div class="hover-card anim fade-in" style="--delay: 0.5s;">
+                <div class="hover-card-header">
+                    <span class="stroke-number">04</span>
+                    <h4>Step 4: Powering Advanced Analytics at Speed</h4>
+                </div>
+                <div class="hover-card-body">
+                    <div class="hover-card-inner">
+                        <p class="text-justify">We then deployed a high-performance layer using Databricks and Snowflake for heavy-duty analytics.This worked best for portfolio risk calculations, scenario modeling, and stress testing at speeds that simply were not possible before.Our client was now able to run complex models without waiting overnight for results.
+
+</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Item 5 -->
+            <div class="hover-card anim fade-in" style="--delay: 0.6s;">
+                <div class="hover-card-header">
+                    <span class="stroke-number">05</span>
+                    <h4>Step 5: Putting Insights in the Hands of Business Users</h4>
+                </div>
+                <div class="hover-card-body">
+                    <div class="hover-card-inner">
+                        <p class="text-justify">We rolled out self-service business intelligence through Power BI and Tableau.
+This gave traders, risk analysts, and compliance officers of the bank the ability to explore data and generate reports on their own terms and pace.
+.
+</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Item 6 -->
+            <div class="hover-card anim fade-in" style="--delay: 0.7s;">
+                <div class="hover-card-header">
+                    <span class="stroke-number">06</span>
+                    <h4>Step 6: Building Governance Into the DNA</h4>
+                </div>
+                <div class="hover-card-body">
+                    <div class="hover-card-inner">
+                        <p class="text-justify">We deployed Apache Atlas and Collibra so that the bank can experience  automated data lineage, governance controls, and audit trails.
+Result?  The bank now has full visibility into the origin of data, its transformation, and its intended use.
+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: LEFT CONTENT | RIGHT IMAGE (Fade In)
+         ========================================================================== -->
+    <section id="section-7" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- Left Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim fade-in" style="--delay: 0s;">
+                   What the Client Achieved
+                </h2>
+                <h3 class="subheading text-justify anim fade-in" style="--delay: 0.1s;">
+                    As we wrapped up the project, the results spoke for themselves:
+                </h3>
+                
+                <ul class="bullet-list" style="margin-bottom: 2.5rem;">
+                    <li class="anim fade-in" style="--delay: 0.2s;">Intraday risk visibility improved from hours to minutes.</li>
+                    <li class="anim fade-in" style="--delay: 0.3s;">Manual reporting efforts dropped by 80%.</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Accurate and consistent trade and market data.</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Sharper insights into data to make faster, smarter decisions..</li>
+                </ul>
+                <h3 class="subheading text-justify anim fade-in" style="--delay: 0.1s;">
+                    The bank moved from firefighting data issues to confidently leveraging AI-powered analytics as a competitive advantage.<br> Do you also feel like you're drowning in data complexity?
+StradIT can help you build a modern analytics foundation that scales with your ambitions.
+
+                </h3>
+
+                <div class="anim fade-in" style="--delay: 0.6s;">
+                    <a href="#" class="btn-primary">Request a Data and Analytics Assessment</a>
+                </div>
+            </div>
+            
+            <!-- Right Side Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1000" alt="Executive Meeting">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERSECTION OBSERVER JAVASCRIPT ENGINE
+         ========================================================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Identify all elements slated for scroll animation
+            const animElements = document.querySelectorAll('.anim');
+            
+            // 2. Transfer the CSS variable --delay to standard transition-delay
+            animElements.forEach(el => {
+                const delayStr = el.style.getPropertyValue('--delay');
+                if (delayStr) {
+                    el.style.transitionDelay = delayStr;
+                }
+            });
+
+            // 3. Configure the Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px', // Trigger slightly before element enters view
+                threshold: 0.05
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Ensure animation fires only once
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            // 4. Attach observer
+            animElements.forEach(el => scrollObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
