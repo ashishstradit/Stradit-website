@@ -190,22 +190,16 @@ section {
 }
 
 /* ── CTA Button spacing — every section before footer ── */
-.cta-btn,
 .cs-btn,
 .gcc-btn,
-.contact-submit-btn,
-a.cta-btn,
-a.cs-btn,
-a.gcc-btn {
+.contact-submit-btn {
   margin-top: 32px;
   display: inline-flex;
 }
 
 /* Ensure paragraph/text above button has bottom spacing */
-section p + .cta-btn,
 section p + .cs-btn,
 section p + .gcc-btn,
-section p + a.cta-btn,
 .cs-center p:last-of-type,
 .gcc-cta-content p,
 .contact-hero-copy-content p {
