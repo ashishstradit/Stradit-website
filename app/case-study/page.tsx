@@ -81,20 +81,21 @@ export default function CaseStudyPage() {
   return (
     <div ref={pageRef} className="cs-page">
 
-      {/* Hero */}
+      {/* Hero — image only */}
       <section className="cs-hero">
         <img src={img('Hero.jpg')} className="cs-hero-bg" alt="Hero" />
         <div className="cs-hero-overlay" />
-        <div className="cs-hero-content">
-          <h1 className="cs-anim cs-anim-rtl">
+      </section>
+
+      {/* Hero heading below */}
+      <section className="cs-section" style={{ background: '#0a0a0c', textAlign: 'center' }}>
+        <div className="cs-container cs-center">
+          <h1 className="cs-h2 cs-anim cs-anim-rtl" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.8rem)' }}>
             Our Expert Cloud Advisory Resulted in 30% Less Operations Cost
           </h1>
-          <p className="cs-anim cs-anim-rtl" style={d('0.15s')}>
+          <p className="cs-h3 cs-anim cs-anim-rtl" style={{ transitionDelay: '0.15s' }}>
             Learn how StradIT helped a US-based financial institution move from a fragmented legacy data-center landscape to a cloud-ready, cost-optimized portfolio, without compromising regulatory, security, or data-residency requirements.
           </p>
-          <a href="#overview" className="cs-btn cs-anim cs-anim-rtl" style={d('0.3s')}>
-            Read the Case Study
-          </a>
         </div>
       </section>
 
@@ -197,15 +198,7 @@ export default function CaseStudyPage() {
           <p className="cs-h3 cs-anim cs-anim-ttb" style={d('0.15s')}>
             Within the first phases of execution of our cloud advisory, the client realized tangible benefits driven by the advisory outputs.
           </p>
-          <div className="cs-stats cs-anim cs-anim-ttb" style={d('0.3s')}>
-            {stats.map((s, i) => (
-              <div key={i} className="cs-stat">
-                <div className="cs-stat-num">{s.num}</div>
-                <div className="cs-stat-label">{s.label}</div>
-              </div>
-            ))}
-          </div>
-          <p className="cs-p cs-anim cs-anim-ttb" style={d('0.45s')}>
+          <p className="cs-p cs-anim cs-anim-ttb" style={d('0.3s')}>
             Peace of mind and hassle-free migration, backed by a clear, executable roadmap and an agreed operating model, come built in with every engagement. If you are finding it hard to navigate complex cloud decisions, talk to StradIT&apos;s Cloud Advisory team today and get a structured plan your teams can execute with confidence.
           </p>
           <a href="/contact-us/" className="cs-btn cs-anim cs-anim-ttb" style={d('0.6s')}>
