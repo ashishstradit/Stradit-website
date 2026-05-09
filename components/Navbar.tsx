@@ -34,8 +34,11 @@ export default function Navbar() {
           <li className={styles.navItem}>
             <a href="/case-study/">Case Study</a>
             <ul className={styles.dropdownMenu}>
-              <li><a href="/case-study/">Cloud Advisory</a></li>
-              <li><a href="/case-study/data-analytics/">Data Analytics</a></li>
+              <li><a href="/case-study/ai/">Applied Artificial Intelligence</a></li>
+              <li><a href="/case-study/data-analytics/">Data Analytics - Applied AI</a></li>
+              <li><a href="/case-study/cyber-security/">Cyber Security - Applied AI</a></li>
+              <li><a href="/case-study/">Cloud & Infrastructure - Applied AI</a></li>
+              <li><a href="/case-study/testing/">Automated AI Testing</a></li>
             </ul>
           </li>
         </ul>
@@ -103,8 +106,11 @@ export default function Navbar() {
           </div>
           {caseOpen && (
             <div className={styles.mobileSubMenu}>
-              <a href="/case-study/" onClick={() => setMenuOpen(false)}>Cloud Advisory</a>
-              <a href="/case-study/data-analytics/" onClick={() => setMenuOpen(false)}>Data Analytics</a>
+              <a href="/case-study/ai/" onClick={() => setMenuOpen(false)}>Applied Artificial Intelligence</a>
+              <a href="/case-study/data-analytics/" onClick={() => setMenuOpen(false)}>Data Analytics - Applied AI</a>
+              <a href="/case-study/cyber-security/" onClick={() => setMenuOpen(false)}>Cyber Security - Applied AI</a>
+              <a href="/case-study/" onClick={() => setMenuOpen(false)}>Cloud & Infrastructure - Applied AI</a>
+              <a href="/case-study/testing/" onClick={() => setMenuOpen(false)}>Automated AI Testing</a>
             </div>
           )}
         </div>

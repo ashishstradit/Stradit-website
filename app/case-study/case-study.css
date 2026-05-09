@@ -49,11 +49,9 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: 1.2rem;
-  background: linear-gradient(135deg, #f68723 0%, #e63946 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
+  color: #f68723;
+  -webkit-text-fill-color: #f68723;
+  display: block;
 }
 
 .cs-hero-content p {
@@ -103,10 +101,8 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #f68723 0%, #e63946 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #f68723;
+  -webkit-text-fill-color: #f68723;
   display: inline-block;
 }
 
@@ -319,4 +315,23 @@
   .cs-hero { height: auto; padding: 120px 5% 80px; }
   .cs-h3 { text-align: left; }
   .cs-p { text-align: left; }
+}
+
+/* ── Additional Mobile Fixes ── */
+@media (max-width: 768px) {
+  .cs-section { padding: 60px 5%; }
+  .cs-bg-section { padding: 60px 5%; min-height: auto; }
+  .cs-hero { height: auto; min-height: 60vh; padding: 100px 5% 60px; }
+  .cs-hero-content h1 { font-size: 1.8rem; }
+  .cs-h2 { font-size: 1.5rem; }
+  .cs-h3 { font-size: 1rem; }
+  .cs-center { text-align: left; align-items: flex-start; }
+  .cs-btn { width: 100%; justify-content: center; }
+  .cs-acc-btn { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .cs-hero-content h1 { font-size: 1.4rem; }
+  .cs-h2 { font-size: 1.3rem; }
+  .cs-img { height: 240px; }
 }

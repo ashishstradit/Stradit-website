@@ -123,7 +123,7 @@ export default function StartItView() {
           <div className="bg-animated-gradient" />
           <div className="bg-overlay" style={{ background: 'rgba(8,11,35,0.8)' }} />
           <div className="container content-center">
-            <h1 className="hero-title text-gradient split-text-rtl anim-words-rtl">Turning Your Teams Into AI Powerhouses</h1>
+            <h1 className="hero-title text-gradient anim slide-rtl">Turning Your Teams Into AI Powerhouses</h1>
             <p className="subheading anim slide-ltr" style={{ color: '#fff', ...delay('0.2s') }}>
               From &lsquo;AI Curious&rsquo; to &lsquo;AI Certified&rsquo; in Only 8 Weeks with StartIT.
             </p>
@@ -138,7 +138,7 @@ export default function StartItView() {
         <section id="section-two">
           <div className="container grid-2">
             <div>
-              <h2 className="heading-main text-gradient split-text-rtl anim-words-rtl">Lead AI and Technology With Confidence</h2>
+              <h2 className="heading-main text-gradient anim slide-rtl">Lead AI and Technology With Confidence</h2>
               <h3 className="subheading anim slide-ltr" style={{ color: '#fff', textAlign: 'left', ...delay('0.1s') }}>
                 StradIT turns learning AI and tech engineering from an uphill battle to a strategic leap forward through guided learning, hands-on
                 labs, mentorship, and a clear path from concepts to outcomes.
@@ -156,7 +156,7 @@ export default function StartItView() {
               </ul>
             </div>
             <div>
-              <h2 className="heading-main text-gradient split-text-rtl anim-words-rtl">Fuel Your Career with StartIT</h2>
+              <h2 className="heading-main text-gradient anim slide-rtl">Fuel Your Career with StartIT</h2>
               <h3 className="subheading anim slide-ltr" style={{ color: '#fff', textAlign: 'left', ...delay('0.1s') }}>
                 StartIT, our AI training and returnship program, helps leaders and tech professionals to make AI concepts their second nature, with
                 training mapped to enterprise roles and grounded in domain realities.
@@ -181,7 +181,7 @@ export default function StartItView() {
 
         <section>
           <div className="container content-center">
-            <h2 className="heading-main text-gradient split-text-zoom anim-words-zoom">Build Rock-solid Confidence</h2>
+            <h2 className="heading-main text-gradient anim slide-rtl">Build Rock-solid Confidence</h2>
             <h3 className="subheading anim slide-ltr" style={{ color: '#fff', ...delay('0.2s') }}>
               StartIT is organized into four tracks, so every participant learns what they need, at the right depth, with a shared language across
               business and technology.

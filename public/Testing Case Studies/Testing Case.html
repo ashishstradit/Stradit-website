@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Vision | Build What's Yours</title>
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & GLOBAL THEME
+           ========================================================================== */
+        :root {
+            --brand-primary: #f68723;
+            --brand-hover: #e0751a;
+            --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
+            
+            --bg-dark-base: #0a0d16;
+            --bg-dark-surface: #080a11;
+            --bg-dark-elevated: #1a1a1a;
+            
+            --text-main: #ffffff;
+            --text-muted: #fff;
+            
+            --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Water flow smoothness timing */
+            --transition-fluid: 1s cubic-bezier(0.16, 1, 0.3, 1); 
+            --radius-md: 12px;
+            --radius-pill: 50px;
+        }
+
+        /* ==========================================================================
+           RESET & TYPOGRAPHY
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4, h5 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .heading-xl { font-size: clamp(3rem, 5vw, 3rem); }
+        .heading-lg { font-size: clamp(2.2rem, 4vw, 2rem); }
+        
+        .subheading {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ==========================================================================
+           UI COMPONENTS
+           ========================================================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-primary);
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding: 0;
+            text-align: left;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -4px;
+            color: var(--brand-primary);
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        .img-wrapper {
+            width: 100%;
+            height: 550px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            background: #111;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ==========================================================================
+           LAYOUTS & CONTAINERS
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 120px 5%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Utility to alternate layout visually on desktop */
+        .order-reverse { order: -1; }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Background Images & Overlays */
+        .bg-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .bg-overlay-center {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /*background: rgba(6,6,6,0.85);*/
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           SCROLL ANIMATION ENGINE
+           ========================================================================== */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity var(--transition-fluid), transform var(--transition-fluid);
+        }
+
+        .anim.slide-rtl { transform: translateX(100px); }
+        .anim.slide-ltr { transform: translateX(-100px); }
+        .anim.slide-ttb { transform: translateY(-60px); }
+        .anim.fade-in { transform: scale(0.98); }
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* ==========================================================================
+           SECTION 1: HERO
+           ========================================================================== */
+        #hero {
+            height: 100vh;
+            min-height: 600px;
+            padding: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-img-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        /* Hero Zoom Out Reveal */
+        .hero-bg-zoom {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.3);
+            animation: heroZoomOut 2.5s cubic-bezier(0.21, 1.11, 0.81, 0.99) forwards;
+            opacity: 0.6;
+        }
+
+        @keyframes heroZoomOut {
+            to { transform: scale(1); }
+        }
+
+        /* ==========================================================================
+           SECTION 6: HOVER ACCORDION (WATER FLOW)
+           ========================================================================== */
+        .hover-accordion-wrapper {
+            max-width: 900px;
+            margin: 50px auto 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hover-accordion-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hover-accordion-header {
+            width: 100%;
+            padding: 25px 0;
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: default;
+        }
+
+        /* Heading is Orange/Red Gradient in Accordion */
+        .hover-accordion-header h4 {
+            margin: 0;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hover-accordion-icon {
+            color: var(--brand-color);
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: transform 0.5s var(--transition-fluid);
+            line-height: 1;
+        }
+
+        /* The Water Flow Expansion */
+        .hover-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            /* Extra smooth easing for "water flow" */
+            transition: max-height 0.8s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .hover-accordion-item:hover .hover-accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .hover-accordion-item:hover .hover-accordion-content {
+            /* Generous max-height to allow full content expansion smoothly */
+            max-height: 400px; 
+            opacity: 1;
+        }
+
+        .hover-accordion-inner {
+            padding: 0 0 30px 35px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .order-reverse { order: 0; } /* Reset visual order on mobile */
+            #section-4 .img-wrapper { grid-row: 2; } /* Keep images below text on mobile */
+            #section-7 .img-wrapper { grid-row: 2; }
+            .img-wrapper { height: 400px; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 90px 5%; }
+            .text-justify { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         SECTION 1: HERO
+         ========================================================================== -->
+    <section id="hero">
+        <div class="hero-img-container">
+            <img src="Testing case studies hero.jpg" class="hero-bg-zoom" alt="Architectural Tech Background">
+        </div>
+        <!-- Clear view: minimal gradient overlay -->
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%;  z-index: 1;"></div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: CENTER HEADING & CTA
+         ========================================================================== -->
+    <section id="section-2" style="background-color: var(--bg-dark-surface);">
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                Zero Licensing & Unmatched Results: The StradIT Difference for a Global Investment Bank
+            </h2>
+            <p class="subheading anim slide-ltr" style="--delay: 0.2s;">
+                Breaking free from expensive, complex testing frameworks is not a dream anymore. It’s a reality for many with StradIT’s Testing & Automation services. Discover how a global investment bank is now living this reality with a modern automation solution that anyone on the team can use.
+            <div class="anim slide-ttb" style="--delay: 0.4s;">
+                <a href="#section-3" class="btn-primary">Build What's Yours</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: LEFT CONTENT | RIGHT IMAGE (Water Flow LTR)
+         ========================================================================== -->
+    <section id="section-3" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- Left Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim slide-ltr" style="--delay: 0s;">
+                    Client Overview
+                </h2>
+                <h3 class="subheading text-justify anim slide-ltr" style="--delay: 0.15s;">
+                    One of the world's major investment banks, offering investment management and financial services across the globe. The bank was using outdated test automation setup, causing a heap of hurdles.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.3s;">The legacy framework wasn’t adapting to new requirements.</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Only developers with deep Java knowledge could write or maintain test scripts.</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">High licensing costs for proprietary tools.</li>
+                    <li class="anim fade-in" style="--delay: 0.6s;">Longer test cycles slowing down releases.</li>
+                </ul>
+                
+                <p class="text-justify anim fade-in" style="--delay: 0.7s; color: var(--text-muted);">
+                    As the bank planned to adopt cloud, AI integration, and advanced data analytics, it needed a testing approach that could keep pace without draining budgets. This is when StradIT decided to step in.
+                </p>
+            </div>
+            
+            <!-- Right Side Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.4s;">
+                <img src="Client Overview.jpg" alt="Cloud Data Center">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: RIGHT CONTENT | LEFT IMAGE (Water Flow LTR)
+         ========================================================================== -->
+    <section id="section-4" style="background-color: var(--bg-dark-surface);">
+        <div class="container grid-2">
+            <!-- Left Side Image (Visually ordered left via CSS class) -->
+            <div class="img-wrapper anim fade-in order-reverse" style="--delay: 0.4s;">
+                <img src="Testing.jpg" alt="Cyber Security Command Center">
+            </div>
+
+            <!-- Right Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim slide-ltr" style="--delay: 0s;">
+                    StradIT’s Test Automation: A Game-Changer
+                </h2>
+                <h3 class="subheading text-justify anim slide-ltr" style="--delay: 0.15s;">
+                    StradIT brings practical, hands-on experience in building test automation frameworks that actually work for real teams.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.3s;">70+ Experts</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Fully-managed QAs</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Enterprise-grade Result</li>
+                    
+                </ul>
+
+                <p class="text-justify anim fade-in" style="--delay: 0.7s; color: var(--text-muted);">
+                    We understand that having the best framework is the one that anyone can use without feeling like inventing the wheel. 
+We partnered closely with the client to understand their testing needs, application landscape, and long-term goals.
+
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: LEFT CONTENT | RIGHT IMAGE (Water Flow LTR)
+         ========================================================================== -->
+    <section id="section-5" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- Left Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim slide-ltr" style="--delay: 0s;">
+                    What We Set Out To Do
+                </h2>
+                <h3 class="subheading text-justify anim slide-ltr" style="--delay: 0.15s;">
+                    This client needed a complete transformation of how testing was done across their application portfolio. To achieve this goal, we delivered:
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.3s;">End-to-end development of a test automation framework</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Test execution across APIs, user interfaces, and databases</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">A keyword-driven approach</li>
+                    <li class="anim fade-in" style="--delay: 0.6s;">Seamless integration with modern technology stacks</li>
+                    <li class="anim fade-in" style="--delay: 0.6s;">Agile practices for speed and transparency</li>
+                </ul>
+
+                <!-- <p class="text-justify anim fade-in" style="--delay: 0.7s; color: var(--text-muted);">
+                    Our advanced analytics pipelines convert operational friction into absolute clarity, providing a true competitive advantage.
+                </p> -->
+            </div>
+            
+            <!-- Right Side Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.4s;">
+                <img src="what we do.jpg" alt="Artificial Intelligence">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: CENTER HEADING + HOVER ACCORDION (Water Flow Expansion)
+         ========================================================================== -->
+    <section id="section-6" style="background-color: var(--bg-dark-surface);">
+        <div class="container content-center">
+            <h2 class="heading-lg gradient-text anim slide-rtl" style="--delay: 0s;">
+                How We Built the Solution
+            </h2>
+            <p class="subheading anim slide-ltr" style="--delay: 0.2s;">
+                The testing and automation strategy we adopted for this client was lean, agile, and laser-focused.
+            </p>
+            <div class="anim slide-ttb" style="--delay: 0.4s; margin-bottom: 30px;">
+                <!-- <a href="#" class="btn-primary">Build What's Yours</a> -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="hover-accordion-wrapper anim slide-ttb" style="--delay: 0.5s;">
+                
+                <!-- Hover Accordion 1 -->
+                <div class="hover-accordion-item">
+                    <div class="hover-accordion-header">
+                        <span class="hover-accordion-icon">+</span>
+                        <h4>Step 1: Choosing the Right Foundation</h4>
+                    </div>
+                    <div class="hover-accordion-content">
+                        <div class="hover-accordion-inner text-justify">
+                            We selected Robot Framework as the backbone of the new solution as it’s an open-source automation that supports a keyword-driven approach. We paired with Python.The result? The client reduced the licensing cost while having a testing solution that everyone was able to use seamlessly.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hover Accordion 2 -->
+                <div class="hover-accordion-item">
+                    <div class="hover-accordion-header">
+                        <span class="hover-accordion-icon">+</span>
+                        <h4>Step 2: Designing for Flexibility and Scale</h4>
+                    </div>
+                    <div class="hover-accordion-content">
+                        <div class="hover-accordion-inner text-justify">
+                            Our Testing & Automation team designed the framework using the Page Object Model that separates test logic from page-specific code. We powered it with built-in support for multiple environments, allowing the client to run the same tests against development, staging, and production without rewrites.<br>
+                            This leads to easy and hassle-free testing.
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hover Accordion 3 -->
+                <div class="hover-accordion-item">
+                    <div class="hover-accordion-header">
+                        <span class="hover-accordion-icon">+</span>
+                        <h4>Step 3: Enabling End-to-End Coverage</h4>
+                    </div>
+                    <div class="hover-accordion-content">
+                        <div class="hover-accordion-inner text-justify">
+                            We built the framework to handle API testing, UI testing, and database validation in a unified flow so that the bank is not testing in isolation. Due to this, the client was able to catch the issues at their infant stage, whether they originate in backend services, frontend interfaces, or data layers.
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hover Accordion 4 -->
+                <div class="hover-accordion-item">
+                    <div class="hover-accordion-header">
+                        <span class="hover-accordion-icon">+</span>
+                        <h4>Step 4: Making It Easy for Everyone</h4>
+                    </div>
+                    <div class="hover-accordion-content">
+                        <div class="hover-accordion-inner text-justify">
+                            As the Robot Framework is based on keyword-driven, the in-house testers of this client were able to write and understand tests using plain language keywords. They didn’t have to wrestle with complex code.
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hover Accordion 5 -->
+                <div class="hover-accordion-item">
+                    <div class="hover-accordion-header">
+                        <span class="hover-accordion-icon">+</span>
+                        <h4>Step 5: Delivering with Agile Discipline</h4>
+                    </div>
+                    <div class="hover-accordion-content">
+                        <div class="hover-accordion-inner text-justify">
+                           We followed Agile methodology throughout the engagement, delivering working increments on a regular cadence. Our governance framework kept the project on track, with clear visibility into progress, risks, and outcomes.
+                        The client always knew where things stood and had input at every stage.
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: LEFT CONTENT | RIGHT IMAGE (Water Flow LTR + CTA)
+         ========================================================================== -->
+    <section id="section-7" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- Left Side Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim slide-ltr" style="--delay: 0s;">
+                    What the Client Achieved
+                </h2>
+                <h3 class="subheading text-justify anim slide-ltr" style="--delay: 0.15s;">
+                    Since launching the new framework in February 2024, the bank has experienced a genuine shift in how testing supports its delivery pipeline:
+                </h3>
+                
+                <ul class="bullet-list" style="margin-bottom: 2rem;">
+                    <li class="anim fade-in" style="--delay: 0.3s;">Zero licensing costs</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">RFaster test development</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Fewer errors in test scripts</li>
+                    <li class="anim fade-in" style="--delay: 0.6s;">Broader adoption across teams</li>
+                    <li class="anim fade-in" style="--delay: 0.6s;">Smooth integration with cloud, AI, and data analytics</li>
+                </ul>
+
+                <p class="text-justify anim fade-in" style="--delay: 0.7s; color: var(--text-muted); margin-bottom: 2.5rem;">
+                    The bank now has a testing foundation that scales with its ambitions, costs nothing to license, and puts quality in the hands of the people who understand the business best.
+                </p>
+
+                <div class="anim fade-in" style="--delay: 0.8s;">
+                    <!-- <a href="#" class="btn-primary">Initiate Transformation</a> -->
+                </div>
+            </div>
+            
+            <!-- Right Side Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.4s;">
+                <img src="Client Achied.jpg" alt="Executive Meeting">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: BACKGROUND IMAGE (CENTER SUBHEADING & CTA ONLY)
+         ========================================================================== -->
+    <section id="section-8" style="min-height: 60vh; display: flex; align-items: center;">
+        <img src="Background 01.png" class="bg-img" alt="Digital Background">
+        <div class="bg-overlay-center"></div>
+
+        <div class="container content-center">
+            <h3 class="subheading anim slide-ttb" style="--delay: 0s; font-size: 1.5rem; font-weight: 400; color: #fff; max-width: 800px; margin: 0 auto 2.5rem auto;">
+                Stuck with expensive, complicated testing tools that slow you down?<br> StradIT can help you build something better.
+
+            </h3>
+            <div class="anim slide-ttb" style="--delay: 0.2s;">
+                <a href="#" class="btn-primary">Request a Test Automation Assessment</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERSECTION OBSERVER JAVASCRIPT ENGINE
+         ========================================================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Identify all elements slated for scroll animation
+            const animElements = document.querySelectorAll('.anim');
+            
+            // 2. Transfer the CSS variable --delay to standard transition-delay
+            animElements.forEach(el => {
+                const delayStr = el.style.getPropertyValue('--delay');
+                if (delayStr) {
+                    el.style.transitionDelay = delayStr;
+                }
+            });
+
+            // 3. Configure the Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px', // Trigger slightly before element enters view
+                threshold: 0.05
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Ensure animation fires only once
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            // 4. Attach observer
+            animElements.forEach(el => scrollObserver.observe(el));
+        });
+    </script>
+</body>
+</html>

@@ -117,3 +117,11 @@
   .da-grid-3x2 { grid-template-columns: 1fr; }
   .da-img-wrapper { height: 280px; }
 }
+
+@media (max-width: 480px) {
+  .da-hero { height: 60vh; }
+  .da-img-wrapper { height: 240px; }
+  .da-grid-3x2 { grid-template-columns: 1fr; }
+  .da-stroke-num { font-size: 2rem; }
+  .da-card-header h4 { font-size: 0.95rem; }
+}

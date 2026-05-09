@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Vision | Fluid Transformation</title>
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & THEME SETTINGS
+           ========================================================================== */
+        :root {
+            --brand-primary: #f68723;
+            --brand-hover: #e0751a;
+            --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
+            
+            --bg-dark-base: #070707;
+            --bg-dark-surface: #111111;
+            
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            
+            --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            
+            /* Water flow smoothness */
+            --transition-fluid: 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
+            --transition-swift: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            
+            --radius-md: 16px;
+            --radius-pill: 50px;
+        }
+
+        /* ==========================================================================
+           RESET & TYPOGRAPHY
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4, h5 {
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .heading-xl { font-size: clamp(3.2rem, 6vw, 3rem); }
+        .heading-lg { font-size: clamp(2.2rem, 4vw, 2rem); }
+        
+        .subheading {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* ==========================================================================
+           UI COMPONENTS
+           ========================================================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-primary);
+            color: #ffffff;
+            padding: 10px 35px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            padding: 0;
+            text-align: left;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -4px;
+            color: var(--brand-primary);
+            font-weight: 400;
+            font-size: 1.5rem;
+        }
+
+        .img-wrapper {
+            width: 100%;
+            height: 550px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ==========================================================================
+           LAYOUTS & CONTAINERS
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 120px 5%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Visually re-order columns */
+        .order-reverse { order: -1; }
+
+        /* Background Images & Overlays */
+        .bg-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /*background: rgba(6,6,6,0.75);*/
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           SCROLL ANIMATION ENGINE
+           ========================================================================== */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+            /* Default fallback transition */
+            transition: opacity var(--transition-fluid), transform var(--transition-fluid);
+        }
+
+        /* Standard Block Animations */
+        .anim.slide-rtl { transform: translateX(80px); }
+        .anim.slide-ltr { transform: translateX(-80px); }
+        .anim.fade-in { transform: scale(0.98); opacity: 0; transition: opacity 1.5s ease, transform 1.5s ease; }
+
+        /* Water Flow (Smooth LTR) */
+        .anim.water-flow {
+            transform: translateX(-50px);
+            transition: opacity var(--transition-fluid), transform var(--transition-fluid);
+        }
+
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* ==========================================================================
+           WORD-BY-WORD "TYPEWRITER" SLIDE LOGIC
+           ========================================================================== */
+        .word-typewriter {
+            display: inline-block;
+        }
+
+        .typewriter-word {
+            display: inline-block;
+            opacity: 0;
+            /* Slide from left to right smoothly */
+            transform: translateX(-30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transition-delay: calc(var(--word-index) * 0.15s); /* Delay between words */
+        }
+
+        .word-typewriter.is-visible .typewriter-word {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE OVERRIDES
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .order-reverse { order: 0; }
+            /* Force images below text on mobile for S4 */
+            #section-4 .img-wrapper { grid-row: 2; }
+            .img-wrapper { height: 400px; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 90px 5%; }
+            .text-justify { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         SECTION 1: HERO
+         ========================================================================== -->
+    <section id="hero" style="height: 100vh; min-height: 600px; padding: 0; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <img src="Ai.jpg" class="bg-img" alt="Architectural Tech Background" style="opacity: 0.8;">
+        <!-- Clear view gradient overlay -->
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%;z-index: 1;"></div>
+        
+        <div class="container content-center">
+            <!-- Word-by-word slide from LTR animation -->
+            <h1 class="heading-xl gradient-text word-typewriter split-text-typewriter">
+                Faster Due Diligence Delivered with Purpose-Built AI Agents
+
+            </h1>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: CENTER HEADING & CTA
+         ========================================================================== -->
+    <section id="section-2" style="background-color: var(--bg-dark-surface);">
+        <div class="container content-center">
+            <!-- Slide right to left -->
+            <h2 class="heading-lg gradient-text anim slide-rtl" style="--delay: 0s;">
+                Faster Due Diligence Delivered with Purpose-Built AI Agents
+
+            <!-- Slide left to right -->
+            <p class="subheading anim slide-ltr" style="--delay: 0.2s; max-width: 800px;">
+                Some companies hired more analysts. This company hired AI agents instead. StradIT created a digital workforce that reduced two weeks of work to minutes, yielding a 5,000% ROI on the investment.
+            </p>
+            <div class="anim fade-in" style="--delay: 0.4s;">
+                <!-- <a href="#section-3" class="btn-primary">Build What's Yours</a> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: LEFT CONTENT | RIGHT IMAGE (Water Flow LTR)
+         ========================================================================== -->
+    <section id="section-3" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- First Part: Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim water-flow" style="--delay: 0s;">
+                    Client Overview
+                </h2>
+                <h3 class="subheading text-justify anim water-flow" style="--delay: 0.15s;">
+                    A mid-to-large financial organization with alternative investments, AML/KYC, and fund operations for multiple asset classes and geographies. <br> The company was losing out to complexity.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim water-flow" style="--delay: 0.3s;">Slow and inconsistent manual processes</li>
+                    <li class="anim water-flow" style="--delay: 0.45s;">Rigid legacy RPA tools </li>
+                    <li class="anim water-flow" style="--delay: 0.6s;">Complex regulators were raising the bar</li>
+                    <li class="anim water-flow" style="--delay: 0.75s;">Only being available during the business hours was a hurdle</li>
+                </ul>
+                
+                <p class="text-justify anim water-flow" style="--delay: 0.9s; color: var(--text-muted);">
+                    They had the ambition. What they needed was intelligence that could keep up with it.
+                </p>
+            </div>
+            
+            <!-- Second Part: Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.5s;">
+                <img src="Client Overview.jpg" alt="Cloud Infrastructure">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: LEFT IMAGE | RIGHT CONTENT (Water Flow LTR)
+         ========================================================================== -->
+    <section id="section-4" style="background-color: var(--bg-dark-surface);">
+        <div class="container grid-2">
+            <!-- Second Part: Image (Visually ordered left via CSS grid) -->
+            <div class="img-wrapper anim fade-in order-reverse" style="--delay: 0.5s;">
+                <img src="Ai Development.jpg" alt="Cyber Security">
+            </div>
+
+            <!-- First Part: Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim water-flow" style="--delay: 0s;">
+                     StradIT: Enhanced AI Development for the Needs of Finance
+                </h2>
+                <h3 class="subheading text-justify anim water-flow" style="--delay: 0.15s;">
+                    The expertise of StradIT in AI development is in developing intelligent agents for financial institutions. These are not chatbots that operate on a pre-set script.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim water-flow" style="--delay: 0.3s;">Creating conversational AI agents trained on domain-specific knowledge</li>
+                    <li class="anim water-flow" style="--delay: 0.45s;">Creating autonomous workflows that intelligently escalate exceptions to human reviewers</li>
+                    <li class="anim water-flow" style="--delay: 0.6s;">Developing continuous learning loops to increase accuracy with each completed task</li>
+                    <li class="anim water-flow" style="--delay: 0.75s;">Providing enterprise-level security, compliance, and audit trails</li>
+                </ul>
+
+                <!-- <p class="text-justify anim water-flow" style="--delay: 0.9s; color: var(--text-muted);">
+                    Security is not an afterthought. Our DevSecOps pipelines ensure that vulnerability scanning is embedded into every deployment.
+                </p> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: LEFT CONTENT | RIGHT IMAGE (Water Flow LTR)
+         ========================================================================== -->
+    <section id="section-5" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <!-- First Part: Content -->
+            <div>
+                <h2 class="heading-lg gradient-text anim water-flow" style="--delay: 0s;">
+                    What the Client Achieved
+                </h2>
+                <h3 class="subheading text-justify anim water-flow" style="--delay: 0.15s;">
+                    The results demonstrated what purpose-built AI agents can do when they are built with the right expertise and deployed with the right governance.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim water-flow" style="--delay: 0.3s;">AltsIQ identified 95%+ of operational risks, without missing a beat</li>
+                    <li class="anim water-flow" style="--delay: 0.45s;">Due diligence took from a 2-week slog to a 2-minute exercise</li>
+                    <li class="anim water-flow" style="--delay: 0.6s;">Deal capacity increased from a few per year to 40+ at the same price point</li>
+                    <li class="anim water-flow" style="--delay: 0.75s;">A human analyst can cost up to $200K per year. The AI agent costs $250 per month</li>
+                    <li class="anim water-flow" style="--delay: 0.3s;">The company operates 24/7 across 50+ jurisdictions in 10+ languages, without any sick days or gaps in turnover</li>
+                    <li class="anim water-flow" style="--delay: 0.45s;">Compliance analysis improved for speed, acuity, and explainability to human analysts</li>
+                    <li class="anim water-flow" style="--delay: 0.6s;">Portfolio and fund analysis that took weeks to deliver are now available on demand</li>
+                    <li class="anim water-flow" style="--delay: 0.75s;">The company ceased to be constrained by headcount and began to scale with intelligence</li>
+                </ul>
+
+                <!-- <p class="text-justify anim water-flow" style="--delay: 0.9s; color: var(--text-muted);">
+                    Our advanced analytics pipelines convert operational friction into absolute clarity, providing a true competitive advantage.
+                </p> -->
+            </div>
+            
+            <!-- Second Part: Image -->
+            <div class="img-wrapper anim fade-in" style="--delay: 0.5s;">
+                <img src="Client Achied.jpg" alt="Artificial Intelligence">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: FINAL CTA / SUBHEADING
+         ========================================================================== -->
+    <section id="section-6" style="min-height: 80vh; display: flex; align-items: center; padding: 0 5%;">
+        <img src="Background 01.png" class="bg-img" alt="Digital Landscape">
+        <div class="bg-overlay"></div>
+
+        <div class="container content-center">
+            <!-- Only Subheading & CTA as requested -->
+            <p class="subheading text-justify anim fade-in" style="--delay: 0s; font-size: 1.2rem; font-weight: 300; max-width: 900px; margin: 0 auto 3rem auto;">
+                Is your team spending too much time on work that AI could handle faster, more accurately, and at a fraction of the cost?<br>
+StradIT builds AI agents tailored to the demands of financial operations, from design and training through deployment and ongoing optimization.
+
+            </p>
+            <div class="anim fade-in" style="--delay: 0.3s;">
+                <a href="#" class="btn-primary">Request an AI Agent Assessment</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERSECTION OBSERVER & TEXT SPLIT JAVASCRIPT ENGINE
+         ========================================================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            /* --- 1. WORD-BY-WORD SPLITTING LOGIC (Typewriter Effect) --- */
+            function splitTextForAnimation(selector) {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    const text = el.innerText;
+                    const words = text.split(' ');
+                    el.innerHTML = '';
+                    
+                    words.forEach((word, index) => {
+                        const span = document.createElement('span');
+                        span.textContent = word;
+                        span.className = `typewriter-word`;
+                        // Custom property for staggered CSS delay
+                        span.style.setProperty('--word-index', index);
+                        
+                        el.appendChild(span);
+                        el.appendChild(document.createTextNode(' '));
+                    });
+                });
+            }
+
+            // Apply word-splitting to target classes
+            splitTextForAnimation('.split-text-typewriter');
+
+
+            /* --- 2. SCROLL TRIGGER ANIMATIONS --- */
+            // Select all general animations AND the word animation containers
+            const animElements = document.querySelectorAll('.anim, .word-typewriter');
+            
+            animElements.forEach(el => {
+                if(el.classList.contains('anim')) {
+                    const delay = el.style.getPropertyValue('--delay');
+                    if (delay) el.style.transitionDelay = delay;
+                }
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.05
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Ensure animation fires only once per reload
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => scrollObserver.observe(el));
+        });
+    </script>
+</body>
+</html>

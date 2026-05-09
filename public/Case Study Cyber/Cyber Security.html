@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Vision | Build What's Yours</title>
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & THEME SETTINGS
+           ========================================================================== */
+        :root {
+            --brand-primary: #f68723;
+            --brand-hover: #e0751a;
+            --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
+            
+            --bg-dark-base: #080808;
+            --bg-dark-surface: #121212;
+            --bg-dark-elevated: #1a1a1a;
+            
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+            
+            --font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+            --transition-speed: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            --radius-md: 12px;
+            --radius-pill: 50px;
+        }
+
+        /* ==========================================================================
+           RESET & TYPOGRAPHY
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4, h5 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .heading-xl { font-size: clamp(3rem, 6vw, 3rem); }
+        .heading-lg { font-size: clamp(2.2rem, 4vw, 2rem); }
+        
+        .subheading {
+            font-size: 1.15rem;
+            color: var(--text-main); /* Requested white color */
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* ==========================================================================
+           UI COMPONENTS
+           ========================================================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-primary);
+            color: #ffffff;
+            padding: 10px 30px;
+            border-radius: var(--radius-pill); /* Round rectangle shape */
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 135, 35, 0.25);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding: 0;
+            text-align: left;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .bullet-list li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            top: -4px;
+            color: var(--brand-primary);
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        /* Image Wrapper for Grid Sections */
+        .img-wrapper {
+            width: 100%;
+            height: 550px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ==========================================================================
+           LAYOUTS & CONTAINERS
+           ========================================================================== */
+        section {
+            position: relative;
+            padding: 120px 5%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .bg-media {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /*background: rgba(8,8,8,0.7);*/
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           SCROLL ANIMATION ENGINE
+           ========================================================================== */
+        .anim {
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .anim.slide-rtl { transform: translateX(80px); }
+        .anim.slide-ltr { transform: translateX(-80px); }
+        .anim.fade-in { transform: scale(0.98); }
+        
+        .anim.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        /* Word-by-Word Animations */
+        .split-word {
+            display: inline-block;
+            opacity: 0;
+            will-change: opacity, transform;
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            transition-delay: calc(var(--word-index) * 0.08s); 
+        }
+
+        /* RTL Word Slide */
+        .anim-words-rtl .split-word { transform: translateX(40px); }
+        .anim-words-rtl.is-visible .split-word { opacity: 1; transform: translateX(0); }
+
+        /* ==========================================================================
+           SECTION 5: ACCORDION SPECIFICS
+           ========================================================================== */
+        .accordion-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: 50px auto 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 25px 0;
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #fff;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .accordion-icon {
+            color: var(--brand-primary);
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: transform 0.4s ease;
+            line-height: 1;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .accordion-item.active .accordion-content {
+            opacity: 1;
+        }
+
+        .accordion-inner {
+            padding: 0 0 30px 30px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Responsive Grid Adjustments */
+        @media (max-width: 992px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .img-wrapper { height: 400px; }
+            #section-4 .img-wrapper { grid-row: 2; } /* Keep images below text on mobile */
+            #section-6 .img-wrapper { grid-row: 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: HERO -->
+    <section id="hero" style="height: 100vh; min-height: 600px; padding: 0;">
+        <img src="Cyber case Study hero.jpg" class="bg-media" alt="Hero Clear View" style="opacity: 0.85;">
+        <!-- Minimal overlay to keep it a "clear view" while ensuring text legibility -->
+        <!-- <div class="bg-overlay" style="background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 100%);"></div> -->
+    </section>
+
+    <!-- SECTION 2: CENTER HEADING & CTA -->
+    <section id="section-2" style="background-color: var(--bg-dark-base);">
+        <div class="container content-center">
+            <h2 class="heading-xl gradient-text anim slide-rtl" style="--delay: 0s;">
+                Zero Data Loss Readiness Across 300+ Applications With Our Cybersecurity Service
+            </h2>
+            <p class="subheading anim slide-ltr" style="--delay: 0.2s;">
+                When a malware attack hits, every second counts.
+Discover how StradIT collaborated with a major financial institution to develop bulletproof, AI-fortified cyber resiliency, so that their mission-critical applications could recover with little disruption and no loss of data.
+
+            </p>
+            <!-- <div class="anim slide-rtl" style="--delay: 0.4s;">
+                <a href="#" class="btn-primary">Build What's Yours</a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- SECTION 3: LEFT HEADING, RIGHT IMAGE (Fade-In) -->
+    <section id="section-3" style="background-color: var(--bg-surface);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="heading-lg gradient-text anim fade-in" style="--delay: 0s;">
+                    Client Overview
+                </h2>
+                <h3 class="subheading text-justify anim fade-in" style="--delay: 0.1s;">
+                    Our client is a prominent global financial institution specializing in asset management, serving clients across the world. Their technology landscape is vast and complex, spanning 300+ applications powered by Oracle, SQL Server, and DB2 databases.<br>
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.2s;">No visibility into how applications would perform during a malware attack</li>
+                    <li class="anim fade-in" style="--delay: 0.3s;">Blind spots in tracking data entry points</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">Absence of standard operating procedures</li>
+                    <li class="anim fade-in" style="--delay: 0.5s;">Critical gaps in backup processes</li>
+                </ul>
+                <p class="subheading anim slide-rtl" style="--delay: 0.2s; color: #fff;">
+                Leadership understood the gravity of the situation: just one cyber attack could lead to extended downtime, significant data loss, hefty regulatory fines, and long-term damage to their reputation. They realized they needed a reliable partner to evaluate their entire application portfolio and create a solid plan for building resilience.
+            </p>
+            </div>
+            
+            <div class="img-wrapper anim fade-in" style="--delay: 0.3s;">
+                <img src="Case-Client overview.jpg" alt="Cloud Infrastructure">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: RIGHT HEADING, LEFT IMAGE (Fade-In) -->
+    <section id="section-4" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <div class="img-wrapper anim fade-in" style="--delay: 0.3s; order: -1;">
+                <img src="Why Stradit Cyber.jpg" alt="Cyber Security">
+            </div>
+
+            <div>
+                <h2 class="heading-lg gradient-text anim fade-in" style="--delay: 0s;">
+                    Why StradIT for Cyber Resiliency
+                </h2>
+                <h3 class="subheading text-justify anim fade-in" style="--delay: 0.1s;">
+                    StradIT offers a proven Cyber Resiliency practice, refined over years of safeguarding critical infrastructure for clients in banking, insurance, and asset management.
+                </h3>
+                
+                <ul class="bullet-list">
+                    <li class="anim fade-in" style="--delay: 0.2s;">100% tailored cybersecurity advisory</li>
+                    <li class="anim fade-in" style="--delay: 0.3s;">Recovery frameworks from the ground up</li>
+                    <li class="anim fade-in" style="--delay: 0.4s;">24*7 threat monitoring and management</li>
+                    </ul>
+                 <p class="subheading anim slide-rtl" style="--delay: 0.2s; color: #fff;">
+                We don't do cookie-cutter solutions. Every engagement is rooted in deep technical analysis, tailored to each client's unique risk profile.
+            </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: CENTER CTA + ACCORDION -->
+    <section id="section-5" style="background-color: var(--bg-surface);">
+        <div class="container content-center">
+            <h2 class="heading-lg gradient-text anim slide-rtl" style="--delay: 0s;">
+                How We Made It Happen
+            </h2>
+            <p class="subheading anim slide-rtl" style="--delay: 0.2s; color: #fff;">
+                Cybersecurity at StradIT is proactive, precise, and battle-tested. This is why took a multi-step approach to help this client to overcome their cybersecurity challenges.
+            </p>
+            <div class="anim slide-rtl" style="--delay: 0.4s; margin-bottom: 20px;">
+                <a href="#" class="btn-primary">Explore our CoE</a>
+            </div>
+            
+            <div class="accordion-wrapper anim slide-rtl" style="--delay: 0.6s;">
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 1: Getting Under the Hood of Every Application
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            We began by understanding everything and carefully mapping each application's architecture, identifying its data sources, and tracing downstream dependencies.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 2:Measuring Recovery Readiness
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            Next, we evaluated the Recovery Point Capability of every application in scope. This included looking at existing backup mechanisms, replay capabilities, and calculating exactly how much data could be lost in different scenarios.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 3: Building Custom Test Plans
+
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            We then designed 100% tailored test plans for each application. Every plan was accounted for in the database type, application criticality, integration complexity, and business function.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 4: Running the Tests and Keeping Governance Tight
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                            Our experts performed tests along with the client teams, ensuring governance standards were met. All evidence, reports, and sign-offs were securely stored for audit readiness.
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-icon">+</span>
+                        Step 5: Closing the Gaps and Arming Teams with Playbooks
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner text-justify">
+                           After testing, we compiled a clear list of gaps and remediation recommendations. For every application, we created or updated playbooks and runbooks with step-by-step instructions for bringing systems back to normal operations with minimal data loss.<br>
+These documents became the go-to resource for teams facing an incident.
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: SPLIT WITH WORD-BY-WORD ANIMATION -->
+    <section id="section-6" style="background-color: var(--bg-dark-base);">
+        <div class="container grid-2">
+            <div>
+                <h2 class="heading-lg gradient-text split-text-rtl anim-words-rtl">
+                    What the Client Walked Away With
+                </h2>
+                <h3 class="subheading anim slide-ltr" style="--delay: 0.1s; color: #fff;">
+                    The client had transformed their cyber resiliency posture:
+                
+                <ul class="bullet-list">
+                    <li class="anim slide-rtl" style="--delay: 0.2s;">300+ applications assessed, tested, and documented</li>
+                    <li class="anim slide-rtl" style="--delay: 0.3s;">Automated data comparison tools for faster recovery validation</li>
+                    <li class="anim slide-rtl" style="--delay: 0.4s;">Clear, actionable playbooks ready for any incident</li>
+                    <li class="anim slide-rtl" style="--delay: 0.5s;">Reduced risk exposure across critical infrastructure</li>
+                    <li class="anim slide-rtl" style="--delay: 0.5s;">Confidence in zero data loss recovery</li>
+                </ul>
+                
+                <p class="anim slide-rtl text-justify" style="--delay: 0.6s; color: var(--text-muted); margin-bottom: 30px;">
+                    Two years into our partnership, this institution still chooses StradIT. The reason is simple: a tailored cybersecurity strategy that makes threats a thing of the past.<br>
+Unsure how your organization would survive a cyber incident?
+StradIT can help you uncover vulnerabilities and close the gaps before attackers find them first.
+
+                
+                <div class="anim slide-rtl" style="--delay: 0.7s;">
+                    <a href="#" class="btn-primary">Request a Cyber Resiliency Assessment</a>
+                </div>
+            </div>
+            
+            <div class="img-wrapper anim fade-in" style="--delay: 0.3s;">
+                <img src="Client walk.jpg" alt="Artificial Intelligence">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            /* --- 1. WORD-BY-WORD TEXT SPLITTING LOGIC --- */
+            function splitTextForAnimation(selector, animClass) {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    const text = el.innerText;
+                    const words = text.split(' ');
+                    el.innerHTML = '';
+                    
+                    words.forEach((word, index) => {
+                        const span = document.createElement('span');
+                        span.textContent = word;
+                        span.className = `split-word`;
+                        // Custom property for staggered CSS delay
+                        span.style.setProperty('--word-index', index);
+                        
+                        el.appendChild(span);
+                        el.appendChild(document.createTextNode(' '));
+                    });
+                });
+            }
+
+            // Apply word-splitting to target classes
+            splitTextForAnimation('.split-text-rtl', 'anim-words-rtl');
+
+
+            /* --- 2. SCROLL TRIGGER ANIMATIONS --- */
+            const animElements = document.querySelectorAll('.anim, .anim-words-rtl');
+            
+            animElements.forEach(el => {
+                if(el.classList.contains('anim')) {
+                    const delay = el.style.getPropertyValue('--delay');
+                    if (delay) el.style.transitionDelay = delay;
+                }
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.05
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            animElements.forEach(el => scrollObserver.observe(el));
+
+
+            /* --- 3. SMOOTH WATER FLOW ACCORDION --- */
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const content = header.nextElementSibling;
+                    const isActive = item.classList.contains('active');
+
+                    // Close all open accordions first (for clean UX)
+                    document.querySelectorAll('.accordion-item').forEach(accItem => {
+                        accItem.classList.remove('active');
+                        accItem.querySelector('.accordion-content').style.maxHeight = null;
+                    });
+
+                    // If it was NOT active before click, open it smoothly
+                    if (!isActive) {
+                        item.classList.add('active');
+                        // Set max height dynamically based on scrollHeight to ensure "water flow" smoothness
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // Re-calculate heights on window resize for responsiveness
+            window.addEventListener('resize', () => {
+                document.querySelectorAll('.accordion-item.active .accordion-content').forEach(content => {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

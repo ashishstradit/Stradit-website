@@ -55,11 +55,14 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: 1.2rem;
-  background: linear-gradient(90deg, #f68723 0%, #e63946 100%);
+  background: linear-gradient(90deg, #ffea3b 0%, #ff633b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .contact-hero-content p {
@@ -201,4 +204,38 @@ textarea.form-control {
 @media (max-width: 600px) {
   .contact-form-wrapper { padding: 28px 20px; }
   .contact-hero { height: auto; padding: 120px 5% 80px; }
+}
+
+@media (max-width: 480px) {
+  .contact-hero-content h1 { font-size: 1.8rem; }
+  .contact-hero-content p { font-size: 1rem; }
+  .contact-section { padding: 60px 5%; }
+  .contact-info h2 { font-size: 1.6rem; }
+  .contact-submit-btn { font-size: 0.95rem; padding: 14px 20px; }
+}
+
+/* Hero copy section below hero image */
+.contact-hero-copy {
+  background: #0a0a0a;
+  padding: 80px 5% 60px;
+}
+
+.contact-hero-copy-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-hero-copy-content h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+
+.contact-hero-copy-content p {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
 }

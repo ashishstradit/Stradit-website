@@ -4,6 +4,21 @@ import './case-study.css'
 
 const img = (name: string) => `/Main-case%20study%20/${encodeURIComponent(name)}`
 
+const bullets1 = [
+  'Fragmented application portfolios',
+  'Deep dependencies on proprietary middleware',
+  'Limited observability across environments',
+  'Multiple regulators enforcing stringent compliance requirements',
+]
+
+const bullets2 = [
+  'End-to-end IT service assessment',
+  'Detailed cloud readiness assessment',
+  '100% personalized cloud deployment',
+  'Extensive technology evaluation',
+  'Multi-year cloud roadmap',
+]
+
 const accordionItems = [
   {
     title: 'Step 1: IT Service Catalogue',
@@ -11,20 +26,26 @@ const accordionItems = [
   },
   {
     title: 'Step 2: Cloud Readiness Assessment',
-    body: 'We then performed functional, financial, and technical feasibility analysis for each service so that the client is able to easily evaluate application architecture patterns, integration style, and data flows. We also applied a scoring model for cloud suitability.',
+    body: 'We then performed functional, financial, and technical feasibility analysis for each service so that the client is able to easily evaluate application architecture patterns, integration style, and data flows. We also applied a scoring model for cloud suitability. By now, the client has a priority list of cloud-ready services.',
   },
   {
     title: 'Step 3: Cloud Deployment Strategy',
-    body: 'To achieve result-driven cloud deployment, the team classified workloads into public, private, and hybrid cloud candidates and defined isolation requirements for regulated data, customer PII, and payment workload. Additionally, we mapped non-functional requirements to avoid resource wastage.',
+    body: 'To achieve result-driven cloud deployment, the team classified workloads into public, private, and hybrid cloud candidates and defined isolation requirements for regulated data, customer PII, and payment workload. Additionally, we mapped non-functional requirements to avoid resource wastage. This allowed the client to pick deployment models based on evidence instead of generic best practices.',
   },
   {
     title: 'Step 4: Technology Selection',
-    body: 'Based on the assessment and client\'s requirement, the team constructs a detailed and viable evaluation framework around IaaS, PaaS, and managed services while comparing hyperscaler offerings. We carefully identified preferred vendors and implementation partners.',
+    body: "Based on the assessment and client's requirement, the team constructs a detailed and viable evaluation framework around IaaS, PaaS, and managed services while comparing hyperscaler offerings. We carefully identified preferred vendors and implementation partners offering solutions aligned with the client's objectives.",
   },
   {
     title: 'Step 5: Cloud Roadmap And Governance',
     body: 'We create the cloud roadmap that defines migration waves, covering quick wins, and establish a cloud governance, and help our client to realize early benefits while preparing for deeper modernization.',
   },
+]
+
+const stats = [
+  { num: '30%', label: 'reduction in operations cost' },
+  { num: '70%', label: 'reduction in software license cost' },
+  { num: '50%', label: 'faster application deployment' },
 ]
 
 export default function CaseStudyPage() {
@@ -66,7 +87,7 @@ export default function CaseStudyPage() {
         <div className="cs-hero-overlay" />
         <div className="cs-hero-content">
           <h1 className="cs-anim cs-anim-rtl">
-            Our AI-led Cloud Advisory Resulted in 30% Less Operations Cost
+            Our Expert Cloud Advisory Resulted in 30% Less Operations Cost
           </h1>
           <p className="cs-anim cs-anim-rtl" style={d('0.15s')}>
             Learn how StradIT helped a US-based financial institution move from a fragmented legacy data-center landscape to a cloud-ready, cost-optimized portfolio, without compromising regulatory, security, or data-residency requirements.
@@ -86,12 +107,15 @@ export default function CaseStudyPage() {
               A leading US-based financial institution, operating under strict regulatory, audit, and data residency requirements, with a heterogeneous landscape of mainframe, mid-tier, and distributed systems. The client faced several structural challenges:
             </h3>
             <ul className="cs-bullets">
-              {['Fragmented application portfolios', 'Deep dependencies on proprietary middleware', 'Limited observability across environments', 'Multiple regulators enforcing stringent compliance requirements'].map((b, i) => (
+              {bullets1.map((b, i) => (
                 <li key={i} className="cs-anim cs-anim-ttb" style={d(`${0.2 + i * 0.1}s`)}>{b}</li>
               ))}
             </ul>
             <p className="cs-p cs-anim cs-anim-ttb" style={d('0.6s')}>
-              The absence of a common framework to assess cloud readiness resulted in higher operational costs and eroding margins. A structured, evidence-based cloud advisory approach was required.
+              The absence of a common framework to assess cloud readiness resulted in higher operational costs and eroding margins. A simple lift-and-shift approach would have only moved costs, not optimized them.
+            </p>
+            <p className="cs-p cs-anim cs-anim-ttb" style={d('0.7s')}>
+              A structured, evidence-based cloud advisory approach was required.
             </p>
           </div>
           <div className="cs-anim cs-anim-ttb" style={d('0.3s')}>
@@ -107,7 +131,7 @@ export default function CaseStudyPage() {
         <div className="cs-container cs-center">
           <h2 className="cs-h2 cs-anim cs-anim-ttb">Our Proven Scale and Experience in Cloud Advisory</h2>
           <p className="cs-h3 cs-anim cs-anim-ttb" style={d('0.15s')}>
-            StradIT brings a mature, execution focused cloud practice to engagements. With 5+ years of dedicated experience in AI-powered cloud solutions and a core group of 30+ cloud and infrastructure specialists, our CoE in Cloud & Infrastructure has successfully managed 7+ data centers and 5,000+ cloud instances for clients across regulated industries.
+            StradIT brings a mature, execution focused cloud practice to engagements. With 5+ years of dedicated experience in cloud solutions and a core group of 30+ cloud and infrastructure specialists, our CoE in Cloud & Infrastructure has successfully managed 7+ data centers and 5,000+ cloud instances for clients across regulated industries. These accelerators allow StradIT to move from assessment to repeatable, codified implementation without relying on one-off scripts.
           </p>
         </div>
       </section>
@@ -121,7 +145,7 @@ export default function CaseStudyPage() {
               When the client reached StradIT for our Cloud Advisory Services, we played at the front foot and came up with a fully-optimized cloud advisory covering:
             </h3>
             <ul className="cs-bullets">
-              {['End-to-end IT service assessment', 'Detailed cloud readiness assessment', '100% personalized cloud deployment', 'Extensive technology evaluation', 'Multi-year cloud roadmap'].map((b, i) => (
+              {bullets2.map((b, i) => (
                 <li key={i} className="cs-anim cs-anim-ttb" style={d(`${0.2 + i * 0.1}s`)}>{b}</li>
               ))}
             </ul>
@@ -139,13 +163,13 @@ export default function CaseStudyPage() {
         <div className="cs-container cs-center">
           <h2 className="cs-h2 cs-anim cs-anim-rtl">Solutions Offered</h2>
           <p className="cs-h3 cs-anim cs-anim-rtl" style={d('0.15s')}>
-            We bring our hands-on mastery over cloud and infrastructure, backed by AI-driven analysis, to create a multi-step cloud strategy.
+            We bring our hands-on mastery over cloud & infrastructure and created a multi-step cloud strategy.
           </p>
           <a href="/coe/cloud/" className="cs-btn cs-anim cs-anim-rtl" style={d('0.3s')}>Explore our CoE</a>
         </div>
       </section>
 
-      {/* Accordion */}
+      {/* Accordion Steps */}
       <section className="cs-section cs-darker">
         <div className="cs-container">
           <div className="cs-accordion">
@@ -174,9 +198,15 @@ export default function CaseStudyPage() {
             Within the first phases of execution of our cloud advisory, the client realized tangible benefits driven by the advisory outputs.
           </p>
           <div className="cs-stats cs-anim cs-anim-ttb" style={d('0.3s')}>
+            {stats.map((s, i) => (
+              <div key={i} className="cs-stat">
+                <div className="cs-stat-num">{s.num}</div>
+                <div className="cs-stat-label">{s.label}</div>
+              </div>
+            ))}
           </div>
           <p className="cs-p cs-anim cs-anim-ttb" style={d('0.45s')}>
-            Peace of mind and hassle-free migration, backed by a clear, executable roadmap and an agreed operating model, come built in with every engagement. If you are finding it hard to navigate complex cloud decisions, talk to StradIT&apos;s Cloud Advisory team today.
+            Peace of mind and hassle-free migration, backed by a clear, executable roadmap and an agreed operating model, come built in with every engagement. If you are finding it hard to navigate complex cloud decisions, talk to StradIT&apos;s Cloud Advisory team today and get a structured plan your teams can execute with confidence.
           </p>
           <a href="/contact-us/" className="cs-btn cs-anim cs-anim-ttb" style={d('0.6s')}>
             Request a Cloud Readiness Assessment

@@ -25,11 +25,16 @@ export default function ContactUsPage() {
   return (
     <div ref={pageRef} className="contact-page">
 
-      {/* Hero */}
+      {/* Hero — image only */}
       <section className="contact-hero">
+        <img src="/contact-hero.png" alt="Contact Hero" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, opacity: 1 }} />
         <div className="contact-hero-overlay" />
-        <div className="contact-hero-content">
-          <h1 className="c-anim c-anim-rtl">Let&apos;s Build the Future Together.</h1>
+      </section>
+
+      {/* Hero heading section below */}
+      <section className="contact-hero-copy">
+        <div className="contact-hero-copy-content">
+          <h1 className="c-anim c-anim-rtl text-gradient">Let&apos;s Build the Future Together.</h1>
           <p className="c-anim c-anim-rtl" style={{ transitionDelay: '0.2s' }}>
             Connect with our experts today and embark on a digital transformation journey tailored to your enterprise.
           </p>
@@ -41,7 +46,7 @@ export default function ContactUsPage() {
         <div className="contact-container">
 
           <div className="contact-info" style={{ paddingTop: 20 }}>
-            <h2 className="c-anim c-anim-up">Get in Touch</h2>
+            <h2 className="c-anim c-anim-up text-gradient">Get in Touch</h2>
             <h3 className="c-anim c-anim-up" style={{ transitionDelay: '0.1s' }}>
               We are ready to align technology with your business vision.
             </h3>

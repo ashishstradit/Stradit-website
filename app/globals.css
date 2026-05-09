@@ -162,3 +162,29 @@ section {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* ---- Global heading gradient — applies to ALL pages ---- */
+.text-gradient,
+.gradient-text,
+.cs-h2,
+.gcc-section-header h2,
+.gcc-hero-content h1,
+.gcc-cta-content h2 {
+  background: linear-gradient(90deg, #ffea3b, #ff633b) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+}
+
+/* ── Global mobile section padding fix ── */
+@media (max-width: 768px) {
+  section { padding: 60px 5% !important; }
+  .heading-main { font-size: 1.6rem !important; }
+}
+
+@media (max-width: 480px) {
+  section { padding: 50px 5% !important; }
+  .heading-main { font-size: 1.3rem !important; }
+  .sub-heading { font-size: 0.95rem !important; }
+}

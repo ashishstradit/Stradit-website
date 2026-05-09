@@ -6,7 +6,7 @@ import './gcc.css'
 const differenceCards = [
   { icon: 'cloud', title: 'First hires in 2–4 weeks. Not quarters.' },
   { icon: 'shield', title: 'Cut costs up to 50% without cutting corners.' },
-  { icon: 'server', title: 'Go from 5 to 50 to 500. We grow when you grow.' },
+  { icon: 'server', title: 'Go from 100 to 500 to 1000. We grow when you grow.' },
   { icon: 'code', title: 'One partner. Full stack. No juggling vendors.' },
 ]
 

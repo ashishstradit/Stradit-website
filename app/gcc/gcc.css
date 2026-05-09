@@ -360,3 +360,13 @@
   .ci-1, .ci-2, .ci-3, .ci-4, .ci-5 { grid-column: 1 / -1; }
   .gcc-collage-img { height: 280px; }
 }
+
+@media (max-width: 480px) {
+  .gcc-hero-content h1 { font-size: 1.6rem; }
+  .gcc-h2 { font-size: 1.3rem; }
+  .gcc-card { padding: 20px 16px; }
+  .gcc-collage-img { height: 220px; }
+  .gcc-btn { width: 100%; justify-content: center; }
+  .gcc-cta { padding: 60px 5%; }
+  .gcc-grid-5 .gcc-card:last-child { max-width: 100%; }
+}

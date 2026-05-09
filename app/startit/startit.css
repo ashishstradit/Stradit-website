@@ -1,4 +1,4 @@
-/* StartIT — scoped under .startit-page (CoE-style scroll, no iframe) */
+/* StartIT page styles */
 @keyframes startit-gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -8,7 +8,6 @@
   --brand-primary: #f68723;
   --brand-hover: #e0751a;
   --brand-color: var(--brand-primary);
-  --brand-gradient: linear-gradient(135deg, #f68723 0%, #e63946 100%);
   --bg-dark-base: #060606;
   --bg-dark-surface: #121212;
   --bg-dark-elevated: #1a1a1a;
@@ -23,353 +22,63 @@
   font-family: var(--font-family);
   line-height: 1.6;
 }
-/* ==========================================================================
-   CSS VARIABLES & THEME SETTINGS
-   ========================================================================== */
-/* ==========================================================================
-   RESET & TYPOGRAPHY
-   ========================================================================== */
-/* Images: full width inside layout */
 .startit-page img { max-width: 100%; height: auto; display: block; }
-.startit-page h1, .startit-page h2, .startit-page h3, .startit-page h4, .startit-page h5 {
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-.startit-page .gradient-text {
-  background: linear-gradient(90deg, #f68723 0%, #e63946 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-}
-
-.startit-page .text-gradient .split-word {
-  color: #f68723;
-  -webkit-text-fill-color: #f68723;
-  background: none;
-}
-/* Typography Scales */
+.startit-page h1,.startit-page h2,.startit-page h3,.startit-page h4,.startit-page h5 { line-height: 1.2; margin-bottom: 1rem; font-weight: 600; letter-spacing: -0.02em; }
+.startit-page .gradient-text { color: #f68723; -webkit-text-fill-color: #f68723; display: inline-block; }
 .startit-page .heading-xl { font-size: clamp(3rem, 6vw, 3rem); }
 .startit-page .heading-lg { font-size: clamp(2.2rem, 4vw, 2rem); }
 .startit-page .heading-md { font-size: clamp(1.6rem, 3vw, 1.5rem); }
-.startit-page .subheading {
-  font-size: 1.15rem;
-  color: var(--text-main);
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
-  font-weight: 400;
-}
-.startit-page .text-justify {
-  text-align: justify;
-  text-justify: inter-word;
-}
-/* ==========================================================================
-   UI COMPONENTS
-   ========================================================================== */
-.startit-page .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #e0751a;
-  color: #ffffff;
-  padding: 10px 35px;
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 1.05rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(246, 135, 35, 0.2);
-}
-.startit-page .btn-primary:hover {
-  background-color: var(--brand-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(246, 135, 35, 0.4);
-}
-.startit-page .bullet-list {
-  list-style: none;
-  margin-bottom: 1.5rem;
-  padding: 0;
-  text-align: left;
-}
-.startit-page .bullet-list li {
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 12px;
-  color: var(--text-muted);
-  font-size: 1.05rem;
-}
-.startit-page .bullet-list li::before {
-  content: "+";
-  position: absolute;
-  left: 0;
-  top: -4px;
-  color: var(--brand-primary);
-  font-weight: 600;
-  font-size: 1.5rem;
-}
-/* ==========================================================================
-   LAYOUT STRUCTURES
-   ========================================================================== */
-.startit-page section {
-  position: relative;
-  padding: 100px 5%;
-  overflow: hidden;
-}
-.startit-page .container {
-  max-width: 1300px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-.startit-page .grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-}
-.startit-page .content-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-}
-/* Backgrounds */
-.startit-page .bg-img {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.4;
-}
-.startit-page .bg-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(6,6,6,0.85);
-  z-index: 1;
-}
-/* Animated Background Gradient */
-.startit-page .bg-animated-gradient {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(-45deg, #050505, #1a0a00, #0a0a0a, #2a1100);
-  background-size: 400% 400%;
-  animation: startit-gradientBG 15s ease infinite;
-  z-index: 0;
-}
-/* ==========================================================================
-   SCROLL ANIMATION ENGINE & WORD SPLITTING
-   ========================================================================== */
-/* General Blocks */
-.startit-page .anim {
-  opacity: 0;
-  will-change: opacity, transform;
-  transition: opacity var(--transition-fluid), transform var(--transition-fluid);
-}
+.startit-page .subheading { font-size: 1.15rem; color: var(--text-main); margin-bottom: 2.5rem; line-height: 1.7; font-weight: 400; }
+.startit-page .text-justify { text-align: justify; text-justify: inter-word; }
+.startit-page .btn-primary { display: inline-flex; align-items: center; justify-content: center; background-color: #e0751a; color: #ffffff; padding: 10px 35px; border-radius: var(--radius-pill); text-decoration: none; font-weight: 400; font-size: 1.05rem; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(246,135,35,0.2); }
+.startit-page .btn-primary:hover { background-color: var(--brand-hover); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(246,135,35,0.4); }
+.startit-page .bullet-list { list-style: none; margin-bottom: 1.5rem; padding: 0; }
+.startit-page .bullet-list li { position: relative; padding-left: 30px; margin-bottom: 12px; color: var(--text-muted); font-size: 1.05rem; }
+.startit-page .bullet-list li::before { content: "+"; position: absolute; left: 0; top: -4px; color: var(--brand-primary); font-weight: 600; font-size: 1.5rem; }
+.startit-page section { position: relative; padding: 100px 5%; overflow: hidden; }
+.startit-page .container { max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; }
+.startit-page .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.startit-page .content-center { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 900px; margin: 0 auto; }
+.startit-page .bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.4; }
+.startit-page .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(6,6,6,0.85); z-index: 1; }
+.startit-page .bg-animated-gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(-45deg, #050505, #1a0a00, #0a0a0a, #2a1100); background-size: 400% 400%; animation: startit-gradientBG 15s ease infinite; z-index: 0; }
+.startit-page .anim { opacity: 0; will-change: opacity, transform; transition: opacity var(--transition-fluid), transform var(--transition-fluid); }
 .startit-page .anim.slide-rtl { transform: translateX(80px); }
 .startit-page .anim.slide-ltr { transform: translateX(-80px); }
 .startit-page .anim.slide-ttb { transform: translateY(-50px); }
 .startit-page .anim.zoom-out { transform: scale(1.15); }
 .startit-page .anim.is-visible { opacity: 1; transform: translate(0) scale(1); }
-/* Word-by-Word Animations */
-.startit-page .split-word {
-  display: inline-block;
-  opacity: 0;
-  will-change: opacity, transform;
-  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-  transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    /* Calculate delay based on JS assigned index */
-  transition-delay: calc(var(--word-index) * 0.08s);
-}
-/* RTL Word Slide */
+.startit-page .split-word { display: inline-block; opacity: 0; will-change: opacity, transform; transition: opacity 0.6s cubic-bezier(0.25,1,0.5,1), transform 0.6s cubic-bezier(0.25,1,0.5,1); transition-delay: calc(var(--word-index) * 0.08s); }
 .startit-page .anim-words-rtl .split-word { transform: translateX(40px); }
-.startit-page .anim-words-rtl.is-visible .split-word { opacity: 100; transform: translateX(0); }
-/* Zoom Out Reveal Word */
+.startit-page .anim-words-rtl.is-visible .split-word { opacity: 1; transform: translateX(0); }
 .startit-page .anim-words-zoom .split-word { transform: scale(1.3); }
-.startit-page .anim-words-zoom.is-visible .split-word { opacity: 100; transform: scale(1); }
-/* ==========================================================================
-   SECTION 3: CAROUSEL WIDGET
-   ========================================================================== */
-.startit-page .carousel-box {
-  position: relative;
-  background: var(--bg-dark-surface);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-  overflow: hidden;
-  margin: 50px 0;
-}
-.startit-page .carousel-track {
-  display: flex;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
-}
-.startit-page .carousel-slide {
-  flex: 0 0 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
+.startit-page .anim-words-zoom.is-visible .split-word { opacity: 1; transform: scale(1); }
+.startit-page .carousel-box { position: relative; background: var(--bg-dark-surface); border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 30px 60px rgba(0,0,0,0.6); overflow: hidden; margin: 50px 0; }
+.startit-page .carousel-track { display: flex; transition: transform 0.8s cubic-bezier(0.25,1,0.5,1); will-change: transform; }
+.startit-page .carousel-slide { flex: 0 0 100%; width: 100%; display: grid; grid-template-columns: 1fr 1fr; opacity: 0; transition: opacity 0.5s ease; }
 .startit-page .carousel-slide.active { opacity: 1; }
-.startit-page .carousel-content {
-  padding: 60px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.startit-page .carousel-image {
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-  object-fit: cover;
-}
-/* Controls */
-.startit-page .carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(246, 135, 35, 0.9);
-  color: #fff;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
+.startit-page .carousel-content { padding: 60px 50px; display: flex; flex-direction: column; justify-content: center; }
+.startit-page .carousel-image { width: 100%; height: 100%; min-height: 500px; object-fit: cover; }
+.startit-page .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: rgba(246,135,35,0.9); color: #fff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: all 0.3s ease; }
 .startit-page .carousel-btn:hover { background: var(--brand-hover); transform: translateY(-50%) scale(1.1); }
 .startit-page .carousel-btn.prev { left: 20px; }
 .startit-page .carousel-btn.next { right: 20px; }
 .startit-page .carousel-btn svg { width: 24px; height: 24px; fill: currentColor; }
-/* ==========================================================================
-   SECTION 4: 3:3 GRID
-   ========================================================================== */
-.startit-page .grid-3x2 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin-top: 50px;
-}
-.startit-page .icon-box-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
-  padding: 40px 30px;
-  border-radius: var(--radius-md);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease;
-}
-.startit-page .icon-box-card:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(246, 135, 35, 0.3);
-  transform: translateY(-5px);
-}
-.startit-page .icon-wrapper {
-  width: 60px;
-  height: 60px;
-  background: rgba(246, 135, 35, 0.1);
-  color: var(--brand-primary);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+.startit-page .grid-3x2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+.startit-page .icon-box-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 40px 30px; border-radius: var(--radius-md); text-align: center; display: flex; flex-direction: column; align-items: center; transition: all 0.3s ease; }
+.startit-page .icon-box-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(246,135,35,0.3); transform: translateY(-5px); }
+.startit-page .icon-wrapper { width: 60px; height: 60px; background: rgba(246,135,35,0.1); color: var(--brand-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
 .startit-page .icon-wrapper svg { width: 30px; height: 30px; fill: currentColor; }
 .startit-page .icon-box-card h4 { font-size: 1.25rem; color: #fff; margin: 0; }
-/* ==========================================================================
-   SECTION 6: FAQ ACCORDION
-   ========================================================================== */
-.startit-page .accordion-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-.startit-page .accordion-item {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.startit-page .accordion-header {
-  width: 100%;
-  padding: 25px 0;
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  color: #fff;
-  text-align: left;
-  cursor: pointer;
-  font-size: 1.25rem;
-  font-weight: 600;
-  font-family: inherit;
-}
-.startit-page .accordion-icon {
-  color: var(--brand-primary);
-  font-weight: 800;
-  font-size: 1.5rem;
-  margin-right: 15px;
-  transition: transform 0.4s ease;
-  line-height: 1;
-}
+.startit-page .accordion-wrapper { max-width: 900px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); }
+.startit-page .accordion-item { border-bottom: 1px solid rgba(255,255,255,0.1); }
+.startit-page .accordion-header { width: 100%; padding: 25px 0; display: flex; align-items: center; background: none; border: none; color: #fff; text-align: left; cursor: pointer; font-size: 1.25rem; font-weight: 600; font-family: inherit; }
+.startit-page .accordion-icon { color: var(--brand-primary); font-weight: 800; font-size: 1.5rem; margin-right: 15px; transition: transform 0.4s ease; line-height: 1; }
 .startit-page .accordion-item.active .accordion-icon { transform: rotate(45deg); }
-.startit-page .accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
-  opacity: 0;
-}
+.startit-page .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.25,1,0.5,1), opacity 0.4s ease; opacity: 0; }
 .startit-page .accordion-item.active .accordion-content { opacity: 1; }
-.startit-page .accordion-inner {
-  padding: 0 0 30px 35px;
-  color: var(--text-muted);
-  font-size: 1.05rem;
-}
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-@media (max-width: 992px) {
-  .startit-page .grid-2 { grid-template-columns: 1fr; gap: 40px; }
-  .startit-page .carousel-slide { grid-template-columns: 1fr; }
-  .startit-page .carousel-image { height: 300px; min-height: auto; }
-  .startit-page .carousel-content { padding: 40px 30px; }
-  .startit-page .grid-3x2 { grid-template-columns: repeat(2, 1fr); }
-  .startit-page .carousel-btn { display: none; }
-}
-@media (max-width: 600px) {
-  .startit-page .grid-3x2 { grid-template-columns: 1fr; }
-  .startit-page .text-justify { text-align: left; }
-}
-
-.startit-page .bg-overlay-center {
-  position: absolute;
-  inset: 0;
-  background: rgba(6, 6, 6, 0.82);
-  z-index: 1;
-}
-
-/* One document scroll + CoE hero spacing under fixed navbar */
-.coe-detail.startit-page #hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: var(--nav-offset, 80px) 5% 48px;
-  text-align: center;
-}
-
-/* Same orange as landing page Applied AI */
-.startit-page .text-gradient .split-word {
-  color: #f68723;
-  -webkit-text-fill-color: #f68723;
-  background: none;
-}
+.startit-page .accordion-inner { padding: 0 0 30px 35px; color: var(--text-muted); font-size: 1.05rem; }
+@media (max-width: 992px) { .startit-page .grid-2 { grid-template-columns: 1fr; gap: 40px; } .startit-page .carousel-slide { grid-template-columns: 1fr; } .startit-page .carousel-image { height: 300px; min-height: auto; } .startit-page .carousel-content { padding: 40px 30px; } .startit-page .grid-3x2 { grid-template-columns: repeat(2, 1fr); } .startit-page .carousel-btn { display: none; } }
+@media (max-width: 600px) { .startit-page .grid-3x2 { grid-template-columns: 1fr; } .startit-page .text-justify { text-align: left; } }
+.startit-page .bg-overlay-center { position: absolute; inset: 0; background: rgba(6,6,6,0.82); z-index: 1; }
+.coe-detail.startit-page #hero { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: var(--nav-offset, 80px) 5% 48px; text-align: center; }
