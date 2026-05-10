@@ -168,6 +168,11 @@ export default function DataAnalyticsCoePage() {
                 Write Your Data Success Story With Us
               </a>
             </div>
+            <div className="anim anim-up observe-me" style={{ ['--delay' as any]: '0.5s', marginTop: 16 }}>
+              <a className="btn" href="/case-study/data-analytics/" style={{ background: 'transparent', border: '1px solid #f68723', color: '#f68723' }}>
+                Read Case Study →
+              </a>
+            </div>
           </div>
         </section>
       </main>

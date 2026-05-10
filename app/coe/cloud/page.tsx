@@ -112,6 +112,11 @@ export default function CloudCoePage() {
                 Redefine Cloud With StradIT
               </a>
             </div>
+            <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.5s', marginTop: 16 }}>
+              <a className="btn" href="/case-study/" style={{ background: 'transparent', border: '1px solid #f68723', color: '#f68723' }}>
+                Read Case Study →
+              </a>
+            </div>
           </div>
         </section>
       </main>

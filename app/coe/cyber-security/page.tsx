@@ -115,6 +115,9 @@ export default function CyberSecurityCoePage() {
               <a className="btn" href="#">
                 Strengthen Your Security Posture
               </a>
+              <a className="btn" href="/case-study/cyber-security/" style={{ background: 'transparent', border: '1px solid #f68723', color: '#f68723' }}>
+                Read Case Study →
+              </a>
             </div>
           </div>
         </section>

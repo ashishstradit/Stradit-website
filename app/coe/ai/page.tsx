@@ -67,6 +67,11 @@ export default function AiCoePage() {
                 Validate AI With Confidence
               </a>
             </div>
+            <div className="anim slide-rtl observe-me" style={{ ['--delay' as any]: '0.5s', marginTop: 16 }}>
+              <a className="btn" href="/case-study/ai/" style={{ background: 'transparent', border: '1px solid #f68723', color: '#f68723' }}>
+                Read Case Study →
+              </a>
+            </div>
           </div>
         </section>
       </main>

@@ -31,16 +31,6 @@ export default function Navbar() {
           </li>
           <li className={styles.navItem}><a href="/gcc/">Global Capability Center</a></li>
           <li className={styles.navItem}><a href="/startit/">StartIT</a></li>
-          <li className={styles.navItem}>
-            <a href="/case-study/">Case Study</a>
-            <ul className={styles.dropdownMenu}>
-              <li><a href="/case-study/ai/">Applied Artificial Intelligence</a></li>
-              <li><a href="/case-study/data-analytics/">Data Analytics - Applied AI</a></li>
-              <li><a href="/case-study/cyber-security/">Cyber Security - Applied AI</a></li>
-              <li><a href="/case-study/">Cloud & Infrastructure - Applied AI</a></li>
-              <li><a href="/case-study/testing/">Automated AI Testing</a></li>
-            </ul>
-          </li>
         </ul>
         <a href="/contact-us/" className="cta-btn" style={{padding: '10px 18px', fontSize: '13px', whiteSpace: 'nowrap', flexShrink: 0}}>Contact Us</a>
       </div>
@@ -96,24 +86,6 @@ export default function Navbar() {
 
         <a href="/gcc/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>Global Capability Center</a>
         <a href="/startit/" className={styles.mobileLink} onClick={() => setMenuOpen(false)}>StartIT</a>
-        <div className={styles.mobileAccordion}>
-          <div className={styles.mobileAccordionRow}>
-            <a href="/case-study/" className={styles.mobileAccordionLink} onClick={() => setMenuOpen(false)}>Case Study</a>
-            <button type="button" className={styles.mobileAccordionArrow} aria-label="Expand Case Study links" aria-expanded={caseOpen}
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setCaseOpen(v => !v) }}>
-              <span className={`${styles.chevron} ${caseOpen ? styles.chevronOpen : ''}`}>▾</span>
-            </button>
-          </div>
-          {caseOpen && (
-            <div className={styles.mobileSubMenu}>
-              <a href="/case-study/ai/" onClick={() => setMenuOpen(false)}>Applied Artificial Intelligence</a>
-              <a href="/case-study/data-analytics/" onClick={() => setMenuOpen(false)}>Data Analytics - Applied AI</a>
-              <a href="/case-study/cyber-security/" onClick={() => setMenuOpen(false)}>Cyber Security - Applied AI</a>
-              <a href="/case-study/" onClick={() => setMenuOpen(false)}>Cloud & Infrastructure - Applied AI</a>
-              <a href="/case-study/testing/" onClick={() => setMenuOpen(false)}>Automated AI Testing</a>
-            </div>
-          )}
-        </div>
         <a href="/contact-us" className={`cta-btn ${styles.mobileCta}`} onClick={() => setMenuOpen(false)}>Contact Us</a>
       </div>
     </nav>
